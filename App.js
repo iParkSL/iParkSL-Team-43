@@ -81,7 +81,7 @@ const App: () => Node = () => {
             <DebugInstructions />
           </Section>
           <Section title="Learn More">
-            Read the docs to discover what to do next:
+            Read docs to discover what to do next:
           </Section>
           <LearnMoreLinks />
         </View>
