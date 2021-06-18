@@ -33,7 +33,7 @@ const Tabs = () => {
       
       <Tab.Screen
         name="Home"
-        component={Home}
+        component={MainStackNavigator}
         options={{
           tabBarIcon: ({focused}) => (
             <View
@@ -111,7 +111,7 @@ const Tabs = () => {
           ),
         }}
       />
-      <Tab.Screen name="HomeScreen" component={MainStackNavigator} />
+    
 
     </Tab.Navigator>
     
