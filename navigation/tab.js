@@ -6,9 +6,14 @@ import Search from '../screens/SearchScreen';
 import Bookmark from '../screens/BookmarkScreen';
 import Setting from '../screens/SettingScreen';
 
+import {MainStackNavigator} from '../navigation/StackNavigator';
+
 const Tab = createBottomTabNavigator();
 const Tabs = () => {
   return (
+  
+    
+  
     <Tab.Navigator
       tabBarOptions={{
         showLabel: false,
@@ -24,6 +29,8 @@ const Tabs = () => {
           ...styles.shadow,
         },
       }}>
+      
+      
       <Tab.Screen
         name="Home"
         component={Home}
@@ -37,19 +44,16 @@ const Tabs = () => {
                 style={{
                   width: 25,
                   height: 25,
-                 
                 }}
               />
-              <Text
-                style={{fontSize: 12}}>
-                Home
-              </Text>
+              <Text style={{fontSize: 12}}>Home</Text>
             </View>
           ),
         }}
       />
-      <Tab.Screen name="Search" component={Search} 
-
+      <Tab.Screen
+        name="Search"
+        component={Search}
         options={{
           tabBarIcon: ({focused}) => (
             <View
@@ -60,23 +64,17 @@ const Tabs = () => {
                 style={{
                   width: 25,
                   height: 25,
-                 
                 }}
               />
-              <Text
-                style={{fontSize: 12}}>
-                search
-              </Text>
+              <Text style={{fontSize: 12}}>search</Text>
             </View>
           ),
         }}
-
-
-
       />
-      <Tab.Screen name="Bookmark" component={Bookmark}     
-               
-      options={{
+      <Tab.Screen
+        name="Bookmark"
+        component={Bookmark}
+        options={{
           tabBarIcon: ({focused}) => (
             <View
               style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
@@ -86,23 +84,17 @@ const Tabs = () => {
                 style={{
                   width: 25,
                   height: 25,
-                 
                 }}
               />
-              <Text
-                style={{fontSize: 12}}>
-                Bookmark
-              </Text>
+              <Text style={{fontSize: 12}}>Bookmark</Text>
             </View>
           ),
         }}
-
-
-
-
       />
-      <Tab.Screen name="Setting" component={Setting}  
-   options={{
+      <Tab.Screen
+        name="Setting"
+        component={Setting}
+        options={{
           tabBarIcon: ({focused}) => (
             <View
               style={{alignItems: 'center', justifyContent: 'center', top: 10}}>
@@ -112,18 +104,19 @@ const Tabs = () => {
                 style={{
                   width: 25,
                   height: 25,
-                 
                 }}
               />
-              <Text
-                style={{fontSize: 12}}>
-                Setting
-              </Text>
+              <Text style={{fontSize: 12}}>Setting</Text>
             </View>
           ),
         }}
- />
+      />
+      <Tab.Screen name="HomeScreen" component={MainStackNavigator} />
+
     </Tab.Navigator>
+    
+    
+  
   );
 };
 
