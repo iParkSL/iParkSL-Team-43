@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import {Image, TouchableOpacity} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
@@ -15,10 +16,29 @@ const theme = {
   },
 };
 
+=======
+import 'react-native-gesture-handler';
+import * as React from 'react';
+import {View, Text} from 'react-native';
+import {NavigationContainer} from '@react-navigation/native';
+import {createStackNavigator} from '@react-navigation/stack';
+import { MainStackNavigator } from './navigation/StackNavigator';
+import Tab from './navigation/tab';
+
+function HomeScreen() {
+  return (
+    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <Text>Home Screen</Text>
+    </View>
+  );
+}
+
+>>>>>>> 7cc9a7b0a76facccf13db7cd45587ccbdd7204ad
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
+<<<<<<< HEAD
     <NavigationContainer theme={theme}>
       <Stack.Navigator>
         {/* Tabs */}
@@ -68,3 +88,17 @@ const App = () => {
 export default () => {
   return <App />;
 };
+=======
+
+    
+    <NavigationContainer>
+    
+    <Tab/>
+
+  </NavigationContainer>
+    
+  );
+};
+
+export default App;
+>>>>>>> 7cc9a7b0a76facccf13db7cd45587ccbdd7204ad
