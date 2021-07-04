@@ -13,7 +13,11 @@ export const starHalf = require('../assets/icons/star_half.png');
 export const taxi = require('../assets/icons/taxi_icon.png');
 export const user = require('../assets/icons/user_icon.png');
 export const wind = require('../assets/icons/wind_icon.png');
-
+export const qr = require('../assets/icons/qr.png');
+export const Vpark = require('../assets/icons/Vpark.png');
+export const dollar = require('../assets/icons/dollar.png');
+export const Switch = require('../assets/icons/switch.png');
+export const update = require('../assets/icons/update.png');
 export default {
   bookmark,
   car,
@@ -30,4 +34,9 @@ export default {
   taxi,
   user,
   wind,
+  qr,
+  Vpark,
+  dollar,
+  Switch,
+  update,
 };

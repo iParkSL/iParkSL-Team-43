@@ -1,14 +1,14 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-const AddNewPark = () => {
+const Earnings = () => {
   return (
     <View>
       <View>
-        <Text>ADD NEW PARK</Text>
+        <Text>Earnings</Text>
       </View>
     </View>
   );
 };
 
-export default AddNewPark;
+export default Earnings;
