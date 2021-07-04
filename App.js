@@ -1,11 +1,18 @@
-<<<<<<< HEAD
 import React from 'react';
 import {Image, TouchableOpacity} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 
-import Tabs from './navigation/tab';
-
+/*import Tabs from './navigation/tab';*/
+import Tabs from './navigation/owner/tab';
+import {
+  AddNewPark,
+  Earnings,
+  parkUpdate,
+  Scan,
+  ViewPark,
+  Switch,
+} from './screens/owner/functions/index';
 import {icons, COLORS, SIZES} from './constants';
 
 const theme = {
@@ -16,29 +23,10 @@ const theme = {
   },
 };
 
-=======
-import 'react-native-gesture-handler';
-import * as React from 'react';
-import {View, Text} from 'react-native';
-import {NavigationContainer} from '@react-navigation/native';
-import {createStackNavigator} from '@react-navigation/stack';
-import { MainStackNavigator } from './navigation/StackNavigator';
-import Tab from './navigation/tab';
-
-function HomeScreen() {
-  return (
-    <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-      <Text>Home Screen</Text>
-    </View>
-  );
-}
-
->>>>>>> 7cc9a7b0a76facccf13db7cd45587ccbdd7204ad
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
-<<<<<<< HEAD
     <NavigationContainer theme={theme}>
       <Stack.Navigator>
         {/* Tabs */}
@@ -64,20 +52,105 @@ const App = () => {
                 />
               </TouchableOpacity>
             ),
-            headerRight: ()=>(
+
+            headerRight: () => (
               <TouchableOpacity
-              style={{marginRight:SIZES.padding}}
-              onPress={()=>console.log('pressed')}>
+                style={{marginRight: SIZES.padding}}
+                onPress={() => console.log('pressed')}>
                 <Image
-                     source={icons.user}
-                     resizeMode="contain"
-                     style={{
-                       width:25,
-                       height:25,
-                     }}
+                  source={icons.user}
+                  resizeMode="contain"
+                  style={{
+                    width: 25,
+                    height: 25,
+                  }}
                 />
               </TouchableOpacity>
             ),
+          }}
+        />
+        <Stack.Screen
+          name="AddNewPark"
+          component={AddNewPark}
+          options={{
+            title: 'Add Park',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Scan"
+          component={Scan}
+          options={{
+            title: 'QR Scan',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="ViewPark"
+          component={ViewPark}
+          options={{
+            title: 'View Park',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Earnings"
+          component={Earnings}
+          options={{
+            title: 'Earnings',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Switch"
+          component={Switch}
+          options={{
+            title: 'Switch',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <Stack.Screen
+          name="parkUpdate"
+          component={parkUpdate}
+          options={{
+            title: 'Park Update',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
           }}
         />
       </Stack.Navigator>
@@ -88,17 +161,3 @@ const App = () => {
 export default () => {
   return <App />;
 };
-=======
-
-    
-    <NavigationContainer>
-    
-    <Tab/>
-
-  </NavigationContainer>
-    
-  );
-};
-
-export default App;
->>>>>>> 7cc9a7b0a76facccf13db7cd45587ccbdd7204ad

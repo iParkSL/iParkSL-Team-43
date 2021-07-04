@@ -5,7 +5,7 @@ const SearchScreen = () => {
   return (
     <View  style = {{flex: 1, backgroundColor: "#ffffff" }}>
       <View style={styles.contentContainer}>
-        <Text style={styles.title}>Library</Text>
+        <Text style={styles.title}>Search</Text>
       </View>
     </View>
   );
