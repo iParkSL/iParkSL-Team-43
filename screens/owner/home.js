@@ -45,8 +45,7 @@ const OptionItem = ({bgColor, icon, label, onPress}) => {
   );
 };
 
-
-const Home = ({navigation }) => {
+const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
       <View style={{flex: 1, justifyContent: 'center'}}>
@@ -60,25 +59,25 @@ const Home = ({navigation }) => {
             icon={icons.parking}
             bgColor={['#ffb907', '#ffb907']}
             label="Add Park"
-            onPress={() =>  navigation.navigate("AddNewPark")}
+            onPress={() => navigation.navigate('AddNewPark')}
           />
           <OptionItem
             icon={icons.qr}
             bgColor={['#ffb907', '#ffb907']}
             label="Scan"
-            onPress={() => navigation.navigate("Scan")}
+            onPress={() => navigation.navigate('Scan')}
           />
           <OptionItem
             icon={icons.Vpark}
             bgColor={['#ffb907', '#ffb907']}
-            label="View Park"
-            onPress={() =>navigation.navigate("ViewPark")}
+            label="Bookings"
+            onPress={() => navigation.navigate('ViewPark')}
           />
           <OptionItem
             icon={icons.dollar}
             bgColor={['#ffb907', '#ffb907']}
             label="Earnings"
-            onPress={() =>navigation.navigate("Earnings")}
+            onPress={() => navigation.navigate('Earnings')}
           />
         </View>
         <View
@@ -91,13 +90,13 @@ const Home = ({navigation }) => {
             icon={icons.Switch}
             bgColor={['#ffb907', '#ffb907']}
             label="Switch"
-            onPress={() => navigation.navigate("Switch")}
+            onPress={() => navigation.navigate('Switch')}
           />
           <OptionItem
             icon={icons.update}
             bgColor={['#ffb907', '#ffb907']}
             label="Update"
-            onPress={() => navigation.navigate("parkUpdate")}
+            onPress={() => navigation.navigate('parkUpdate')}
           />
         </View>
       </View>

@@ -101,7 +101,7 @@ const App = () => {
           name="ViewPark"
           component={ViewPark}
           options={{
-            title: 'View Park',
+            title: 'View Bookings',
             headerStyle: {
               backgroundColor: COLORS.orange,
             },

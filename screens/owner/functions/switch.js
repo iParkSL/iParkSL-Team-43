@@ -5,7 +5,7 @@ const Switch = () => {
   return (
     <View>
       <View>
-        <Text>switch</Text>
+        <Text>QR Scan</Text>
       </View>
     </View>
   );
