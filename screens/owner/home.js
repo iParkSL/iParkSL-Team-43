@@ -15,7 +15,7 @@ const OptionItem = ({bgColor, icon, label, onPress}) => {
     <TouchableOpacity
       style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
       onPress={onPress}>
-      <View style={[styles.shadow, {width: 60, height: 60}]}>
+      <View style={[styles.shadow, {width: 150, height: 150}]}>
         <LinearGradient
           style={[
             {
@@ -34,13 +34,16 @@ const OptionItem = ({bgColor, icon, label, onPress}) => {
             resizeMode="cover"
             style={{
               tintColor: COLORS.black,
-              width: 40,
-              height: 40,
+              width: 75,
+              height: 75,
             }}
           />
+          <Text
+            style={{marginTop: SIZES.radius, color: COLORS.black, ...FONTS.h4}}>
+            {label}
+          </Text>
         </LinearGradient>
       </View>
-      <Text>{label}</Text>
     </TouchableOpacity>
   );
 };
@@ -48,10 +51,11 @@ const OptionItem = ({bgColor, icon, label, onPress}) => {
 const Home = ({navigation}) => {
   return (
     <View style={styles.container}>
-      <View style={{flex: 1, justifyContent: 'center'}}>
+      <View style={{flex: 2, justifyContent: 'center'}}>
         <View
           style={{
             flexDirection: 'row',
+            flex: 0.7,
             marginTop: SIZES.padding,
             paddingHorizontal: SIZES.base,
           }}>
@@ -61,17 +65,26 @@ const Home = ({navigation}) => {
             label="Add Park"
             onPress={() => navigation.navigate('AddNewPark')}
           />
-          <OptionItem
-            icon={icons.qr}
-            bgColor={['#ffb907', '#ffb907']}
-            label="Scan"
-            onPress={() => navigation.navigate('Scan')}
-          />
+
           <OptionItem
             icon={icons.Vpark}
             bgColor={['#ffb907', '#ffb907']}
             label="Bookings"
             onPress={() => navigation.navigate('ViewPark')}
+          />
+        </View>
+        <View
+          style={{
+            flexDirection: 'row',
+            flex: 0.7,
+            marginTop: SIZES.padding,
+            paddingHorizontal: SIZES.base,
+          }}>
+          <OptionItem
+            icon={icons.area}
+            bgColor={['#ffb907', '#ffb907']}
+            label="My parks"
+            onPress={() => navigation.navigate('My parks')}
           />
           <OptionItem
             icon={icons.dollar}
@@ -83,24 +96,24 @@ const Home = ({navigation}) => {
         <View
           style={{
             flexDirection: 'row',
+            flex: 0.7,
             marginTop: SIZES.radius,
             paddingHorizontal: SIZES.base,
           }}>
+          <OptionItem
+            icon={icons.budget}
+            bgColor={['#ffb907', '#ffb907']}
+            label="Charges"
+            onPress={() => navigation.navigate('monthly charges')}
+          />
           <OptionItem
             icon={icons.Switch}
             bgColor={['#ffb907', '#ffb907']}
             label="Switch"
             onPress={() => navigation.navigate('Switch')}
           />
-          <OptionItem
-            icon={icons.update}
-            bgColor={['#ffb907', '#ffb907']}
-            label="Update"
-            onPress={() => navigation.navigate('parkUpdate')}
-          />
         </View>
       </View>
-      <View style={{flex: 2}}></View>
     </View>
   );
 };

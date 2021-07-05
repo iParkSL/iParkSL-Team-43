@@ -57,7 +57,7 @@ const Tabs = () => {
                   }}
                 />
               );
-            case 'bookmark':
+           /* case 'bookmark':
               return (
                 <Image
                   source={icons.bookmark}
@@ -68,7 +68,7 @@ const Tabs = () => {
                     height: 30,
                   }}
                 />
-              );
+              );*/
             case 'setting':
               return (
                 <Image
@@ -86,7 +86,7 @@ const Tabs = () => {
       })}>
       <Tab.Screen name="home" component={Home} />
       <Tab.Screen name="search" component={Home} />
-      <Tab.Screen name="bookmark" component={Home} />
+    
       <Tab.Screen name="setting" component={Home} />
     </Tab.Navigator>
   );

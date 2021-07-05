@@ -47,7 +47,7 @@ const Tabs = () => {
                   }}
                 />
               );
-            case 'search':
+            /*case 'search':
               return (
                 <Image
                   source={icons.search}
@@ -58,11 +58,11 @@ const Tabs = () => {
                     height: 30,
                   }}
                 />
-              );
-            case 'bookmark':
+              );*/
+            case 'scanner':
               return (
                 <Image
-                  source={icons.bookmark}
+                  source={icons.scanner}
                   resizeMode="contain"
                   style={{
                     tintColor: tintColor,
@@ -87,8 +87,8 @@ const Tabs = () => {
         },
       })}>
       <Tab.Screen name="home" component={Home} />
-      <Tab.Screen name="search" component={search} />
-      <Tab.Screen name="bookmark" component={Home} />
+  
+      <Tab.Screen name="scanner" component={Home} />
       <Tab.Screen name="setting" component={Home} />
     </Tab.Navigator>
     

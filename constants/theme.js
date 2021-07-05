@@ -25,7 +25,7 @@ export const SIZES = {
   h1: 30,
   h2: 22,
   h3: 16,
-  h4: 14,
+  h4: 17,
   body1: 30,
   body2: 22,
   body3: 16,
