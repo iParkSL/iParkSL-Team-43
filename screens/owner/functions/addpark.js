@@ -17,7 +17,8 @@ import { createStackNavigator } from '@react-navigation/stack';
 import  FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {DrawerContent} from '../screens/DrawerContent';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialIcons'
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import nextScreen from './addparknext';
 
 const HomeScreen = ({navigation}) =>{
     return (
@@ -119,7 +120,7 @@ const HomeScreen = ({navigation}) =>{
 
                     <TouchableOpacity
                         style={[styles.signIn,{}]}
-                        onPress={() => {}}
+                       onPress={()=>navigation.push("nextScreen")}
                     >
                         <LinearGradient
                             colors={['#FDC73E', '#ffb907']}
@@ -145,7 +146,7 @@ const HomeScreen = ({navigation}) =>{
 const Stack = createStackNavigator();
 
 
-const App = () => {
+const App = (navigation) => {
     return (
         <NavigationContainer>        
             <Stack.Navigator  screenOptions={{
@@ -160,21 +161,29 @@ const App = () => {
               <Stack.Screen name="Home" component={HomeScreen} options={{
                 title: 'Add Park',     
                 headerTintColor:'black',
-                headerLeft: () => (
-                  <TouchableOpacity>
-                      <Icon
-                            name="arrow-back"
-                            size= {25}
-                            style={{marginLeft:10}}
-                            // backgroundColor="#fff"
+            //     headerLeft: () => (
+            //       <TouchableOpacity>
+            //           <Icon
+            //                 name="arrow-back"
+            //                 size= {25}
+            //                 style={{marginLeft:10}}
+            //                 // backgroundColor="#fff"
             
-                          />
+            //               />
                           
-                  </TouchableOpacity>
-            ),
+                          
+            //       </TouchableOpacity>
+                  
+            // ),
+            
             }}                 
            />
-            
+             <Stack.Screen name="nextScreen" component={nextScreen} options={{
+                title: 'Add Park',     
+                headerTintColor:'black',
+       
+            }}                 
+           />
             </Stack.Navigator>
         </NavigationContainer>
     )
