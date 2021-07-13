@@ -10,7 +10,8 @@ import {
     Platform,
     StyleSheet,
     ScrollView,
-    StatusBar
+    StatusBar,
+    Image
 } from 'react-native';
 
 import { createStackNavigator } from '@react-navigation/stack';
@@ -18,39 +19,32 @@ import  FontAwesome from 'react-native-vector-icons/FontAwesome';
 import {DrawerContent} from '../screens/DrawerContent';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import nextScreen from './addparknext';
+// import nextScreen from './addparknext';
 
 const HomeScreen = ({navigation}) =>{
     return (
        <ScrollView>
        
-        
             <View style={styles.footer}>
-       
-                <Text style={[styles.text_footer,{marginTop:15}]}>Name</Text>
-
-                <View style={styles.action}>
-                   
-                    <TextInput 
-                    placeholder="First Name"
-                    style={styles.textInput}
-                    autoCapitalize="none"
-                    // onChangeText={(val) => textInputChange(val)}
-                    />
-                      <TextInput 
-                    placeholder="Last Name"
-                    style={[styles.textInput,{marginLeft:5}]}
-                    autoCapitalize="none"
-                    // onChangeText={(val) => textInputChange(val)}
-                    />
-                </View> 
-
-                <Text style={[styles.text_footer,{marginTop:20}]}>Email</Text>
+                <Image source={require('./img/payhere.png')}  style={{ width: 150, height: 50,alignSelf:'center'}}/>
+                <Text style={[styles.text_footer,{marginTop:15}]}>Card Name</Text>
 
                 <View style={styles.action}>
                     
                     <TextInput 
-                        placeholder="Enter Email"
+                        placeholder="Enter Card Name"
+                        style={styles.textInput}
+                        autoCapitalize="none"
+                        // onChangeText={(val) => textInputChange(val)}
+                    />
+                </View>  
+
+                <Text style={[styles.text_footer,{marginTop:15}]}>Card No</Text>
+
+                <View style={styles.action}>
+                    
+                    <TextInput 
+                        placeholder="Enter Card Number"
                         style={styles.textInput}
                         autoCapitalize="none"
                         // onChangeText={(val) => textInputChange(val)}
@@ -58,22 +52,22 @@ const HomeScreen = ({navigation}) =>{
                 </View>             
  
                 
-                <Text style={[styles.text_footer,{marginTop:20}]}>Password</Text>
+                <Text style={[styles.text_footer,{marginTop:15}]}>Expire Date(MM/YY)</Text>
                 <View style={styles.action}>
                    
                     <TextInput 
-                    placeholder="**************"
+                    placeholder="MM:YY"
                     style={styles.textInput}
                     autoCapitalize="none"
                     // onChangeText={(val) => textInputChange(val)}
                 />
                 </View> 
                 
-                <Text style={[styles.text_footer,{marginTop:20}]}>Confirm Password</Text>
+                <Text style={[styles.text_footer,{marginTop:15}]}>CVV</Text>
                 <View style={styles.action}>
                   
                    <TextInput 
-                    placeholder="**************"
+                    placeholder="Enter CVV"
                     style={styles.textInput}
                     autoCapitalize="none"
                     // onChangeText={(val) => textInputChange(val)}
@@ -92,7 +86,7 @@ const HomeScreen = ({navigation}) =>{
                         >
                             <Text style={[styles.textSign, {
                                 color:'#000000'
-                            }]}>Register</Text>
+                            }]}>Pay</Text>
 
                         </LinearGradient>
                     </TouchableOpacity>
@@ -117,13 +111,13 @@ const App = (navigation) => {
                 headerStyle: {
                     backgroundColor: '#ffb907',            
                 },
-                headerTintColor: '#fff',
+                
                 headerTitleStyle: {
                     fontWeight: '900',        
                 }
             }}>
               <Stack.Screen name="Home" component={HomeScreen} options={{
-                title: 'Add Park Keeper',     
+                title: 'Payment',     
                 headerTintColor:'black',
                 
                 headerLeft: () => (
@@ -131,8 +125,7 @@ const App = (navigation) => {
                       <Icon
                             name="arrow-back"
                             size= {25}
-                            style={{marginLeft:14}}
-                            // backgroundColor="#fff"
+                            style={{marginLeft:14}}                            
             
                           />
                           
@@ -166,11 +159,10 @@ const styles = StyleSheet.create({
     footer: {
         flex: Platform.OS === 'ios' ? 3 : 5,
         backgroundColor: '#fff',
-        // marginLeft:5,
-  
+        // marginLeft:5,  
         paddingHorizontal: 30,
-        paddingVertical: 40,
-        paddingBottom:80
+        paddingTop:30,
+        paddingBottom:60
     },
     text_header: {
         color: 'black',
@@ -197,11 +189,11 @@ const styles = StyleSheet.create({
         // borderWidth:1,
         backgroundColor:'#F6F6F6',
         borderRadius:10,
-        borderColor: '#ffb907', 
+        borderColor: '#F6F6F6', 
     },
     button: {
       
-        marginTop: 50,
+        marginTop: 35,
         flexDirection: 'row',
         // marginLeft: 
           
