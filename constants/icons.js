@@ -27,6 +27,8 @@ export const area = require('../assets/icons/area.png');
 export const budget = require('../assets/icons/budget.png');
 export const Psearch = require('../assets/icons/Psearch.png');
 export const carparking = require('../assets/icons/carparking.png');
+export const cancel=require('../assets/icons/cancel.png');
+export const Focus=require('../assets/icons/focus.png');
 export default {
   bookmark,
   car,
@@ -57,4 +59,6 @@ export default {
   budget,
   Psearch,
   carparking,
+  cancel,
+  Focus,
 };
