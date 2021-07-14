@@ -19,6 +19,7 @@ import {DrawerContent} from '../screens/DrawerContent';
 import LinearGradient from 'react-native-linear-gradient';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import nextScreen from './addparknext';
+import NumericInput from 'react-native-numeric-input'
 
 const HomeScreen = ({navigation}) =>{
     return (
@@ -70,24 +71,14 @@ const HomeScreen = ({navigation}) =>{
                 <Text style={[styles.text_footer,{marginTop:10}]}>City</Text>
                 <View style={styles.action}>
                    
-                       <TextInput 
+                    <TextInput 
                    
                     style={styles.textInput}
                     autoCapitalize="none"
                     // onChangeText={(val) => textInputChange(val)}
                 />
-                </View> 
-                
-                <Text style={[styles.text_footer,{marginTop:10}]}>Province</Text>
-                <View style={styles.action}>
-                  
-                   <TextInput 
-                  
-                    style={styles.textInput}
-                    autoCapitalize="none"
-                    // onChangeText={(val) => textInputChange(val)}
-                />
-                </View> 
+                </View>               
+               
                 
                 <Text style={[styles.text_footer,{marginTop:10}]}>Zip code/Postal code</Text>
                 <View style={styles.action}>
@@ -98,6 +89,26 @@ const HomeScreen = ({navigation}) =>{
                     autoCapitalize="none"
                     // onChangeText={(val) => textInputChange(val)}
                 />
+                </View> 
+                <View style={[styles.action,{marginTop:10}]}>
+                    <Text style={[styles.text_footer,]}>Add Price /hr</Text>
+                    <Text style={[styles.text_footer,{marginLeft:45}]}>Total Slots</Text>
+                </View>
+                
+                <View style={styles.action}>
+                   
+                    <TextInput 
+                    placeholder=""
+                    style={styles.textInput}
+                    autoCapitalize="none"
+                    // onChangeText={(val) => textInputChange(val)}
+                    />
+                    <TextInput 
+                    
+                    style={[styles.textInput,{marginLeft:20}]}
+                    autoCapitalize="none"
+                    // onChangeText={(val) => textInputChange(val)}
+                    />
                 </View> 
 
 
@@ -119,12 +130,12 @@ const HomeScreen = ({navigation}) =>{
                     </TouchableOpacity>
 
                     <TouchableOpacity
-                        style={[styles.signIn,{}]}
+                        style={[styles.signIn,{marginLeft:-18}]}
                        onPress={()=>navigation.push("nextScreen")}
                     >
                         <LinearGradient
                             colors={['#FDC73E', '#ffb907']}
-                            style={[styles.signIn,{marginLeft:-54}]}
+                            style={[styles.signIn]}
                         >
                             <Text style={[styles.textSign, {
                                 color:'#000000'
@@ -161,20 +172,20 @@ const App = (navigation) => {
               <Stack.Screen name="Home" component={HomeScreen} options={{
                 title: 'Add Park',     
                 headerTintColor:'black',
-            //     headerLeft: () => (
-            //       <TouchableOpacity>
-            //           <Icon
-            //                 name="arrow-back"
-            //                 size= {25}
-            //                 style={{marginLeft:10}}
-            //                 // backgroundColor="#fff"
+                headerLeft: () => (
+                  <TouchableOpacity>
+                      <Icon
+                            name="arrow-back"
+                            size= {25}
+                            style={{marginLeft:14}}
+                            // backgroundColor="#fff"
             
-            //               />
+                          />
                           
                           
-            //       </TouchableOpacity>
+                  </TouchableOpacity>
                   
-            // ),
+            ),           
             
             }}                 
            />
@@ -200,11 +211,11 @@ const styles = StyleSheet.create({
     },
     footer: {
         flex: Platform.OS === 'ios' ? 3 : 5,
-        // backgroundColor: '#fff',
+        backgroundColor: '#fff',
         // marginLeft:5,
   
-        paddingHorizontal: 20,
-        paddingVertical: 30
+        paddingHorizontal: 30,
+        paddingVertical: 20
     },
     text_header: {
         color: 'black',
@@ -229,7 +240,7 @@ const styles = StyleSheet.create({
         paddingLeft: 10,
         color: '#05375a',
         // borderWidth:1,
-        backgroundColor:'white',
+        backgroundColor:'#F6F6F6',
         borderRadius:10,
         borderColor: '#ffb907', 
     },
@@ -241,7 +252,7 @@ const styles = StyleSheet.create({
           
     },
     signIn: {
-        width: '70%',
+        width: '65%',
         height: 50,
         justifyContent: 'center',
         // alignItems: 'center',

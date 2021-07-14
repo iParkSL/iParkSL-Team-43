@@ -21,22 +21,56 @@ const HomeScreen = ({navigation}) => {
 
   return (
     <ScrollView>
-      <View style={styles.footer}>
-
-        <Text style={{marginLeft: 10, fontSize: 18, fontWeight: '900',marginBottom: 10}}>
-          How many spaces do you have for rent in your park?
-        </Text>
-        
-        <View style={{alignSelf:'center'}}>
+      <View style={styles.footer}>        
+        {/* <View style={{alignSelf:'center'}}>
            
             <NumericInput totalWidth={120}  rounded minValue={1} valueType='real' onChange={value => console.log(value)} />
+        </View> */}
+        <Text style={[styles.text_footer]}>Add pictures</Text>
+        <View style={styles.action}>
+                    
+          <TextInput 
+           placeholder="Choose Photo"
+           style={styles.textInput}
+           autoCapitalize="none"
+            // onChangeText={(val) => textInputChange(val)}
+                   />
+        </View>             
+
+        <View style={styles.action}>
+                   
+         <TextInput 
+             placeholder="Choose Photo"
+             style={styles.textInput}
+             autoCapitalize="none"
+            // onChangeText={(val) => textInputChange(val)}
+         />
+        </View> 
+        <View style={styles.action}>
+                   
+         <TextInput 
+             placeholder="Choose Photo"
+             style={styles.textInput}
+             autoCapitalize="none"
+            // onChangeText={(val) => textInputChange(val)}
+         />
         </View>
 
-        <Text style={{marginLeft: 10, fontSize: 18, fontWeight: '900',marginTop: 20}}>
+        <View style={styles.action}>
+                   
+                   <TextInput 
+                       placeholder="Choose Photo"
+                       style={styles.textInput}
+                       autoCapitalize="none"
+                      // onChangeText={(val) => textInputChange(val)}
+                   />
+        </View>
+
+        <Text style={[styles.text_footer,{marginTop:15}]}>
               Select facilities in your park
         </Text>
         
-        <View style={[styles.checkbox, {marginTop: 15}]}>
+        <View style={[styles.checkbox, {marginTop: 2}]}>
           <CheckBox
             disabled={false}
             value={toggleCheckBox}
@@ -173,8 +207,9 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff',
     // marginLeft:5,
 
-    paddingHorizontal: 15,
-    paddingVertical: 30,
+    paddingHorizontal: 30,
+    paddingVertical: 20,
+    // paddingBottom:
   },
   text_header: {
     color: 'black',
@@ -191,31 +226,31 @@ const styles = StyleSheet.create({
     marginTop: 10,
     // borderBottomWidth: 1,
     // borderBottomColor: '#cdd7de',
-    paddingBottom: 3,
-  },
+    paddingBottom: 3
+},
   textInput: {
     flex: 1,
     marginTop: Platform.OS === 'ios' ? 0 : -5,
     paddingLeft: 10,
     color: '#05375a',
     // borderWidth:1,
-    backgroundColor: 'white',
-    borderRadius: 10,
-    borderColor: '#ffb907',
+    backgroundColor:'#F6F6F6',
+    borderRadius:10,
+    borderColor: '#ffb907', 
   },
   button: {
     flexDirection: 'row',
-    borderTopWidth: 1,
+    // borderTopWidth: 1,
     borderTopColor: '#f2f2f2',
     paddingBottom: 5,
-    marginTop: 80,
+    
   },
   signIn: {
     width: '100%',
     height: 50,
     justifyContent: 'center',
     // alignItems: 'center',
-    marginTop: 8,
+    marginTop: 5,
     borderRadius: 10,
   },
   textSign: {
