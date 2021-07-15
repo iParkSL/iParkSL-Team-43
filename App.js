@@ -2,9 +2,11 @@ import React from 'react';
 import {Image, TouchableOpacity} from 'react-native';
 import {createStackNavigator} from '@react-navigation/stack';
 import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+//import { NavigationContainer } from '@react-navigation/native';
+//import StackScreen from './navigation/customer/navigator';
 
-//import Tabs from './navigation/tab';
-import Tabs from './navigation/owner/tab';
+import Tabs from './navigation/tab';
+//import Tabs from './navigation/owner/tab';
 import {
   AddNewPark,
   Earnings,
