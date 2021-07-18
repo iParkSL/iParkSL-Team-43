@@ -11,7 +11,7 @@ import {
   ScrollView,
 } from 'react-native';
 
-export default function ViewPark() {
+export default function RecentBookings() {
   const [people, setPeople] = useState([
     {name: 'Rashan', key: '1'},
     {name: 'Malith', key: '2'},
@@ -32,17 +32,12 @@ export default function ViewPark() {
         <ScrollView>
           {people.map(item => (
             <View key={item.item} style={styles.item}>
-              <Text style={styles.title}>{item.name} Book your park</Text>
+              <Text style={styles.title}>{item.name} Booked your park</Text>
               <View style={styles.fixToText}>
                 <Button
-                  title="Accept"
+                  title="View Details"
                   color="#000000"
-                  onPress={() => Alert.alert('Accept Successfull')}
-                />
-                <Button
-                  title="Reject"
-                  color="#000000"
-                  onPress={() => Alert.alert('Reject Successfull')}
+                  //onPress={() => Alert.alert('Accept Successfull')}
                 />
               </View>
             </View>

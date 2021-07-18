@@ -124,17 +124,15 @@ const Home = ({navigation}) => {
             icon={icons.Psearch}
             bgColor={['#ffb907', '#ffb907']}
             label="Find Park"
-            onPress={() => {
-              console.log('find park');
-            }}
+            //console.log('find park');
+            onPress={() => navigation.navigate('findPark')}
           />
           <OptionItem
             icon={icons.carparking}
             bgColor={['#ffb907', '#ffb907']}
             label="Visited Parks"
-            onPress={() => {
-              console.log('Add new car');
-            }}
+            //console.log('Add new car');
+            onPress={() => navigation.navigate('visitedParks')}
           />
         </View>
 
@@ -149,20 +147,17 @@ const Home = ({navigation}) => {
             icon={icons.payment}
             bgColor={['#ffb907', '#ffb907']}
             label="Payments"
-            onPress={() => {
-              console.log('payments');
-            }}
+            //console.log('payments');
+            onPress={() => navigation.navigate('Payments')}
           />
           <OptionItem
             icon={icons.coupon}
             bgColor={['#ffb907', '#ffb907']}
             label="My bookings"
-            onPress={() => {
-              console.log('My bookings');
-            }}
+            //console.log('My bookings');
+            onPress={() => navigation.navigate('mybookings')}
           />
         </View>
-
         <View style={{flex: 0.7}}>
           <Text
             style={{

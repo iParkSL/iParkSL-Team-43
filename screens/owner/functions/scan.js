@@ -51,7 +51,7 @@ const Scan = ({navigation}) => {
               backgroundColor: COLORS.orange,
               padding: 10,
             }}>
-            <Text>Scan QR Code</Text>
+            <Text style={{fontWeight: 'bold'}}>Scan QR Code</Text>
           </TouchableOpacity>
         </View>
       </View>

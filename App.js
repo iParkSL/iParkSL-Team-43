@@ -5,15 +5,24 @@ import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
 //import { NavigationContainer } from '@react-navigation/native';
 //import StackScreen from './navigation/customer/navigator';
 
-import Tabs from './navigation/tab';
-//import Tabs from './navigation/owner/tab';
+import TabsC from './navigation/tab';
+import TabO from './navigation/owner/tab';
+import {
+  findPark,
+  mybookings, 
+  Payments, 
+  visitedParks,
+
+} from './screens/customer/functions/index';
 import {
   AddNewPark,
   Earnings,
   parkUpdate,
   Scan,
-  ViewPark,
+  RecentBookings,
   Switch,
+  myParks,
+  receivePayments,
 } from './screens/owner/functions/index';
 import {icons, COLORS, SIZES} from './constants';
 
@@ -24,137 +33,239 @@ const theme = {
     border: 'transparent',
   },
 };
-
+const userRole = 'customers';
 const Stack = createStackNavigator();
 
 const App = () => {
   return (
     <NavigationContainer theme={theme}>
       <Stack.Navigator>
-        {/* Tabs */}
-        <Stack.Screen
-          name="Home"
-          component={Tabs}
-          options={{
-            title: null,
-            headerStyle: {
-              backgroundColor: COLORS.orange,
-            },
-            headerLeft: () => (
-              <TouchableOpacity
-                style={{marginLeft: SIZES.padding}}
-                onPress={() => console.log('pressed')}>
-                <Image
-                  source={icons.barMenu}
-                  resizeMode="contain"
-                  style={{
-                    width: 25,
-                    height: 25,
-                  }}
-                />
-              </TouchableOpacity>
-            ),
+        {userRole == 'customer' ? (
+          <>
+            <Stack.Screen
+              name="Home"
+              component={TabsC}
+              options={{
+                title: null,
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerLeft: () => (
+                  <TouchableOpacity
+                    style={{marginLeft: SIZES.padding}}
+                    onPress={() => console.log('pressed')}>
+                    <Image
+                      source={icons.barMenu}
+                      resizeMode="contain"
+                      style={{
+                        width: 25,
+                        height: 25,
+                      }}
+                    />
+                  </TouchableOpacity>
+                ),
 
-            headerRight: () => (
-              <TouchableOpacity
-                style={{marginRight: SIZES.padding}}
-                onPress={() => console.log('pressed')}>
-                <Image
-                  source={icons.user}
-                  resizeMode="contain"
-                  style={{
-                    width: 25,
-                    height: 25,
-                  }}
-                />
-              </TouchableOpacity>
-            ),
-          }}
-        />
-        <Stack.Screen
-          name="AddNewPark"
-          component={AddNewPark}
-          options={{
-            title: 'Add Park',
-            headerStyle: {
-              backgroundColor: COLORS.orange,
-            },
-            headerTintColor: COLORS.black,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Scan"
-          component={Scan}
-          options={{
-            title: 'QR Scan',
-            headerStyle: {
-              backgroundColor: COLORS.orange,
-            },
-            headerTintColor: COLORS.black,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="ViewPark"
-          component={ViewPark}
-          options={{
-            title: 'View Bookings',
-            headerStyle: {
-              backgroundColor: COLORS.orange,
-            },
-            headerTintColor: COLORS.black,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Earnings"
-          component={Earnings}
-          options={{
-            title: 'Earnings',
-            headerStyle: {
-              backgroundColor: COLORS.orange,
-            },
-            headerTintColor: COLORS.black,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="Switch"
-          component={Switch}
-          options={{
-            title: 'Switch',
-            headerStyle: {
-              backgroundColor: COLORS.orange,
-            },
-            headerTintColor: COLORS.black,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
-        <Stack.Screen
-          name="parkUpdate"
-          component={parkUpdate}
-          options={{
-            title: 'Park Update',
-            headerStyle: {
-              backgroundColor: COLORS.orange,
-            },
-            headerTintColor: COLORS.black,
-            headerTitleStyle: {
-              fontWeight: 'bold',
-            },
-          }}
-        />
+                headerRight: () => (
+                  <TouchableOpacity
+                    style={{marginRight: SIZES.padding}}
+                    onPress={() => console.log('pressed')}>
+                    <Image
+                      source={icons.user}
+                      resizeMode="contain"
+                      style={{
+                        width: 25,
+                        height: 25,
+                      }}
+                    />
+                  </TouchableOpacity>
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="findPark"
+              component={findPark}
+              options={{
+                title: 'Find Park',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="mybookings"
+              component={mybookings}
+              options={{
+                title: 'My Bookings',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Payments"
+              component={Payments}
+              options={{
+                title: 'Payments',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="visitedParks"
+              component={visitedParks}
+              options={{
+                title: 'visited Parks',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            
+          </>
+        ) : (
+          <>
+            <Stack.Screen
+              name="Home"
+              component={TabO}
+              options={{
+                title: null,
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerLeft: () => (
+                  <TouchableOpacity
+                    style={{marginLeft: SIZES.padding}}
+                    onPress={() => console.log('pressed')}>
+                    <Image
+                      source={icons.barMenu}
+                      resizeMode="contain"
+                      style={{
+                        width: 25,
+                        height: 25,
+                      }}
+                    />
+                  </TouchableOpacity>
+                ),
+
+                headerRight: () => (
+                  <TouchableOpacity
+                    style={{marginRight: SIZES.padding}}
+                    onPress={() => console.log('pressed')}>
+                    <Image
+                      source={icons.user}
+                      resizeMode="contain"
+                      style={{
+                        width: 25,
+                        height: 25,
+                      }}
+                    />
+                  </TouchableOpacity>
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="AddNewPark"
+             component={AddNewPark}
+              options={{
+                title: 'Add Park',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Scan"
+              component={Scan}
+              options={{
+                title: 'QR Scan',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="RecentBookings"
+              component={RecentBookings}
+              options={{
+                title: 'Recent Bookings',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="receivePayments"
+              component={receivePayments}
+              options={{
+                title: 'Receive Payments',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Switch"
+              component={Switch}
+              options={{
+                title: 'Switch',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="myParks"
+              component={myParks}
+              options={{
+                title: 'My Parks',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+          </>
+        )}
       </Stack.Navigator>
     </NavigationContainer>
   );

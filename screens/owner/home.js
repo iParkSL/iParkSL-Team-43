@@ -39,7 +39,12 @@ const OptionItem = ({bgColor, icon, label, onPress}) => {
             }}
           />
           <Text
-            style={{marginTop: SIZES.radius, color: COLORS.black, ...FONTS.h4}}>
+            style={{
+              marginTop: SIZES.radius,
+              color: COLORS.black,
+              ...FONTS.h4,
+              fontWeight: 'bold',
+            }}>
             {label}
           </Text>
         </LinearGradient>
@@ -70,7 +75,7 @@ const Home = ({navigation}) => {
             icon={icons.Vpark}
             bgColor={['#ffb907', '#ffb907']}
             label="Bookings"
-            onPress={() => navigation.navigate('ViewPark')}
+            onPress={() => navigation.navigate('RecentBookings')}
           />
         </View>
         <View
@@ -84,13 +89,14 @@ const Home = ({navigation}) => {
             icon={icons.area}
             bgColor={['#ffb907', '#ffb907']}
             label="My parks"
-            onPress={() => navigation.navigate('My parks')}
+            onPress={() => navigation.navigate('myParks')}
           />
           <OptionItem
             icon={icons.dollar}
             bgColor={['#ffb907', '#ffb907']}
-            label="Earnings"
-            onPress={() => navigation.navigate('Earnings')}
+            label="Recive 
+            Payments"
+            onPress={() => navigation.navigate('receivePayments')}
           />
         </View>
         <View
@@ -104,12 +110,13 @@ const Home = ({navigation}) => {
             icon={icons.budget}
             bgColor={['#ffb907', '#ffb907']}
             label="Charges"
-            onPress={() => navigation.navigate('monthly charges')}
+            onPress={() => navigation.navigate('myParks')}
           />
           <OptionItem
             icon={icons.Switch}
             bgColor={['#ffb907', '#ffb907']}
-            label="Switch"
+            label="Switch 
+            Customer"
             onPress={() => navigation.navigate('Switch')}
           />
         </View>
