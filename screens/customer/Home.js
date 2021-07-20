@@ -177,7 +177,7 @@ const Home = ({navigation}) => {
         </View>
       </View>
     </View>
-    // booking
+
   );
 };
 
