@@ -155,7 +155,7 @@ const Home = ({navigation}) => {
             bgColor={['#ffb907', '#ffb907']}
             label="My bookings"
             //console.log('My bookings');
-            onPress={() => navigation.navigate('mybookings')}
+           onPress={() => navigation.navigate('mybookings')}
           />
         </View>
         <View style={{flex: 0.7}}>

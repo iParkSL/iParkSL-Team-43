@@ -22,6 +22,7 @@ const Find = ({navigation}) => {
           image={require('../../../assets/icons/marker.png')}
           title="sky park"
           description="150 LKR/hr"
+          //onPress={() => navigation.navigate('visitedParks')}
         />
         <Marker
           coordinate={{

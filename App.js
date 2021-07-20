@@ -34,6 +34,7 @@ const theme = {
   },
 };
 const userRole = 'customers';
+//const userRole = 'Owner';
 const Stack = createStackNavigator();
 
 const App = () => {
