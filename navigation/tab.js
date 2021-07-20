@@ -2,7 +2,7 @@ import React from 'react';
 import {Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
-import {Home} from '../screens/';
+import {Home} from '../screens/customer/index';
 
 import {icons, COLORS} from '../constants';
 
@@ -57,18 +57,6 @@ const Tabs = () => {
                   }}
                 />
               );
-           /* case 'bookmark':
-              return (
-                <Image
-                  source={icons.bookmark}
-                  resizeMode="contain"
-                  style={{
-                    tintColor: tintColor,
-                    width: 30,
-                    height: 30,
-                  }}
-                />
-              );*/
             case 'setting':
               return (
                 <Image
@@ -86,7 +74,6 @@ const Tabs = () => {
       })}>
       <Tab.Screen name="home" component={Home} />
       <Tab.Screen name="search" component={Home} />
-    
       <Tab.Screen name="setting" component={Home} />
     </Tab.Navigator>
   );

@@ -3,7 +3,7 @@ import {Image} from 'react-native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 
 import {Home,search} from '../../screens/owner';
-
+import {Scan} from '../../screens/owner/functions/index';
 import {icons, COLORS} from '../../constants';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -88,7 +88,7 @@ const Tabs = () => {
       })}>
       <Tab.Screen name="home" component={Home} />
   
-      <Tab.Screen name="scanner" component={Home} />
+      <Tab.Screen name="scanner" component={Scan} />
       <Tab.Screen name="setting" component={Home} />
     </Tab.Navigator>
     

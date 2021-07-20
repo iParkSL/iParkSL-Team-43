@@ -136,6 +136,7 @@ android {
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
         versionName "1.0"
+        missingDimensionStrategy 'react-native-camera', 'general'
     }
     splits {
         abi {
@@ -184,6 +185,17 @@ android {
 }
 
 dependencies {
+    implementation(project(':react-native-maps')){
+       exclude group: 'com.google.android.gms', module: 'play-services-base'
+       exclude group: 'com.google.android.gms', module: 'play-services-maps'
+   }
+   implementation 'com.google.android.gms:play-services-base:17.2.1'
+   implementation 'com.google.android.gms:play-services-maps:17.0.0'
+
+
+
+
+
     implementation fileTree(dir: "libs", include: ["*.jar"])
     //noinspection GradleDynamicVersion
     implementation "com.facebook.react:react-native:+"  // From node_modules
@@ -211,6 +223,8 @@ dependencies {
     } else {
         implementation jscFlavor
     }
+
+    //implementation project(':react-native-vector-icons')
 }
 
 // Run this once to be able to run the application with BUCK
@@ -221,3 +235,4 @@ task copyDownloadableDepsToLibs(type: Copy) {
 }
 
 apply from: file("../../node_modules/@react-native-community/cli-platform-android/native_modules.gradle"); applyNativeModulesAppBuildGradle(project)
+

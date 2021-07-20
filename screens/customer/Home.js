@@ -8,7 +8,7 @@ import {
   FlatList,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
-import {images, icons, COLORS, FONTS, SIZES} from '../constants';
+import {images, icons, COLORS, FONTS, SIZES} from '../../constants';
 
 const OptionItem = ({bgColor, icon, label, onPress}) => {
   return (
@@ -97,8 +97,8 @@ const Home = ({navigation}) => {
           resizeMode="cover"
           style={{
             width: SIZES.width * 0.28,
-            height: '82%',
-            borderRadius: 15,
+            height: '50%',
+            borderRadius: 10,
           }}
         />
 
@@ -111,14 +111,12 @@ const Home = ({navigation}) => {
 
   return (
     <View style={styles.container}>
-    
-
       {/* Options */}
       <View style={{flex: 1, justifyContent: 'center'}}>
         <View
           style={{
             flexDirection: 'row',
-            flex:0.7,
+            flex: 0.7,
             marginTop: SIZES.padding,
             paddingHorizontal: SIZES.base,
           }}>
@@ -126,47 +124,22 @@ const Home = ({navigation}) => {
             icon={icons.Psearch}
             bgColor={['#ffb907', '#ffb907']}
             label="Find Park"
-            onPress={() => {
-              console.log('Find Park');
-            }}
+            //console.log('find park');
+            onPress={() => navigation.navigate('findPark')}
           />
           <OptionItem
             icon={icons.carparking}
             bgColor={['#ffb907', '#ffb907']}
             label="Visited Parks"
-            onPress={() => {
-              console.log('Add new car');
-            }}
+            //console.log('Add new car');
+            onPress={() => navigation.navigate('visitedParks')}
           />
         </View>
+
         <View
           style={{
             flexDirection: 'row',
-            flex:0.7,
-            marginTop: SIZES.padding,
-            paddingHorizontal: SIZES.base,
-          }}>
-          <OptionItem
-            icon={icons.route}
-            bgColor={['#ffb907', '#ffb907']}
-            label="Track me"
-            onPress={() => {
-              console.log('Location');
-            }}
-          />
-          <OptionItem
-            icon={icons.timer}
-            bgColor={['#ffb907', '#ffb907']}
-            label="Timer"
-            onPress={() => {
-              console.log('Timer');
-            }}
-          />
-        </View>
-        <View
-          style={{
-            flexDirection: 'row',
-            flex:0.7,
+            flex: 0.4,
             marginTop: SIZES.padding,
             paddingHorizontal: SIZES.base,
           }}>
@@ -174,17 +147,32 @@ const Home = ({navigation}) => {
             icon={icons.payment}
             bgColor={['#ffb907', '#ffb907']}
             label="Payments"
-            onPress={() => {
-              console.log('payments');
-            }}
+            //console.log('payments');
+            onPress={() => navigation.navigate('Payments')}
           />
           <OptionItem
             icon={icons.coupon}
             bgColor={['#ffb907', '#ffb907']}
             label="My bookings"
-            onPress={() => {
-              console.log('My bookings');
-            }}
+            //console.log('My bookings');
+           onPress={() => navigation.navigate('mybookings')}
+          />
+        </View>
+        <View style={{flex: 0.7}}>
+          <Text
+            style={{
+              marginTop: SIZES.base,
+              marginHorizontal: SIZES.padding,
+              ...FONTS.h2,
+            }}>
+            Top Parks
+          </Text>
+          <FlatList
+            horizontal
+            showsHorizontalScrollIndicator={false}
+            data={destinations}
+            keyExtractor={item => item.id.toString()}
+            renderItem={({item, index}) => renderDestinations(item, index)}
           />
         </View>
       </View>
@@ -212,43 +200,3 @@ const styles = StyleSheet.create({
 });
 
 export default Home;
-
-/*
-<View
-        style={{
-          flex: 2,
-          marginTop: SIZES.base,
-          paddingHorizontal: SIZES.padding,
-        }}>
-        <Image
-          source={images.CarCover}
-          resizeMode="cover"
-          style={{
-            width: '100%',
-            height: '100%',
-            borderRadius: 15,
-          }}
-        />
-      </View>
-
-      */
-
-/* Destination */
-/* <View style={{flex: 1}}>
-       <Text
-         style={{
-           marginTop: SIZES.base,
-           marginHorizontal: SIZES.padding,
-           ...FONTS.h2,
-         }}>
-         Recently
-       </Text>
-       <FlatList
-         horizontal
-         showsHorizontalScrollIndicator={false}
-         data={destinations}
-         keyExtractor={item => item.id.toString()}
-         renderItem={({item, index}) => renderDestinations(item, index)}
-       />
-     </View>
-     */

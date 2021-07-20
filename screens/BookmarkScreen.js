@@ -3,7 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 
 const BookmarkScreen = () => {
   return (
-    <View  style = {{flex: 1, backgroundColor: "#ffffff" }}>
+    <View style={{flex: 1, backgroundColor: '#ffffff'}}>
       <View style={styles.contentContainer}>
         <Text style={styles.title}>Browse</Text>
       </View>

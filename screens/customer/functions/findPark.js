@@ -1,23 +1,9 @@
-/*import React from 'react';
-import {View, Text} from 'react-native';
-
-const Earnings = () => {
-  return (
-    <View>
-      <View>
-        <Text>Earnings</Text>
-      </View>
-    </View>
-  );
-};
-
-export default Earnings;*/
 import React from 'react';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import {TextInput} from 'react-native';
 import {StyleSheet, View, Text, ScrollView, Animated} from 'react-native';
 import MapView, {Marker} from 'react-native-maps';
-const Earnings = ({navigation}) => {
+const Find = ({navigation}) => {
   return (
     <View style={styles.container}>
       <MapView
@@ -36,6 +22,7 @@ const Earnings = ({navigation}) => {
           image={require('../../../assets/icons/marker.png')}
           title="sky park"
           description="150 LKR/hr"
+          //onPress={() => navigation.navigate('visitedParks')}
         />
         <Marker
           coordinate={{
@@ -233,4 +220,4 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
   },
 });
-export default Earnings;
+export default Find;
