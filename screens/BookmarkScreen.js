@@ -1,6 +1,6 @@
 import React from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-
+//ndndnnnnnn
 const BookmarkScreen = () => {
   return (
     <View style={{flex: 1, backgroundColor: '#ffffff'}}>
