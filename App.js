@@ -14,6 +14,7 @@ import {
   visitedParks,
 
 } from './screens/customer/functions/index';
+
 import {
   AddNewPark,
   Earnings,
@@ -33,7 +34,7 @@ const theme = {
     border: 'transparent',
   },
 };
-const userRole = 'customers';
+const userRole = 'customer';
 //const userRole = 'Owner';
 const Stack = createStackNavigator();
 
