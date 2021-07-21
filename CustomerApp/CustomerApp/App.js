@@ -1,112 +1,139 @@
-/**
- * Sample React Native App
- * https://github.com/facebook/react-native
- *
- * @format
- * @flow strict-local
- */
-
 import React from 'react';
-import type {Node} from 'react';
-import {
-  SafeAreaView,
-  ScrollView,
-  StatusBar,
-  StyleSheet,
-  Text,
-  useColorScheme,
-  View,
-} from 'react-native';
+import {Image, TouchableOpacity} from 'react-native';
+import {createStackNavigator} from '@react-navigation/stack';
+import {NavigationContainer, DefaultTheme} from '@react-navigation/native';
+//import { NavigationContainer } from '@react-navigation/native';
+//import StackScreen from './navigation/customer/navigator';
 
+import TabsC from './navigation/tab';
+//import AppN from './screens/Drawer';
 import {
-  Colors,
-  DebugInstructions,
-  Header,
-  LearnMoreLinks,
-  ReloadInstructions,
-} from 'react-native/Libraries/NewAppScreen';
+  findPark,
+  mybookings, 
+  Payments, 
+  visitedParks,
 
-const Section = ({children, title}): Node => {
-  const isDarkMode = useColorScheme() === 'dark';
+} from './screens/customer/functions/index';
+
+import {icons, COLORS, SIZES} from './constants';
+
+const theme = {
+  ...DefaultTheme,
+  colors: {
+    ...DefaultTheme.colors,
+    border: 'transparent',
+  },
+};
+
+
+const Stack = createStackNavigator();
+
+const App = ({navigation}) => {
   return (
-    <View style={styles.sectionContainer}>
-      <Text
-        style={[
-          styles.sectionTitle,
-          {
-            color: isDarkMode ? Colors.white : Colors.black,
-          },
-        ]}>
-        {title}
-      </Text>
-      <Text
-        style={[
-          styles.sectionDescription,
-          {
-            color: isDarkMode ? Colors.light : Colors.dark,
-          },
-        ]}>
-        {children}
-      </Text>
-    </View>
+    <NavigationContainer theme={theme}>
+      <Stack.Navigator>
+    
+            <Stack.Screen
+              name="Home"
+              component={TabsC}
+              options={{
+                title: null,
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerLeft: () => (
+                  <TouchableOpacity
+                    style={{marginLeft: SIZES.padding}}
+                    onPress={() => console.log('pressed')}>
+                    <Image
+                      source={icons.barMenu}
+                      resizeMode="contain"
+                      style={{
+                        width: 25,
+                        height: 25,
+                      }}
+                    />
+                  </TouchableOpacity>
+                ),
+
+                headerRight: () => (
+                  <TouchableOpacity
+                    style={{marginRight: SIZES.padding}}
+                    onPress={() => console.log('pressed')}>
+                    <Image
+                      source={icons.user}
+                      resizeMode="contain"
+                      style={{
+                        width: 25,
+                        height: 25,
+                      }}
+                    />
+                  </TouchableOpacity>
+                ),
+              }}
+            />
+            <Stack.Screen
+              name="findPark"
+              component={findPark}
+              options={{
+                title: 'Find Park',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="mybookings"
+              component={mybookings}
+              options={{
+                title: 'My Bookings',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="Payments"
+              component={Payments}
+              options={{
+                title: 'Payments',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+            <Stack.Screen
+              name="visitedParks"
+              component={visitedParks}
+              options={{
+                title: 'visited Parks',
+                headerStyle: {
+                  backgroundColor: COLORS.orange,
+                },
+                headerTintColor: COLORS.black,
+                headerTitleStyle: {
+                  fontWeight: 'bold',
+                },
+              }}
+            />
+        
+      </Stack.Navigator>
+    </NavigationContainer>
   );
 };
 
-const App: () => Node = () => {
-  const isDarkMode = useColorScheme() === 'dark';
-
-  const backgroundStyle = {
-    backgroundColor: isDarkMode ? Colors.darker : Colors.lighter,
-  };
-
-  return (
-    <SafeAreaView style={backgroundStyle}>
-      <StatusBar barStyle={isDarkMode ? 'light-content' : 'dark-content'} />
-      <ScrollView
-        contentInsetAdjustmentBehavior="automatic"
-        style={backgroundStyle}>
-        <Header />
-        <View
-          style={{
-            backgroundColor: isDarkMode ? Colors.black : Colors.white,
-          }}>
-          <Section title="Step One">
-            Edit <Text style={styles.highlight}>App.js</Text> to change this
-            screen and then come back to see your edits.
-          </Section>
-          <Section title="See Your Changes">
-            <ReloadInstructions />
-          </Section>
-          <Section title="Debug">
-            <DebugInstructions />
-          </Section>
-          <Section title="Learn More">
-            Read the docs to discover what to do next:
-          </Section>
-          <LearnMoreLinks />
-        </View>
-      </ScrollView>
-    </SafeAreaView>
-  );
+export default () => {
+  return <App />;
 };
-
-const styles = StyleSheet.create({
-  sectionContainer: {
-    marginTop: 32,
-    paddingHorizontal: 24,
-  },
-  sectionTitle: {
-    fontSize: 24,
-    fontWeight: '600',
-  },
-  sectionDescription: {
-    marginTop: 8,
-    fontSize: 18,
-    fontWeight: '400',
-  },
-  highlight: {
-    fontWeight: '700',
-  },
-});
-
-export default App;
