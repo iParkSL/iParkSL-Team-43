@@ -103,7 +103,7 @@ const SignInScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.Button}>
-          <TouchableOpacity onPress={() => navigation.navigate('Home')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Tabs')}>
             <LinearGradient
               colors={['#ffb907', '#ffb907']}
               style={[

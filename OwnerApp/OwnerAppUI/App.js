@@ -5,13 +5,12 @@ import React from 'react';
 //import type {Node} from 'react';
 
 import RootStackScreen from './screens/RootStackScreen';
-
 const App = () => {
   return (
-    
-      <RootStackScreen />
-   
-  );
+  
+    <RootStackScreen/>
+  
+    );
 };
 
 export default App;

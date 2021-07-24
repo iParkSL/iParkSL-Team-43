@@ -11,6 +11,19 @@ import LinearGradient from 'react-native-linear-gradient';
 import {images, icons, COLORS, FONTS, SIZES} from '../../constants';
 import {Tabs} from './tab';
 
+import {
+  AddNewPark,
+  Earnings,
+  parkUpdate,
+  Scan,
+  RecentBookings,
+  Switch,
+  myParks,
+  receivePayments,} from '../owner/functions/index';
+
+import {createStackNavigator} from '@react-navigation/stack';
+
+
 const OptionItem = ({bgColor, icon, label, onPress}) => {
   return (
     <TouchableOpacity
@@ -69,14 +82,14 @@ const Home = ({navigation}) => {
             icon={icons.parking}
             bgColor={['#ffb907', '#ffb907']}
             label="Add Park"
-            //onPress={() => navigation.navigate('AddNewPark')}
+            onPress={() => navigation.navigate('AddNewPark')}
           />
 
           <OptionItem
             icon={icons.Vpark}
             bgColor={['#ffb907', '#ffb907']}
             label="Bookings"
-            //onPress={() => navigation.navigate('RecentBookings')}
+            onPress={() => navigation.navigate('RecentBookings')}
           />
         </View>
         <View
@@ -90,14 +103,14 @@ const Home = ({navigation}) => {
             icon={icons.area}
             bgColor={['#ffb907', '#ffb907']}
             label="My parks"
-            //onPress={() => navigation.navigate('myParks')}
+            onPress={() => navigation.navigate('myParks')}
           />
           <OptionItem
             icon={icons.dollar}
             bgColor={['#ffb907', '#ffb907']}
             label="Recive 
             Payments"
-            // onPress={() => navigation.navigate('receivePayments')}
+            onPress={() => navigation.navigate('receivePayments')}
           />
         </View>
         <View
@@ -111,19 +124,16 @@ const Home = ({navigation}) => {
             icon={icons.budget}
             bgColor={['#ffb907', '#ffb907']}
             label="Charges"
-            // onPress={() => navigation.navigate('myParks')}
+            onPress={() => navigation.navigate('Charges')}
           />
           <OptionItem
             icon={icons.Switch}
             bgColor={['#ffb907', '#ffb907']}
             label="Switch 
             Customer"
-            // onPress={() => navigation.navigate('Switch')}
+            onPress={() => navigation.navigate('Switch')}
           />
         </View>
-      </View>
-      <View>
-        <Tabs/>
       </View>
     </View>
   );
