@@ -4,7 +4,7 @@ const visitedParks = () => {
   return (
     <View>
       <View>
-        <Text>ADD NEW PARK</Text>
+        <Text>visitedParks</Text>
       </View>
     </View>
   );

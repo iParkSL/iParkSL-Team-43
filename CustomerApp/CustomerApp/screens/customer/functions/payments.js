@@ -4,7 +4,7 @@ const payments = () => {
   return (
     <View>
       <View>
-        <Text>ADD NEW PARK</Text>
+        <Text>payments</Text>
       </View>
     </View>
   );

@@ -4,7 +4,7 @@ const mybookings = () => {
   return (
     <View>
       <View>
-        <Text>ADD NEW PARK</Text>
+        <Text>My boookings</Text>
         </View>
     </View>
   );
