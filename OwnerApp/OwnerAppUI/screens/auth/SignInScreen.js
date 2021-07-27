@@ -1,6 +1,7 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
+import axios from 'axios';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Tabs} from '../owner/tab'
+import {Tabs} from '../owner/tab';
 import {
   View,
   Text,
@@ -17,6 +18,27 @@ import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
 const SignInScreen = ({navigation}) => {
+  const [emailtext, setemailtext] = useState('');
+  const [passwordtext, setpasswordtext] = useState('');
+
+  const SignIn = (email, password) => {
+    const x = {
+      email: email,
+      password: password,
+    };
+
+    axios
+      .post('http://localhost:8080/auth/login', x)
+      .then(res => {
+        if (res.data == 'you Logged In!!') {
+          navigation.navigate('Tabs');
+        }
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   const [data, setData] = React.useState({
     email: '',
     password: '',
@@ -68,7 +90,9 @@ const SignInScreen = ({navigation}) => {
             placeholder="Your Email"
             style={styles.textInput}
             autoCapitalize="none"
-            onChangeText={val => textInputChange(val)}
+            name="emailtext"
+            value={emailtext}
+            onChangeText={val => setemailtext(val)}
           />
           {data.check_textInputChange ? (
             <Animatable.View animation="bounceIn">
@@ -92,7 +116,9 @@ const SignInScreen = ({navigation}) => {
             secureTextEntry={data.secureTextEntry ? true : false}
             style={[styles.textInput, {marginLeft: 5}]}
             autoCapitalize="none"
-            onChangeText={val => handlePasswordChange(val)}
+            name="passwordtext"
+            value={passwordtext}
+            onChangeText={val => setpasswordtext(val)}
           />
           <TouchableOpacity onPress={updateSecureTextEntry}>
             {data.secureTextEntry ? (
@@ -103,7 +129,7 @@ const SignInScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.Button}>
-          <TouchableOpacity onPress={() => navigation.navigate('Tabs')}>
+          <TouchableOpacity onPress={()=>SignIn(emailtext,passwordtext)}>
             <LinearGradient
               colors={['#ffb907', '#ffb907']}
               style={[
