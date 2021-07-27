@@ -9,7 +9,7 @@ import RecentBookings from './recentBookings';
 import Switch from './switch';
 import myParks from './myParks';
 import receivePayments from './receivePayments';
-import ViewPark from './viewPark';
+import ViewPark from './viewpark';
 export {
   AddNewPark,
   AddNewParkNext,
