@@ -24,46 +24,33 @@ const HomeScreen = ({navigation}) => {
   return (
     <ScrollView>
       <View style={styles.footer}>
-        <Text style={[styles.text_footer]}>Name</Text>
+        <Text style={[styles.text_footer]}>Park Name</Text>
 
         <View style={styles.action}>
           <TextInput
-            placeholder="First Name"
+            placeholder="Enter Park Name"
             style={styles.textInput}
             autoCapitalize="none"
             // onChangeText={(val) => textInputChange(val)}
           />
-          <TextInput
-            placeholder="Last Name"
-            style={[styles.textInput, {marginLeft: 5}]}
-            autoCapitalize="none"
-            // onChangeText={(val) => textInputChange(val)}
-          />
+         
         </View>
 
         <Text style={[styles.text_footer, {marginTop: 10}]}>Address</Text>
 
         <View style={styles.action}>
           <TextInput
-            placeholder="line 1"
+            placeholder="Enter Your address "
             style={styles.textInput}
             autoCapitalize="none"
             // onChangeText={(val) => textInputChange(val)}
           />
         </View>
-
-        <View style={styles.action}>
-          <TextInput
-            placeholder="line 2"
-            style={styles.textInput}
-            autoCapitalize="none"
-            // onChangeText={(val) => textInputChange(val)}
-          />
-        </View>
-
+        
         <Text style={[styles.text_footer, {marginTop: 10}]}>City</Text>
         <View style={styles.action}>
           <TextInput
+            placeholder="Enter City"
             style={styles.textInput}
             autoCapitalize="none"
             // onChangeText={(val) => textInputChange(val)}
@@ -73,6 +60,7 @@ const HomeScreen = ({navigation}) => {
         <Text style={[styles.text_footer, {marginTop: 10}]}>Province</Text>
         <View style={styles.action}>
           <TextInput
+            placeholder="Enter Province"
             style={styles.textInput}
             autoCapitalize="none"
             // onChangeText={(val) => textInputChange(val)}
@@ -84,12 +72,33 @@ const HomeScreen = ({navigation}) => {
         </Text>
         <View style={styles.action}>
           <TextInput
-            // placeholder="Postal Code"
+            placeholder="Enter Zip/Postal code"
             style={styles.textInput}
             autoCapitalize="none"
             // onChangeText={(val) => textInputChange(val)}
           />
         </View>
+
+        <View style={[styles.action,{marginTop:10}]}>
+                    <Text style={[styles.text_footer,]}>Add Price /hr</Text>
+                    <Text style={[styles.text_footer,{marginLeft:45}]}>Total Slots</Text>
+                </View>
+                
+                <View style={styles.action}>
+                   
+                    <TextInput 
+                    placeholder=""
+                    style={styles.textInput}
+                    autoCapitalize="none"
+                    // onChangeText={(val) => textInputChange(val)}
+                    />
+                    <TextInput 
+                    
+                    style={[styles.textInput,{marginLeft:20}]}
+                    autoCapitalize="none"
+                    // onChangeText={(val) => textInputChange(val)}
+                    />
+                </View> 
 
         <View style={styles.button}>
           <TouchableOpacity style={styles.signIn} onPress={() => {navigation.navigate("home")}}>
@@ -113,7 +122,7 @@ const HomeScreen = ({navigation}) => {
             onPress={() => navigation.push('AddNewParkNext')}>
             <LinearGradient
               colors={['#FDC73E', '#ffb907']}
-              style={[styles.signIn, {marginLeft: -54}]}>
+              style={[styles.signIn, {marginLeft: -20}]}>
               <Text
                 style={[
                   styles.textSign,
@@ -131,51 +140,6 @@ const HomeScreen = ({navigation}) => {
   );
 };
 
-// const Stack = createStackNavigator();
-
-// const App = navigation => {
-//   return (
-//     <NavigationContainer>
-//       <Stack.Navigator
-//         screenOptions={{
-//           headerStyle: {
-//             backgroundColor: '#ffb907',
-//           },
-//           headerTintColor: '#fff',
-//           headerTitleStyle: {
-//             fontWeight: '900',
-//           },
-//         }}>
-//         <Stack.Screen
-//           name="Home"
-//           component={HomeScreen}
-//           options={{
-//             title: 'Add Park',
-//             headerTintColor: 'black',
-//             headerLeft: () => (
-//               <TouchableOpacity>
-//                 <Icon
-//                   name="arrow-back"
-//                   size={25}
-//                   style={{marginLeft: 10}}
-//                   // backgroundColor="#fff"
-//                 />
-//               </TouchableOpacity>
-//             ),
-//           }}
-//         />
-//         <Stack.Screen
-//           name="nextScreen"
-//           component={nextScreen}
-//           options={{
-//             title: 'Add Park',
-//             headerTintColor: 'black',
-//           }}
-//         />
-//       </Stack.Navigator>
-//     </NavigationContainer>
-//   );
-// };
 
 const styles = StyleSheet.create({
   header: {
@@ -186,11 +150,11 @@ const styles = StyleSheet.create({
   },
   footer: {
     flex: Platform.OS === 'ios' ? 3 : 5,
-    // backgroundColor: '#fff',
+    backgroundColor: '#fff',
     // marginLeft:5,
 
-    paddingHorizontal: 20,
-    paddingVertical: 30,
+    paddingHorizontal: 30,
+    paddingVertical: 20,
   },
   text_header: {
     color: 'black',
@@ -204,10 +168,10 @@ const styles = StyleSheet.create({
   },
   action: {
     flexDirection: 'row',
-    marginTop: 10,
+    marginTop: 8,
     // borderBottomWidth: 1,
     // borderBottomColor: '#cdd7de',
-    paddingBottom: 3,
+    
   },
   textInput: {
     flex: 1,
@@ -215,7 +179,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: '#05375a',
     // borderWidth:1,
-    backgroundColor: 'white',
+    backgroundColor:'#F6F6F6',
     borderRadius: 10,
     borderColor: '#ffb907',
   },
@@ -225,7 +189,7 @@ const styles = StyleSheet.create({
     // marginLeft:
   },
   signIn: {
-    width: '70%',
+    width: '65%',
     height: 50,
     justifyContent: 'center',
     // alignItems: 'center',

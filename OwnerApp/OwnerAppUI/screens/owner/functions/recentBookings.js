@@ -9,10 +9,8 @@ import {
   Button,
   FlatList,
   SafeAreaView,
+  TouchableOpacity,
 } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
-
-// import Icon from 'react-native-vector-icons/FontAwesome';
 
 const {width} = Dimensions.get('window');
 const height = width * 0.6;
@@ -25,23 +23,23 @@ const receivePayments = () => (
           data={[
             {
               key: '1',
-              name: 'Amal perera',
+              name: 'Amal Perara booked ABC park',
               image:
-                'https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg',
+                'https://digitalbrandblueprint.com/wp-content/uploads/2020/09/Portrait-300-01-1980x1980.png',
               date: '2021/2/27',
               time: '14.30',
             },
             {
               key: '2',
-              name: 'Saman perera',
+              name: 'Kamal Dias booked ABC park',
               image:
-                'https://www.ccprecruitment.com/imglib/xman-profile-cartoon_18591-58483.jpeg.pagespeed.ic.Q-M5gznZH8.jpg',
+                'https://digitalbrandblueprint.com/wp-content/uploads/2020/09/Portrait-300-01-1980x1980.png',
               date: '2021/2/27',
               time: '14.30',
             },
             {
               key: '3',
-              name: 'Kamal Silva',
+              name: 'Shantha Silva booked CDE park',
               image:
                 'https://digitalbrandblueprint.com/wp-content/uploads/2020/09/Portrait-300-01-1980x1980.png',
               date: '2021/2/27',
@@ -49,17 +47,17 @@ const receivePayments = () => (
             },
             {
               key: '4',
-              name: 'Ama perera',
+              name: 'Ama Gamage booked CDE park',
               image:
-                'https://www.custom-gateway.com/wp-content/uploads/2020/03/Thora-Chan-600x600.png',
+                'https://digitalbrandblueprint.com/wp-content/uploads/2020/09/Portrait-300-01-1980x1980.png',
               date: '2021/2/27',
               time: '14.30',
             },
             {
               key: '5',
-              name: 'Kasun perera',
+              name: 'Kamal Perera booked CDE park',
               image:
-                'https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg',
+                'https://digitalbrandblueprint.com/wp-content/uploads/2020/09/Portrait-300-01-1980x1980.png',
               date: '2021/2/27',
               time: '14.30',
             },
@@ -75,7 +73,7 @@ const receivePayments = () => (
                 margin: '5%',
                 marginBottom: 10,
                 flexDirection: 'row',
-                shadowColor: '#000',
+                shadowColor: '#000000',
                 shadowOffset: {width: 0, height: 1},
                 shadowOpacity: 0.8,
                 shadowRadius: 2.22,
@@ -87,19 +85,35 @@ const receivePayments = () => (
                   source={{uri: item.image}}
                   style={{
                     width: '90%',
-                    height: '100%',
+                    height: '90%',
                     resizeMode: 'cover',
-                    borderRadius: 150,
+                    marginTop: 6,
                   }}
                 />
               </View>
-              <View style={{width: '50%', marginTop: 20}}>
-                <Text style={{fontWeight: 'bold', fontSize: 20}}>
-                  {item.name}
-                </Text>
-                <Text style={{}}>{item.date}</Text>
-                <Text style={{}}>{item.time}</Text>
-                <View style={{marginTop: 20}}></View>
+              <View style={{width: '50%', marginTop: 12}}>
+                <Text style={{fontSize: 16, marginBottom: 3}}>{item.name}</Text>
+
+                <TouchableOpacity
+                  style={styles.signIn}
+                  onPress={() => {
+                    navigation.navigate('home');
+                  }}>
+                  <View
+                    // colors={['#FDC73E', '#ffb907']}
+
+                    style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
+                    <Text
+                      style={[
+                        styles.textSign,
+                        {
+                          color: '#000000',
+                        },
+                      ]}>
+                      View Details
+                    </Text>
+                  </View>
+                </TouchableOpacity>
               </View>
             </View>
           )}
@@ -116,5 +130,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffd700',
     padding: 20,
     marginBottom: 10,
+  },
+
+  signIn: {
+    width: '90%',
+    height: 35,
+    justifyContent: 'center',
+    // alignItems: 'center',
+    borderRadius: 6,
+  },
+  textSign: {
+    fontSize: 16,
+    alignSelf: 'center',
+    fontWeight: '600',
   },
 });

@@ -30,6 +30,7 @@ import {
   Switch,
   myParks,
   receivePayments,
+  ViewPark,
 } from '../screens/owner/functions/index';
 
 const RootStack = createStackNavigator();
@@ -148,7 +149,13 @@ const RootStackScreen = ({navigation}) => {
           component={AddNewParkNext}
           options={{
             title: 'Add Park',
-            headerTintColor: 'black',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
           }}
         />
 
@@ -210,6 +217,21 @@ const RootStackScreen = ({navigation}) => {
         />
 
         <RootStack.Screen
+          name="viewPark"
+          component={ViewPark}
+          options={{
+            title: 'View Park',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+
+        <RootStack.Screen
           name="Charges"
           component={Charges}
           options={{
@@ -244,6 +266,7 @@ const RootStackScreen = ({navigation}) => {
 };
 
 export default RootStackScreen;
+
 
 const Tab = createBottomTabNavigator();
 
