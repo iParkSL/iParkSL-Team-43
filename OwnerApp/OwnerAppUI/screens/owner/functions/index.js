@@ -5,10 +5,11 @@ import Earnings from './earnings';
 
 import Charges from './charges';
 import Scan from './scan';
-import RecentBookings from './viewpark';
+import RecentBookings from './recentBookings';
 import Switch from './switch';
 import myParks from './myParks';
 import receivePayments from './receivePayments';
+import ViewPark from './viewPark';
 export {
   AddNewPark,
   AddNewParkNext,
@@ -18,5 +19,6 @@ export {
   RecentBookings,
   Switch,
   myParks,
+  ViewPark,
   receivePayments,
 };
