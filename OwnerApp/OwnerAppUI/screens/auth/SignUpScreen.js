@@ -20,11 +20,13 @@ import Feather from 'react-native-vector-icons/Feather';
 const SignInScreen = ({navigation}) => {
   const [emailtext, setemailtext] = useState('');
   const [passwordtext, setpasswordtext] = useState('');
+  const [cpasswordtext, setcpasswordtext] = useState('');
 
-  const SignUp = (email, password) => {
+  const SignUp = (email, password, cpassword) => {
     const x = {
       email: email,
       password: password,
+      cpassword: cpassword,
     };
 
     axios
@@ -159,7 +161,9 @@ const SignInScreen = ({navigation}) => {
             secureTextEntry={data.confirm_secureTextEntry ? true : false}
             style={[styles.textInput, {marginLeft: 5}]}
             autoCapitalize="none"
-            onChangeText={val => handleConfirmPasswordChange(val)}
+            name="cpasswordtext"
+            value={cpasswordtext}
+            onChangeText={val => setcpasswordtext(val)}
           />
           <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
             {data.secureTextEntry ? (
@@ -170,7 +174,8 @@ const SignInScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.Button}>
-          <TouchableOpacity onPress={()=>SignUp(emailtext,passwordtext)}>
+          <TouchableOpacity
+            onPress={() => SignUp(emailtext, passwordtext, cpasswordtext)}>
             <LinearGradient
               colors={['#ffb907', '#ffb907']}
               style={[

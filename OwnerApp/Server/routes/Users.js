@@ -6,7 +6,17 @@ const bcrypt =require("bcrypt");
 
 
 router.post("/",async(req,res)=>{
-    const{email,password}=req.body;
+
+    const{email,password,cpassword}=req.body;
+    if(!email||!password||!cpassword){
+        return res.status(400).json({msg:"Please enter all fields"});
+
+    }
+
+    if(password!==cpassword){
+      return res.status(400).json({msg:"Please Confim your password"});
+    }
+    
     bcrypt.hash(password,10).then((hash)=>{
        Users.create({
            email:email,
