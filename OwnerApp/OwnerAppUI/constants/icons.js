@@ -30,7 +30,9 @@ export const carparking = require('../assets/icons/carparking.png');
 export const cancel=require('../assets/icons/cancel.png');
 export const Focus=require('../assets/icons/focus.png');
 export const marker=require('../assets/icons/marker.png');
+export const operator=require('../assets/icons/operator.png');
 export default {
+  operator,
   bookmark,
   car,
   home,

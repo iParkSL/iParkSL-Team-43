@@ -10,8 +10,10 @@ import Switch from './switch';
 import myParks from './myParks';
 import receivePayments from './receivePayments';
 import ViewPark from './viewpark';
+import stopwatch from './stopwatch';
 export {
   AddNewPark,
+  stopwatch,
   AddNewParkNext,
   Earnings,
   Charges,

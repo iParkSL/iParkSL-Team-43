@@ -15,7 +15,7 @@ import {
 const {width} = Dimensions.get('window');
 const height = width * 0.6;
 
-const receivePayments = () => (
+const receivePayments = ({navigation}) => (
   <View style={{width}}>
     <SafeAreaView>
       <View>
@@ -93,27 +93,43 @@ const receivePayments = () => (
               </View>
               <View style={{width: '50%', marginTop: 12}}>
                 <Text style={{fontSize: 16, marginBottom: 3}}>{item.name}</Text>
+                <View style={{flexDirection: 'row'}}>
+                  <TouchableOpacity
+                    style={styles.signIn}
+                    onPress={() => {
+                      navigation.navigate('Scan');
+                    }}>
+                    <View style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
+                      <Text
+                        style={[
+                          styles.textSign,
+                          {
+                            color: '#000000',
+                          },
+                        ]}>
+                        Scan
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
 
-                <TouchableOpacity
-                  style={styles.signIn}
-                  onPress={() => {
-                    navigation.navigate('home');
-                  }}>
-                  <View
-                    // colors={['#FDC73E', '#ffb907']}
-
-                    style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
-                    <Text
-                      style={[
-                        styles.textSign,
-                        {
-                          color: '#000000',
-                        },
-                      ]}>
-                      View Details
-                    </Text>
-                  </View>
-                </TouchableOpacity>
+                  <TouchableOpacity
+                    style={styles.signIn}
+                    onPress={() => {
+                      navigation.navigate('stopwatch');
+                    }}>
+                    <View style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
+                      <Text
+                        style={[
+                          styles.textSign,
+                          {
+                            color: '#000000',
+                          },
+                        ]}>
+                        Timer
+                      </Text>
+                    </View>
+                  </TouchableOpacity>
+                </View>
               </View>
             </View>
           )}
@@ -133,10 +149,10 @@ const styles = StyleSheet.create({
   },
 
   signIn: {
-    width: '90%',
+    width: '65%',
     height: 35,
     justifyContent: 'center',
-    // alignItems: 'center',
+    //alignItems: 'space-between',
     borderRadius: 6,
   },
   textSign: {

@@ -22,6 +22,7 @@ import Home from './owner/home';
 
 import {
   AddNewPark,
+  stopwatch,
   AddNewParkNext,
   Charges,
   parkUpdate,
@@ -188,6 +189,20 @@ const RootStackScreen = ({navigation}) => {
           }}
         />
         <RootStack.Screen
+          name="stopwatch"
+          component={stopwatch}
+          options={{
+            title: 'Timer',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
           name="receivePayments"
           component={receivePayments}
           options={{
@@ -302,39 +317,39 @@ function Tabs() {
                   resizeMode="contain"
                   style={{
                     tintColor: tintColor,
-                    width: 30,
-                    height: 30,
+                    width: 40,
+                    height: 40,
                   }}
                 />
               );
             case 'scanner':
               return (
                 <Image
-                  source={icons.scanner}
+                  source={icons.search}
                   resizeMode="contain"
                   style={{
                     tintColor: tintColor,
-                    width: 30,
-                    height: 30,
+                    width: 40,
+                    height: 40,
                   }}
                 />
               );
             case 'setting':
               return (
                 <Image
-                  source={icons.user}
+                  source={icons.operator}
                   resizeMode="contain"
                   style={{
                     tintColor: tintColor,
-                    width: 30,
-                    height: 30,
+                    width: 40,
+                    height: 40,
                   }}
                 />
               );
           }
         },
       })}>
-      <Tab.Screen name="home" component={Home} />
+      <Tab.Screen name="home" component={Home}/>
       <Tab.Screen name="scanner" component={Scan} />
       <Tab.Screen name="setting" component={Home} />
     </Tab.Navigator>
