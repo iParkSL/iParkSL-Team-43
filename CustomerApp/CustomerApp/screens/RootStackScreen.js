@@ -84,7 +84,7 @@ const RootStackScreen = ({navigation}) => {
         />
         <RootStack.Screen
           name="Home"
-          component={Tabs}
+          component={Home}
           options={{
             title: null,
             headerStyle: {

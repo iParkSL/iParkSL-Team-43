@@ -30,7 +30,13 @@ export const carparking = require('../assets/icons/carparking.png');
 export const cancel=require('../assets/icons/cancel.png');
 export const Focus=require('../assets/icons/focus.png');
 export const marker=require('../assets/icons/marker.png');
+export const NFind=require('../assets/icons/NFind.png');
+export const NVPark=require('../assets/icons/NVPark.png');
+export const bill=require('../assets/icons/bill.png');
 export default {
+  NFind,
+  NVPark,
+  bill,
   bookmark,
   car,
   home,

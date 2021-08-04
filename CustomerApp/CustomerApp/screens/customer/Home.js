@@ -2,6 +2,7 @@ import React from 'react';
 import {
   StyleSheet,
   View,
+  Button,
   Image,
   Text,
   TouchableOpacity,
@@ -50,62 +51,88 @@ const OptionItem = ({bgColor, icon, label, onPress}) => {
 
 const Home = ({navigation}) => {
   // Dummy Data
-  const [destinations, setDestinations] = React.useState([
+  const [Parks, setParks] = React.useState([
     {
       id: 0,
-      name: 'Galle',
+
+      name: 'Sky park',
       img: images.p1,
+      price: '100 lkr/hr',
     },
     {
       id: 1,
-      name: 'Colombo',
+      name: 'RT park',
       img: images.p2,
+      price: '100 lkr/hr',
     },
     {
       id: 2,
-      name: 'Kaluthara',
+      name: 'New KP park',
       img: images.p3,
+      price: '100 lkr/hr',
     },
     {
       id: 3,
-      name: 'Mathara',
+      name: 'KS Park',
       img: images.p5,
+      price: '100 lkr/hr',
+    },
+    {
+      id: 4,
+
+      name: 'Sky park',
+      img: images.p1,
+      price: '100 lkr/hr',
+    },
+    {
+      id: 5,
+      name: 'RT park',
+      img: images.p2,
+      price: '100 lkr/hr',
+    },
+    {
+      id: 6,
+      name: 'New KP park',
+      img: images.p3,
+      price: '100 lkr/hr',
+    },
+    {
+      id: 7,
+      name: 'KS Park',
+      img: images.p5,
+      price: '100 lkr/hr',
     },
   ]);
 
-  // Render
-
-  function renderDestinations(item, index) {
-    var destinationStyle = {};
-
-    if (index == 0) {
-      destinationStyle = {marginLeft: SIZES.padding};
-    }
-
+  function renderParks(item, index) {
     return (
-      <TouchableOpacity
-        style={{
-          justifyContent: 'center',
-          marginHorizontal: SIZES.base,
-          ...destinationStyle,
-        }}
-        onPress={() => {
-          navigation.navigate('DestinationDetail');
-        }}>
+      <View style={styles.card}>
         <Image
           source={item.img}
           resizeMode="cover"
           style={{
-            width: SIZES.width * 0.28,
+            width: '100%',
             height: '50%',
-            borderRadius: 10,
+
+            //borderRadius: 10,
           }}
         />
-
-        <Text style={{marginTop: SIZES.base / 2, ...FONTS.h4}}>
-          {item.name}
-        </Text>
-      </TouchableOpacity>
+        <View
+          style={[
+            styles.BookNow,
+            {
+              color: '#000000',
+            },
+          ]}>
+          <Text style={styles.cardtitle}> {item.name}</Text>
+          <Text style={styles.cardDescription}>{item.price}</Text>
+          <Button
+            onPress={() => navigation.navigate('mybookings')}
+            color="#ffb907"
+            title={'Book Now'}
+          />
+        </View>
+      </View>
     );
   }
 
@@ -124,14 +151,12 @@ const Home = ({navigation}) => {
             icon={icons.Psearch}
             bgColor={['#ffb907', '#ffb907']}
             label="Find Park"
-            //console.log('find park');
             onPress={() => navigation.navigate('findPark')}
           />
           <OptionItem
             icon={icons.carparking}
             bgColor={['#ffb907', '#ffb907']}
             label="Visited Parks"
-            //console.log('Add new car');
             onPress={() => navigation.navigate('visitedParks')}
           />
         </View>
@@ -147,15 +172,13 @@ const Home = ({navigation}) => {
             icon={icons.payment}
             bgColor={['#ffb907', '#ffb907']}
             label="Payments"
-            //console.log('payments');
             onPress={() => navigation.navigate('Payments')}
           />
           <OptionItem
             icon={icons.coupon}
             bgColor={['#ffb907', '#ffb907']}
             label="My bookings"
-            //console.log('My bookings');
-           onPress={() => navigation.navigate('mybookings')}
+            onPress={() => navigation.navigate('mybookings')}
           />
         </View>
         <View style={{flex: 0.7}}>
@@ -165,19 +188,20 @@ const Home = ({navigation}) => {
               marginHorizontal: SIZES.padding,
               ...FONTS.h2,
             }}>
+            {'\n'}
             Top Parks
+            {'\n'}
           </Text>
           <FlatList
             horizontal
             showsHorizontalScrollIndicator={false}
-            data={destinations}
+            data={Parks}
             keyExtractor={item => item.id.toString()}
-            renderItem={({item, index}) => renderDestinations(item, index)}
+            renderItem={({item, index}) => renderParks(item, index)}
           />
         </View>
       </View>
     </View>
-
   );
 };
 
@@ -196,6 +220,41 @@ const styles = StyleSheet.create({
     shadowRadius: 3.84,
 
     elevation: 5,
+  },
+  card: {
+    // padding: 10,
+    elevation: 2,
+    backgroundColor: '#FFF',
+    borderTopLeftRadius: 5,
+    borderTopRightRadius: 5,
+    marginHorizontal: 10,
+    shadowColor: '#000',
+    shadowRadius: 5,
+    shadowOpacity: 0.3,
+    //shadowOffset: { x: 2, y: -2 },
+    height: 160,
+    width: 100,
+    overflow: 'hidden',
+  },
+  textContent: {
+    flex: 2,
+    padding: 10,
+  },
+  cardtitle: {
+    fontSize: 12,
+    // marginTop: 5,
+    fontWeight: 'bold',
+  },
+  cardDescription: {
+    fontSize: 12,
+    color: '#444',
+  },
+  BookNow: {
+    width: '100%',
+    padding: 5,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 3,
   },
 });
 
