@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React, {useState, useEffect} from 'react';
 import {NavigationContainer} from '@react-navigation/native';
 import {
   View,
@@ -13,14 +13,20 @@ import {
   StatusBar,
 } from 'react-native';
 
-import {createStackNavigator} from '@react-navigation/stack';
-import FontAwesome from 'react-native-vector-icons/FontAwesome';
-import {DrawerContent} from '../screens/DrawerContent';
 import LinearGradient from 'react-native-linear-gradient';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import nextScreen from './addparknext';
+
+import MapPreview from './SelectMapView';
+
+import {images, icons, COLORS, FONTS, SIZES} from '../../../constants';
 
 const HomeScreen = ({navigation}) => {
+  const [isFetching, setisFetching] = useState(false);
+  const [pickedLocation, setpickedLocation] = useState();
+
+  const pickOnMap = () => {
+    navigation.navigate('MapScreen');
+  };
+
   return (
     <ScrollView>
       <View style={styles.footer}>
@@ -33,96 +39,83 @@ const HomeScreen = ({navigation}) => {
             autoCapitalize="none"
             // onChangeText={(val) => textInputChange(val)}
           />
-         
         </View>
 
-        <Text style={[styles.text_footer, {marginTop: 10}]}>Address</Text>
+        <Text style={[styles.text_footer]}>Park Place</Text>
+        <View style={styles.locationPicker}>
+          <MapPreview style={styles.mapPreview} onPress={pickOnMap}>
+            {isFetching ? (
+              <ActivityIndicator size="large" color={Colors.primary} />
+            ) : (
+              <Text>No location chosen yet!</Text>
+            )}
+          </MapPreview>
+          <Button title="Pick on Map" color={'#ffb907'} onPress={pickOnMap} />
+        </View>
+
+        <View style={[styles.action, {marginTop: 10}]}>
+          <Text style={[styles.text_footer]}>Add Price /hr</Text>
+          <Text style={[styles.text_footer, {marginLeft: 45}]}>
+            {'\t\t\t\t\t\t\t'}
+            Total Slots
+          </Text>
+        </View>
 
         <View style={styles.action}>
           <TextInput
-            placeholder="Enter Your address "
+            placeholder=""
             style={styles.textInput}
             autoCapitalize="none"
             // onChangeText={(val) => textInputChange(val)}
           />
-        </View>
-        
-        <Text style={[styles.text_footer, {marginTop: 10}]}>City</Text>
-        <View style={styles.action}>
           <TextInput
-            placeholder="Enter City"
-            style={styles.textInput}
-            autoCapitalize="none"
-            // onChangeText={(val) => textInputChange(val)}
-          />
-        </View>
-
-        <Text style={[styles.text_footer, {marginTop: 10}]}>Province</Text>
-        <View style={styles.action}>
-          <TextInput
-            placeholder="Enter Province"
-            style={styles.textInput}
-            autoCapitalize="none"
-            // onChangeText={(val) => textInputChange(val)}
-          />
-        </View>
-
-        <Text style={[styles.text_footer, {marginTop: 10}]}>
-          Zip code/Postal code
-        </Text>
-        <View style={styles.action}>
-          <TextInput
-            placeholder="Enter Zip/Postal code"
-            style={styles.textInput}
+            style={[styles.textInput, {marginLeft: 20}]}
             autoCapitalize="none"
             // onChangeText={(val) => textInputChange(val)}
           />
         </View>
 
-        <View style={[styles.action,{marginTop:10}]}>
-                    <Text style={[styles.text_footer,]}>Add Price /hr</Text>
-                    <Text style={[styles.text_footer,{marginLeft:45}]}>Total Slots</Text>
-                </View>
-                
-                <View style={styles.action}>
-                   
-                    <TextInput 
-                    placeholder=""
-                    style={styles.textInput}
-                    autoCapitalize="none"
-                    // onChangeText={(val) => textInputChange(val)}
-                    />
-                    <TextInput 
-                    
-                    style={[styles.textInput,{marginLeft:20}]}
-                    autoCapitalize="none"
-                    // onChangeText={(val) => textInputChange(val)}
-                    />
-                </View> 
+        <Text style={[styles.text_footer]}>{'\n'}Add Images</Text>
+        {/* <View style={styles.action}>
+          <TextInput
+            placeholder="Choose Photo"
+            style={styles.textInput}
+            autoCapitalize="none"
+            // onChangeText={(val) => textInputChange(val)}
+          />
+        </View> */}
+        <View style={styles.fixToText}>
+          <TouchableOpacity style={styles.uploadBtnContainer}>
+            <Text style={styles.uploadBtn}>Image</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.uploadBtnContainer}>
+            <Text style={styles.uploadBtn}>Image</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.uploadBtnContainer}>
+            <Text style={styles.uploadBtn}>Image</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.uploadBtnContainer}>
+            <Text style={styles.uploadBtn}>Image</Text>
+          </TouchableOpacity>
+        </View>
+
+        <Text style={[styles.text_footer]}>{'\n'}Description</Text>
+        <View style={styles.action}>
+          <TextInput
+            multiline={true}
+            numberOfLines={6}
+            placeholder="Description"
+            style={styles.desBox}
+            autoCapitalize="none"
+            // onChangeText={(val) => textInputChange(val)}
+          />
+        </View>
 
         <View style={styles.button}>
-          <TouchableOpacity style={styles.signIn} onPress={() => {navigation.navigate("home")}}>
-            <View
-              // colors={['#FDC73E', '#ffb907']}
-              style={[styles.signIn, {borderColor: '#ffb907', borderWidth: 1}]}>
-              <Text
-                style={[
-                  styles.textSign,
-                  {
-                    color: '#000000',
-                  },
-                ]}>
-                CANCEL
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity
-            style={[styles.signIn, {}]}
-            onPress={() => navigation.push('AddNewParkNext')}>
+          <TouchableOpacity style={styles.signIn} onPress={() => {}}>
             <LinearGradient
               colors={['#FDC73E', '#ffb907']}
-              style={[styles.signIn, {marginLeft: -20}]}>
+              style={[styles.signIn]}>
               <Text
                 style={[
                   styles.textSign,
@@ -130,7 +123,7 @@ const HomeScreen = ({navigation}) => {
                     color: '#000000',
                   },
                 ]}>
-                NEXT
+                Send for approval
               </Text>
             </LinearGradient>
           </TouchableOpacity>
@@ -139,7 +132,6 @@ const HomeScreen = ({navigation}) => {
     </ScrollView>
   );
 };
-
 
 const styles = StyleSheet.create({
   header: {
@@ -171,7 +163,6 @@ const styles = StyleSheet.create({
     marginTop: 8,
     // borderBottomWidth: 1,
     // borderBottomColor: '#cdd7de',
-    
   },
   textInput: {
     flex: 1,
@@ -179,7 +170,16 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: '#05375a',
     // borderWidth:1,
-    backgroundColor:'#F6F6F6',
+    backgroundColor: '#F6F6F6',
+    borderRadius: 10,
+    borderColor: '#ffb907',
+  },
+  desBox: {
+    paddingRight: 10,
+    lineHeight: 23,
+    flex: 2,
+    textAlignVertical: 'top',
+    backgroundColor: '#F6F6F6',
     borderRadius: 10,
     borderColor: '#ffb907',
   },
@@ -199,6 +199,41 @@ const styles = StyleSheet.create({
     fontSize: 16,
     alignSelf: 'center',
     fontWeight: '600',
+  },
+  locationPicker: {
+    marginBottom: 15,
+  },
+  mapPreview: {
+    marginBottom: 10,
+    width: '100%',
+    height: 150,
+    borderColor: '#ccc',
+    borderWidth: 1,
+  },
+  checkbox: {
+    flexDirection: 'row',
+    // alignItems:'center',
+    // justifyContent:'center'
+  },
+  uploadBtnContainer: {
+    height: 50,
+    width: 50,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderStyle: 'dashed',
+    borderWidth: 1,
+    overflow: 'hidden',
+  },
+  uploadBtn: {
+    textAlign: 'center',
+    fontSize: 11,
+    opacity: 0.3,
+    fontWeight: 'bold',
+  },
+  fixToText: {
+    flexDirection: 'row',
+    justifyContent: 'space-around',
   },
 });
 

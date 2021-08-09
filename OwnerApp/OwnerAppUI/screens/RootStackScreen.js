@@ -32,6 +32,8 @@ import {
   myParks,
   receivePayments,
   ViewPark,
+  viewMap,
+  MapScreen,
 } from '../screens/owner/functions/index';
 
 const RootStack = createStackNavigator();
@@ -130,7 +132,20 @@ const RootStackScreen = ({navigation}) => {
             ),
           }}
         />
-
+        <RootStack.Screen
+          name="viewMap"
+          component={viewMap}
+          options={{
+            title: 'View Map',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
         <RootStack.Screen
           name="AddNewPark"
           component={AddNewPark}
@@ -143,6 +158,26 @@ const RootStackScreen = ({navigation}) => {
             headerTitleStyle: {
               fontWeight: 'bold',
             },
+          }}
+        />
+        <RootStack.Screen
+          name="MapScreen"
+          component={MapScreen}
+          options={{
+            title: 'Map Screen',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+
+            headerRight: () => (
+              <TouchableOpacity style={COLORS.orange}>
+                <Text>Save</Text>
+              </TouchableOpacity>
+            ),
           }}
         />
         <RootStack.Screen
@@ -282,7 +317,6 @@ const RootStackScreen = ({navigation}) => {
 
 export default RootStackScreen;
 
-
 const Tab = createBottomTabNavigator();
 
 const tabOptions = {
@@ -322,7 +356,7 @@ function Tabs() {
                   }}
                 />
               );
-            case 'scanner':
+            case 'viewMap':
               return (
                 <Image
                   source={icons.search}
@@ -349,8 +383,8 @@ function Tabs() {
           }
         },
       })}>
-      <Tab.Screen name="home" component={Home}/>
-      <Tab.Screen name="scanner" component={Scan} />
+      <Tab.Screen name="home" component={Home} />
+      <Tab.Screen name="viewMap" component={viewMap} />
       <Tab.Screen name="setting" component={Home} />
     </Tab.Navigator>
   );
