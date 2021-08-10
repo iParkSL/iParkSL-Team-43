@@ -1,5 +1,6 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
+import axios from 'axios';
 
 import {
   View,
@@ -16,7 +17,31 @@ import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
+
 const SignInScreen = ({navigation}) => {
+  const [emailtext, setemailtext] = useState('');
+  const [passwordtext, setpasswordtext] = useState('');
+  const [cpasswordtext, setcpasswordtext] = useState('');
+
+  
+ 
+
+  const SignUp = (email, password, cpassword) => {
+    const x = {
+      email: email,
+      password: password,
+      cpassword: cpassword,
+    };
+    axios
+      .post('http://localhost:8080/register', x)
+      .then(res => {
+        if (res.data == 'SUCCESS') navigation.navigate('Home');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
+
   const [data, setData] = React.useState({
     email: '',
     password: '',
@@ -83,7 +108,9 @@ const SignInScreen = ({navigation}) => {
             placeholder="Your Email"
             style={styles.textInput}
             autoCapitalize="none"
-            onChangeText={val => textInputChange(val)}
+            name="emailtext"
+            value={emailtext}
+            onChangeText={val => setemailtext(val)}
           />
           {data.check_textInputChange ? (
             <Animatable.View animation="bounceIn">
@@ -107,7 +134,9 @@ const SignInScreen = ({navigation}) => {
             secureTextEntry={data.secureTextEntry ? true : false}
             style={[styles.textInput, {marginLeft: 5}]}
             autoCapitalize="none"
-            onChangeText={val => handlePasswordChange(val)}
+            name="passwordtext"
+            value={passwordtext}
+            onChangeText={val => setpasswordtext(val)}
           />
           <TouchableOpacity onPress={updateSecureTextEntry}>
             {data.secureTextEntry ? (
@@ -133,7 +162,9 @@ const SignInScreen = ({navigation}) => {
             secureTextEntry={data.confirm_secureTextEntry ? true : false}
             style={[styles.textInput, {marginLeft: 5}]}
             autoCapitalize="none"
-            onChangeText={val => handleConfirmPasswordChange(val)}
+            name="cpasswordtext"
+            value={cpasswordtext}
+            onChangeText={val => setcpasswordtext(val)}
           />
           <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
             {data.secureTextEntry ? (
@@ -144,6 +175,9 @@ const SignInScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.Button}>
+          <TouchableOpacity
+          onPress={()=>SignUp(emailtext,passwordtext,cpasswordtext)}
+          >
           <LinearGradient
             colors={['#ffb907', '#ffb907']}
             style={[
@@ -154,6 +188,7 @@ const SignInScreen = ({navigation}) => {
             ]}>
             <Text style={[styles.textSign, {}]}>Sign Up</Text>
           </LinearGradient>
+          </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
             style={[
