@@ -27,7 +27,7 @@ const SignInScreen = ({navigation}) => {
       password: password,
     };
     axios.post('http://localhost:8080/login',x).then(res=>{
-      if(res.data==='SUCCESS')navigation.navigate('Home');
+      // if(res.data==='SUCCESS')navigation.navigate('Home');
 
     }).catch(error=>{
       console.log(error);
@@ -124,7 +124,7 @@ const SignInScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.Button}>
-          <TouchableOpacity onPress={()=>login(emailtext,passwordtext)}>
+          <TouchableOpacity onPress={()=>navigation.navigate('Home')}>
             <LinearGradient
               colors={['#ffb907', '#ffb907']}
               style={[

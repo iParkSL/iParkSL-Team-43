@@ -24,7 +24,12 @@ import {
   mybookings,
   Payments,
   visitedParks,
+  BookingRequest,
+  QrCode,
+  timer,
+  payment
 } from './customer/functions/index';
+
 
 const RootStack = createStackNavigator();
 
@@ -139,7 +144,63 @@ const RootStackScreen = ({navigation}) => {
           name="mybookings"
           component={mybookings}
           options={{
-            title: 'My Bookings',
+            title: 'View Park',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="bookingRequest"
+          component={BookingRequest}
+          options={{
+            title: 'Book Park',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+          <RootStack.Screen
+          name="QrCode"
+          component={QrCode}
+          options={{
+            title: 'QR code',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+          <RootStack.Screen
+          name="timer"
+          component={timer}
+          options={{
+            title: 'Timer',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="payment"
+          component={payment}
+          options={{
+            title: 'Payment Form',
             headerStyle: {
               backgroundColor: COLORS.orange,
             },
