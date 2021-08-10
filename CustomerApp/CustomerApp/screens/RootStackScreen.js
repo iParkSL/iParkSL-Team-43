@@ -20,14 +20,14 @@ import SignInScreen from './auth/SignInScreen';
 import SignUpScreen from './auth/SignUpScreen';
 import Home from './customer/Home';
 import {
-  findPark,
-  mybookings,
+  findPark,  
   Payments,
   visitedParks,
   BookingRequest,
   QrCode,
   timer,
-  payment
+  payment,
+  viewPark,
 } from './customer/functions/index';
 
 
@@ -141,8 +141,8 @@ const RootStackScreen = ({navigation}) => {
           }}
         />
         <RootStack.Screen
-          name="mybookings"
-          component={mybookings}
+          name="viewPark"
+          component={viewPark}
           options={{
             title: 'View Park',
             headerStyle: {

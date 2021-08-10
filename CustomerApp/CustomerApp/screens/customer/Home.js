@@ -168,17 +168,12 @@ const Home = ({navigation}) => {
             marginTop: SIZES.padding,
             paddingHorizontal: SIZES.base,
           }}>
-          <OptionItem
-            icon={icons.payment}
-            bgColor={['#ffb907', '#ffb907']}
-            label="Payments"
-            onPress={() => navigation.navigate('Payments')}
-          />
+        
           <OptionItem
             icon={icons.coupon}
             bgColor={['#ffb907', '#ffb907']}
-            label="My bookings"
-            onPress={() => navigation.navigate('mybookings')}
+            label="Upcoming Bookings"
+            onPress={() => navigation.navigate('timer')}
           />
         </View>
         <View style={{flex: 0.7}}>

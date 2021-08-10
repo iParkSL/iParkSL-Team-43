@@ -180,7 +180,7 @@ const Find = ({navigation}) => {
               image={require('../../../assets/icons/marker.png')}>
               <Callout
                 style={styles.card}
-                onPress={() => navigation.navigate('mybookings')}>
+                onPress={() => navigation.navigate('viewPark')}>
                 <View style={styles.textContent}>
                   <Text style={styles.titleText}>{park.title}</Text>
                   <Text>
