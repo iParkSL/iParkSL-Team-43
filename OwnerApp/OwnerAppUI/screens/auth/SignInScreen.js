@@ -28,9 +28,9 @@ const SignInScreen = ({navigation}) => {
     };
 
     axios
-      .post('http://localhost:8080/auth/login', x)
+      .post('http://localhost:8080/login', x)
       .then(res => {
-        if (res.data == 'you Logged In!!') {
+        if (res.data == 'SUCCESS') {
           navigation.navigate('Tabs');
         }
       })

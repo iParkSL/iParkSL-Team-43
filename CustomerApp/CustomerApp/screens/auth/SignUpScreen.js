@@ -17,17 +17,15 @@ import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
 
-
 const SignInScreen = ({navigation}) => {
+  const [nametext, setnametext] = useState('');
   const [emailtext, setemailtext] = useState('');
   const [passwordtext, setpasswordtext] = useState('');
   const [cpasswordtext, setcpasswordtext] = useState('');
 
-  
- 
-
-  const SignUp = (email, password, cpassword) => {
+  const SignUp = (name, email, password, cpassword) => {
     const x = {
+      name: name,
       email: email,
       password: password,
       cpassword: cpassword,
@@ -101,6 +99,24 @@ const SignInScreen = ({navigation}) => {
         <Text style={styles.text_header}>Register with iParkSL</Text>
       </View>
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+        <Text style={styles.text_footer}>Name</Text>
+        <View style={styles.action}>
+          <FontAwesome name="user-o" color="#05375a" size={20} />
+          <TextInput
+            placeholder="Your Name"
+            style={styles.textInput}
+            autoCapitalize="none"
+            name="nametext"
+            value={nametext}
+            onChangeText={val => setnametext(val)}
+          />
+          {data.check_textInputChange ? (
+            <Animatable.View animation="bounceIn">
+              <Feather name="check-circle" color="#ffb907" size={20} />
+            </Animatable.View>
+          ) : null}
+        </View>
+
         <Text style={styles.text_footer}>Email</Text>
         <View style={styles.action}>
           <FontAwesome name="user-o" color="#05375a" size={20} />
@@ -118,6 +134,7 @@ const SignInScreen = ({navigation}) => {
             </Animatable.View>
           ) : null}
         </View>
+
         <Text
           style={[
             styles.text_footer,
@@ -176,18 +193,19 @@ const SignInScreen = ({navigation}) => {
         </View>
         <View style={styles.Button}>
           <TouchableOpacity
-          onPress={()=>SignUp(emailtext,passwordtext,cpasswordtext)}
-          >
-          <LinearGradient
-            colors={['#ffb907', '#ffb907']}
-            style={[
-              styles.signIn,
-              {
-                marginTop: 30,
-              },
-            ]}>
-            <Text style={[styles.textSign, {}]}>Sign Up</Text>
-          </LinearGradient>
+            onPress={() =>
+              SignUp(nametext, emailtext, passwordtext, cpasswordtext)
+            }>
+            <LinearGradient
+              colors={['#ffb907', '#ffb907']}
+              style={[
+                styles.signIn,
+                {
+                  marginTop: 30,
+                },
+              ]}>
+              <Text style={[styles.textSign, {}]}>Sign Up</Text>
+            </LinearGradient>
           </TouchableOpacity>
           <TouchableOpacity
             onPress={() => navigation.goBack()}
@@ -256,7 +274,7 @@ const styles = StyleSheet.create({
   },
   signIn: {
     width: '100%',
-    height: 50,
+    height: 40,
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 10,
