@@ -4,22 +4,126 @@ import {
   Dimensions,
   StyleSheet,
   ScrollView,
+  FlatList,
   Text,
   Image,
   Button,
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Component } from 'react';
+import axios from 'axios';
 
 // import Icon from 'react-native-vector-icons/FontAwesome';
 
 const {width} = Dimensions.get('window');
 const height = width * 0.6;
 
-const myParks = ({navigation}) => (
-  <View style={{width}}>
+export default class myParks extends Component {
+    state ={
+      data:[]
+  }
+
+  componentDidMount(){
+      axios.get('http://localhost:8080/myParks').then(res=>{
+        console.log(res);
+      this.setState({
+        data:res.data,
+        });
+      });
+
+  }
+ 
+  render(){
+    return(
+      <View style={{width}}>
     <ScrollView>
-      <View
+    <View>
+      {
+       
+        this.state.data.map((item)=>
+          <View
+        style={{
+          marginTop: 10,
+          marginBottom: 20,
+          flexDirection: 'row',
+          paddingHorizontal: 6,
+        }}>
+        
+        <View style={{width: '40%', height: '110%'}}>
+        
+          <Image
+            var img = {item.image1}
+            // console.log(img)
+            // ../parkImages/SkyPark1.jpg
+            // `${item.item.image1}`
+            // src={item.image1}
+            source={
+              require('../parkImages/SkyPark1.jpg')
+            }
+            style={{
+              margin: 10,
+              flex: 1,
+              width: null,
+              height: null,
+              resizeMode: 'cover',
+              borderRadius: 10,
+            }}
+          />
+        </View>
+        <View style={{width: '60%', height: '50%', marginTop: 8}}>
+          <View>
+            <Text style={{marginLeft: 10, fontWeight: 'bold', fontSize: 20}}>{item.parkname}</Text>
+
+            <Text style={{marginLeft: 10, fontSize: 16}}>{item.address}</Text>
+            <Text style={{marginLeft: 10, fontSize: 16}}>Rental per hour Rs{item.price}</Text>
+
+            <View style={{marginTop: 6, marginLeft: 10}}>
+              <TouchableOpacity
+                style={styles.signIn}
+                onPress={() => this.props.navigation.push('viewPark',
+                {
+                  name: `${item.parkname}`, 
+                  image1: `${item.image1}`,
+                  image2: `${item.image2}`, 
+                  image3: `${item.image3}`, 
+                  image4:`${item.image4}`,
+                  slots:`${item.slots}`,
+                  pid:`${item.pid}`,
+                  description:`${item.description}`,
+
+                  })}>
+                <View
+                  // colors={['#FDC73E', '#ffb907']}
+
+                  style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
+                  <Text
+                    style={[
+                      styles.textSign,
+                      {
+                        color: '#000000',
+                      },
+                    ]}>
+                    View Details
+                  </Text>
+                </View>
+              </TouchableOpacity>
+            </View>
+          </View>
+        </View>
+      </View>
+        )
+      }
+        {/* data={this.state.data}
+                keyExtractor={(item,index)=>index.toString()}
+                renderItem={({item})=>
+                        <View>
+                            <Text>{item.parkname}</Text>
+                        </View>
+                    }  */}
+      
+    </View>
+      {/* <View
         style={{
           marginTop: 10,
           marginBottom: 20,
@@ -57,7 +161,7 @@ const myParks = ({navigation}) => (
             <View style={{marginTop: 6, marginLeft: 10}}>
               <TouchableOpacity
                 style={styles.signIn}
-                onPress={() => navigation.push('viewPark')}>
+                onPress={() => this.props.navigation.push('viewPark')}>
                 <View
                   // colors={['#FDC73E', '#ffb907']}
 
@@ -76,174 +180,16 @@ const myParks = ({navigation}) => (
             </View>
           </View>
         </View>
-      </View>
+      </View> */}
 
-      <View
-        style={{marginBottom: 20, flexDirection: 'row', paddingHorizontal: 6}}>
-        <View style={{width: '40%', height: '110%'}}>
-          <Image
-            source={{
-              uri: 'https://www.relumination.com/wp-content/uploads/2014/06/pl.jpg',
-            }}
-            style={{
-              margin: 10,
-              flex: 1,
-              width: null,
-              height: null,
-              resizeMode: 'cover',
-              borderRadius: 10,
-            }}
-          />
-        </View>
-        <View style={{width: '60%', height: '50%', marginTop: 8}}>
-          <View>
-            <Text style={{marginLeft: 10, fontWeight: 'bold', fontSize: 20}}>
-              Star Parkings
-            </Text>
-            <Text style={{marginLeft: 10, fontSize: 16}}>
-              Wijerama Road, Nugegoda
-            </Text>
-            <Text style={{marginLeft: 10, fontSize: 16}}>
-              Rental per hour Rs 40.00
-            </Text>
-
-            <View style={{marginTop: 6, marginLeft: 10}}>
-              <TouchableOpacity
-                style={styles.signIn}
-                onPress={() => {
-                  navigation.navigate('home');
-                }}>
-                <View
-                  // colors={['#FDC73E', '#ffb907']}
-
-                  style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
-                  <Text
-                    style={[
-                      styles.textSign,
-                      {
-                        color: '#000000',
-                      },
-                    ]}>
-                    View Details
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </View>
-      <View
-        style={{marginBottom: 20, flexDirection: 'row', paddingHorizontal: 6}}>
-        <View style={{width: '40%', height: '110%'}}>
-          <Image
-            source={{
-              uri: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Subterranean_parking_lot.jpg',
-            }}
-            style={{
-              margin: 10,
-              flex: 1,
-              width: null,
-              height: null,
-              resizeMode: 'cover',
-              borderRadius: 10,
-            }}
-          />
-        </View>
-        <View style={{width: '60%', height: '50%', marginTop: 8}}>
-          <View>
-            <Text style={{marginLeft: 10, fontWeight: 'bold', fontSize: 20}}>
-              Park Tokyo
-            </Text>
-            <Text style={{marginLeft: 10, fontSize: 16}}>
-              Wijerama Road, Nugegoda
-            </Text>
-            <Text style={{marginLeft: 10, fontSize: 16}}>
-              Rental per hour Rs 40.00
-            </Text>
-            <View style={{marginTop: 6, marginLeft: 10}}>
-              <TouchableOpacity
-                style={styles.signIn}
-                onPress={() => {
-                  navigation.navigate('home');
-                }}>
-                <View
-                  // colors={['#FDC73E', '#ffb907']}
-
-                  style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
-                  <Text
-                    style={[
-                      styles.textSign,
-                      {
-                        color: '#000000',
-                      },
-                    ]}>
-                    View Details
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </View>
-
-      <View
-        style={{marginBottom: 10, flexDirection: 'row', paddingHorizontal: 6}}>
-        <View style={{width: '40%', height: '110%'}}>
-          <Image
-            source={{
-              uri: 'https://upload.wikimedia.org/wikipedia/commons/6/63/Subterranean_parking_lot.jpg',
-            }}
-            style={{
-              margin: 10,
-              flex: 1,
-              width: null,
-              height: null,
-              resizeMode: 'cover',
-              borderRadius: 10,
-            }}
-          />
-        </View>
-        <View style={{width: '60%', height: '50%', marginTop: 8}}>
-          <View>
-            <Text style={{marginLeft: 10, fontWeight: 'bold', fontSize: 20}}>
-              Park ABC
-            </Text>
-            <Text style={{marginLeft: 10, fontSize: 16}}>
-              Wijerama Road, Nugegoda
-            </Text>
-            <Text style={{marginLeft: 10, fontSize: 16}}>
-              Rental per hour Rs 40.00
-            </Text>
-            <View style={{marginTop: 6, marginLeft: 10}}>
-              <TouchableOpacity
-                style={styles.signIn}
-                onPress={() => {
-                  navigation.navigate('home');
-                }}>
-                <View
-                  // colors={['#FDC73E', '#ffb907']}
-
-                  style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
-                  <Text
-                    style={[
-                      styles.textSign,
-                      {
-                        color: '#000000',
-                      },
-                    ]}>
-                    View Details
-                  </Text>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </View>
+      
     </ScrollView>
   </View>
-);
+    )
+  }
+}
 
-export default myParks;
+// export default myParks;
 
 
 const styles = StyleSheet.create({
