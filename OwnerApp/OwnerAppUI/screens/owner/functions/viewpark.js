@@ -12,17 +12,48 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Component } from 'react';
+import axios from 'axios';
 
 const {width} = Dimensions.get('window');
 const height = width * 0.6;
-const images = [
-  'http://i.gettysburgdaily.com/imgs/CycloramaParkingLot051911/CycloramaParkingLot05191110.jpg',
-  'http://i.gettysburgdaily.com/imgs/CycloramaParkingLot051911/CycloramaParkingLot05191102.jpg',
-  'https://www.relumination.com/wp-content/uploads/2014/06/pl.jpg',
-];
+const images = [];
+var i=0;
 import LinearGradient from 'react-native-linear-gradient';
-const App = () => (
-  <View style={{width}}>
+// const App = () => (
+  export default class App extends Component{
+    // constructor(props){
+    //   super(props)
+    // }
+    state ={
+      data:[],
+  }
+  componentDidMount(){
+    axios.get('http://localhost:8080/reviews'
+      ).then(res=>{
+        console.log(res);
+      this.setState({
+        data:res.data,
+        });
+      });
+
+}
+  
+  render(){
+      const {name,image1,image2,image3,image4,slots,pid,description} =this.props.route.params;
+      i = i+1
+      if(i<2){
+        images.push(image1)
+        images.push(image2)
+        images.push(image3)
+        images.push(image4)
+      }
+      
+      // console.log(images)
+      
+      
+      return(
+        <View style={{width}}>
     <ScrollView>
       <ScrollView
         pagingEnabled
@@ -44,9 +75,7 @@ const App = () => (
           textAlign: 'center',
           fontWeight: 'bold',
           marginTop: 10,
-        }}>
-        Sky parks
-      </Text>
+        }}>{name}</Text>
 
       <View>
         <Text
@@ -55,7 +84,7 @@ const App = () => (
             marginLeft: 20,
             marginTop:5,
           }}>
-          Available Slots : 10
+          Available Slots : {slots}
         </Text>
         <Text
           style={{
@@ -66,10 +95,10 @@ const App = () => (
           Facilities
         </Text>
         <View style={{marginLeft: 30}}>
-          <Text style={{fontSize: 16}}>1. Wifi</Text>
-          <Text style={{fontSize: 16}}>2. CCTV</Text>
+          <Text style={{fontSize: 16}}>{description}</Text>
+          {/* <Text style={{fontSize: 16}}>2. CCTV</Text>
           <Text style={{fontSize: 16}}>3. Water</Text>
-          <Text style={{fontSize: 16}}>4. Waiting area</Text>
+          <Text style={{fontSize: 16}}>4. Waiting area</Text> */}
         </View>
         <View style={{marginTop: 5}}>
           <Text
@@ -87,16 +116,17 @@ const App = () => (
             horizontal
             showsHorisontalScrollIndicator={false}
             style={{width}}>
-            <View
-             style={styles.Review}>
-              <Text style={{ fontWeight: 'bold', fontSize: 16}}>
-                Kamal de Silva
-              </Text>
-              <Text style={{fontSize: 16, fontStyle:'italic'}}>
-                "Good parking area. Any customer can get better service".
-              </Text>
-            </View>
-            <View
+            {
+              this.state.data.map((item)=>(
+
+                <View
+                  style={styles.Review}>
+                  <Text style={{ fontWeight: 'bold', fontSize: 16}}>{item.name}</Text>
+                  <Text style={{fontSize: 16, fontStyle:'italic'}}>"{item.description}".</Text>
+                </View>
+              ))
+            }
+            {/* <View
              style={styles.Review}>
               <Text style={{ fontWeight: 'bold', fontSize: 16}}>
                 Shantha 
@@ -113,7 +143,7 @@ const App = () => (
               <Text style={{fontSize: 16, fontStyle:'italic'}}>
                 "Good parking area. Any customer can get better service".
               </Text>
-            </View>
+            </View> */}
           </ScrollView>
         </View>
       </View>
@@ -137,9 +167,13 @@ const App = () => (
       </View>
     </ScrollView>
   </View>
-);
+      )
+    }
+  }
+  
+// );
 
-export default App;
+// export default App;
 
 const styles = StyleSheet.create({
   title: {
