@@ -173,11 +173,11 @@ const RootStackScreen = ({navigation}) => {
               fontWeight: 'bold',
             },
 
-            headerRight: () => (
-              <TouchableOpacity style={COLORS.orange}>
-                <Text>Save</Text>
-              </TouchableOpacity>
-            ),
+            // headerRight: () => (
+            //   <TouchableOpacity style={COLORS.orange}>
+            //     <Text>Save</Text>
+            //   </TouchableOpacity>
+            // ),
           }}
         />
         <RootStack.Screen
