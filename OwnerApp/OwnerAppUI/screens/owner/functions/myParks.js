@@ -53,14 +53,12 @@ export default class myParks extends Component {
         <View style={{width: '40%', height: '110%'}}>
         
           <Image
-            var img = {item.image1}
+            // var img = {item.image1}
             // console.log(img)
             // ../parkImages/SkyPark1.jpg
             // `${item.item.image1}`
             // src={item.image1}
-            source={
-              require('../parkImages/SkyPark1.jpg')
-            }
+            source={{uri:item.image1}}
             style={{
               margin: 10,
               flex: 1,
