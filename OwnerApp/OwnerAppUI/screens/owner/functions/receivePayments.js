@@ -11,104 +11,79 @@ import {
   SafeAreaView,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { Component } from 'react';
+import axios from 'axios';
 
 // import Icon from 'react-native-vector-icons/FontAwesome';
 
 const {width} = Dimensions.get('window');
 const height = width * 0.6;
 
-const receivePayments = () => (
-  <View style={{width}}>
-    <SafeAreaView>
-      <View>
-        <FlatList
-          data={[
-            {
-              key: '1',
-              name: 'Amal perera',
-              image:
-                'https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg',
-              date: '2021/2/27',
-              time: '14.30',
-            },
-            {
-              key: '2',
-              name: 'Saman perera',
-              image:
-                'https://www.ccprecruitment.com/imglib/xman-profile-cartoon_18591-58483.jpeg.pagespeed.ic.Q-M5gznZH8.jpg',
-              date: '2021/2/27',
-              time: '14.30',
-            },
-            {
-              key: '3',
-              name: 'Kamal Silva',
-              image:
-                'https://digitalbrandblueprint.com/wp-content/uploads/2020/09/Portrait-300-01-1980x1980.png',
-              date: '2021/2/27',
-              time: '14.30',
-            },
-            {
-              key: '4',
-              name: 'Ama perera',
-              image:
-                'https://www.custom-gateway.com/wp-content/uploads/2020/03/Thora-Chan-600x600.png',
-              date: '2021/2/27',
-              time: '14.30',
-            },
-            {
-              key: '5',
-              name: 'Kasun perera',
-              image:
-                'https://image.freepik.com/free-vector/man-profile-cartoon_18591-58482.jpg',
-              date: '2021/2/27',
-              time: '14.30',
-            },
-          ]}
-          renderItem={({item}) => (
-            <View
-              style={{
-                flex: 1,
-                padding: 10,
-                borderRadius: 10,
-                width: '90%',
-                height: 120,
-                margin: '5%',
-                marginBottom: 10,
-                flexDirection: 'row',
-                shadowColor: '#000',
-                shadowOffset: {width: 0, height: 1},
-                shadowOpacity: 0.8,
-                shadowRadius: 2.22,
-                elevation: 3,
-              }}>
-              <View style={{width: '40%', height: '100%'}}>
-                <Image
-                  // key={index}
-                  source={{uri: item.image}}
+export default class myParks extends Component {
+  state ={
+    data:[]
+  }
+  componentDidMount(){
+    axios.get('http://localhost:8080/receivePayments').then(res=>{
+      console.log(res);
+    this.setState({
+      data:res.data,
+      });
+    });
+
+  }
+  render(){
+    return (
+      <View style={{width}}>
+        <ScrollView>
+          <View>
+              {
+                this.state.data.map((item)=>(
+                <View
                   style={{
+                    flex: 1,
+                    padding: 10,
+                    borderRadius: 10,
                     width: '90%',
-                    height: '100%',
-                    resizeMode: 'cover',
-                    borderRadius: 150,
-                  }}
-                />
-              </View>
-              <View style={{width: '50%', marginTop: 20}}>
-                <Text style={{fontWeight: 'bold', fontSize: 20}}>
-                  {item.name}
-                </Text>
-                <Text style={{}}>{item.date}</Text>
-                <Text style={{}}>{item.time}</Text>
-                <View style={{marginTop: 20}}></View>
-              </View>
-            </View>
-          )}
-        />
+                    height: 120,
+                    margin: '5%',
+                    marginBottom: 10,
+                    flexDirection: 'row',
+                    shadowColor: '#000',
+                    shadowOffset: {width: 0, height: 1},
+                    shadowOpacity: 0.8,
+                    shadowRadius: 2.22,
+                    elevation: 3,
+                  }}>
+                  <View style={{width: '40%', height: '100%'}}>
+                    <Image
+                      // key={index}
+                      source={{uri: item.profimage}}
+                      style={{
+                        width: '90%',
+                        height: '100%',
+                        resizeMode: 'cover',
+                        borderRadius: 150,
+                      }}
+                    />
+                  </View>
+                  <View style={{width: '50%', marginTop: 20}}>
+                    <Text style={{fontWeight: 'bold', fontSize: 20}}>
+                      {item.name}
+                    </Text>
+                    <Text style={{}}>{item.date}</Text>
+                    <Text style={{}}>{item.time}</Text>
+                    <View style={{marginTop: 20}}></View>
+                  </View>
+                </View>
+              ))
+              }
+          </View>
+        </ScrollView>
       </View>
-    </SafeAreaView>
-  </View>
-);
-export default receivePayments;
+    )
+  }
+}
 const styles = StyleSheet.create({
   title: {
     fontSize: 30,

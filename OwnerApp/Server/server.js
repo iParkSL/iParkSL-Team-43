@@ -24,7 +24,10 @@ app.use(express.json());
 app.use("/register",require("./routes/register"));
 app.use("/login",require("./routes/login"));
 app.use("/SubmitPark",require("./routes/SubmitPark"));
-
+app.use("/myParks",require("./routes/myParksRoute"));
+app.use("/reviews",require("./routes/parkReview"));
+app.use("/recentBookings",require("./routes/recentBookings"));
+app.use("/receivePayments",require("./routes/receivePayments"));
 
 
 

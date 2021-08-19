@@ -72,22 +72,22 @@ render(){
                   <View style={{flexDirection: 'row'}}>
                     {item.isScaned == 0 &&(
                       <TouchableOpacity
-                      style={styles.signIn}
-                      onPress={() => {
-                        navigation.navigate('Scan');
-                      }}>
-                      <View style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
-                        <Text
-                          style={[
-                            styles.textSign,
-                            {
-                              color: '#000000',
-                            },
-                          ]}>
-                          Scan
-                        </Text>
-                      </View>
-                    </TouchableOpacity>
+                        style={styles.signIn}
+                        onPress={() => {
+                          this.props.navigation.push('Scan');
+                        }}>
+                        <View style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
+                          <Text
+                            style={[
+                              styles.textSign,
+                              {
+                                color: '#000000',
+                              },
+                            ]}>
+                            Scan
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
                     )
 
                     }
