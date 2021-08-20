@@ -28,7 +28,6 @@ import MapPreview from './SelectMapView';
 
 import {images, icons, COLORS, FONTS, SIZES} from '../../../constants';
 
-
 const HomeScreen = ({route, navigation}) => {
   const [parkName, setparkName] = React.useState(null);
   // const [lat, setlat] = React.useState(null);
@@ -39,11 +38,11 @@ const HomeScreen = ({route, navigation}) => {
   const [description, setdescription] = React.useState(null);
   // const [selectedLocation, setSelectedLocation] = React.useState(null);
 
-  const oid = 1007;
-
-  const {markerCoordinates} = route.params;
-  const lat = markerCoordinates.latitude;
-  const lon = markerCoordinates.longitude;
+  const oid = 1588;
+  //const {latitude, longitude} = route.params;
+  const lat = route.params?.latitude;
+ 
+  const lon = route.params?.longitude; //route.params.longitude;
   const submitData = () => {
     fetch('http://localhost:8080/SubmitPark', {
       method: 'post',

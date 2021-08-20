@@ -13,14 +13,12 @@ const MapScreen = ({navigation}) => {
     latitudeDelta: 0.015,
     longitudeDelta: 0.0121,
   };
-
   const selectLocationHandler = event => {
     setSelectedLocation({
       lat: event.nativeEvent.coordinate.latitude,
       lng: event.nativeEvent.coordinate.longitude,
     });
   };
-
   let markerCoordinates;
 
   if (selectedLocation) {
@@ -53,9 +51,9 @@ const MapScreen = ({navigation}) => {
             }}
             onPress={() => {
               navigation.navigate('AddNewPark', {
-              markerCoordinates
+                latitude: markerCoordinates.latitude,
+                longitude: markerCoordinates.longitude,
               });
-              console.log(markerCoordinates);
             }}>
             <Text style={{fontWeight: 'bold'}}>Save</Text>
           </TouchableOpacity>

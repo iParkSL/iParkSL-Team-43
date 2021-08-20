@@ -5,7 +5,7 @@ const Charges = () => {
   return (
     <View>
       <View>
-        <Text>Charges</Text>
+       
       </View>
     </View>
   );

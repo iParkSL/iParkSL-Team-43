@@ -13,6 +13,7 @@ import ViewPark from './viewpark';
 import stopwatch from './stopwatch';
 import viewMap from './viewMap';
 import MapScreen from './MapScreen';
+import SlotUP from './SlotUpdate';
 export {
   viewMap,
   MapScreen,
@@ -27,4 +28,5 @@ export {
   myParks,
   ViewPark,
   receivePayments,
+  SlotUP,
 };

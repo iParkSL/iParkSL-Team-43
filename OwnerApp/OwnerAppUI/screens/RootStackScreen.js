@@ -34,6 +34,7 @@ import {
   ViewPark,
   viewMap,
   MapScreen,
+  SlotUP,
 } from '../screens/owner/functions/index';
 
 const RootStack = createStackNavigator();
@@ -200,6 +201,20 @@ const RootStackScreen = ({navigation}) => {
           component={Scan}
           options={{
             title: 'QR Scan',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+         <RootStack.Screen
+          name="SlotUP"
+          component={SlotUP}
+          options={{
+            title: '',
             headerStyle: {
               backgroundColor: COLORS.orange,
             },

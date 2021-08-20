@@ -2,9 +2,9 @@ const express =require('express');
 const router = express.Router();
 const db=require("../config/db");
 
+  
 
-
-
+  
 
 
 router.post("/",(req,res)=>{
@@ -13,7 +13,7 @@ router.post("/",(req,res)=>{
     const slots=req.body.slots;
     const photo=req.body.photo;
     const description=req.body.description;
-    
+      
     const oid=req.body.oid;
     const latitude=req.body.lat;
     const longitude=req.body.lon;

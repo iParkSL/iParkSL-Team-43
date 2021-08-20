@@ -28,6 +28,10 @@ app.use("/myParks",require("./routes/myParksRoute"));
 app.use("/reviews",require("./routes/parkReview"));
 app.use("/recentBookings",require("./routes/recentBookings"));
 app.use("/receivePayments",require("./routes/receivePayments"));
+app.use("/SubmitPark",require("./routes/SubmitPark"));
+app.use("/ViewMap",require("./routes/ViewMap"));
+app.use("/FindPark",require("./routes/FindPark"));
+
 
 
 
