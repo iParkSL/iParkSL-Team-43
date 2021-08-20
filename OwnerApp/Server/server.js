@@ -31,7 +31,7 @@ app.use("/receivePayments",require("./routes/receivePayments"));
 app.use("/SubmitPark",require("./routes/SubmitPark"));
 app.use("/ViewMap",require("./routes/ViewMap"));
 app.use("/FindPark",require("./routes/FindPark"));
-
+app.use("/SlotUpdate",require("./routes/SlotUpdate"));
 
 
 
