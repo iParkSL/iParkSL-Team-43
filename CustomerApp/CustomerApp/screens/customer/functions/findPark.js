@@ -3,186 +3,208 @@ import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Text, StyleSheet, Button, TextInput} from 'react-native';
 import {View, ScrollView, Animated, Image} from 'react-native';
 import MapView, {Marker, Callout} from 'react-native-maps';
+import axios from 'axios';
 const Find = ({navigation}) => {
-  const initialMapState = {
-    parks: [
-      {
-        coordinate: {
-          latitude: 6.867989,
-          longitude: 79.893557,
-        },
-        title: 'Sky New Park',
-        description: '100 LKR/hr',
-        key: '1',
-      },
-      {
-        coordinate: {
-          latitude: 6.865025,
-          longitude: 79.898305,
-        },
-        title: 'AK park',
-        description: '100 LKR/hr',
-        key: '2',
-      },
-      {
-        coordinate: {
-          latitude: 6.879077,
-          longitude: 79.87987,
-        },
-        title: 'KP park',
-        description: '50 LKR/hr',
-        key: '3',
-      },
-      {
-        coordinate: {
-          latitude: 6.874886,
-          longitude: 79.866051,
-        },
-        title: 'HRM park',
-        description: '100 LKR/hr',
-        key: '4',
-      },
-      {
-        coordinate: {
-          latitude: 6.856336,
-          longitude: 79.879806,
-        },
-        title: 'KM park',
-        description: '200 LKR/hr',
-        key: '5',
-      },
-      {
-        coordinate: {
-          latitude: 6.838118,
-          longitude: 79.869262,
-        },
-        title: 'RT park',
-        description: '70 LKR/hr',
-        key: '6',
-      },
-      {
-        coordinate: {
-          latitude: 6.83812,
-          longitude: 79.869262,
-        },
-        title: 'sK park',
-        description: '50 LKR/hr',
-        key: '7',
-      },
-      {
-        coordinate: {
-          latitude: 6.838517,
-          longitude: 79.870335,
-        },
-        title: 'LM park',
-        description: '150 LKR/hr',
-        key: '8',
-      },
-      {
-        coordinate: {
-          latitude: 6.784234,
-          longitude: 79.889947,
-        },
-        title: 'New YK park',
-        description: '150 LKR/hr',
-        key: '9',
-      },
-      {
-        coordinate: {
-          latitude: 6.784234,
-          longitude: 79.898335,
-        },
-        title: 'sky park',
-        description: '150 LKR/hr',
-        key: '10',
-      },
-      {
-        coordinate: {
-          latitude: 6.795873,
-          longitude: 79.875678,
-        },
-        title: 'sky park',
-        description: '150 LKR/hr',
-        key: '11',
-      },
-      {
-        coordinate: {
-          latitude: 6.796928,
-          longitude: 79.879401,
-        },
-        title: 'sky park',
-        description: '150 LKR/hr',
-        key: '12',
-      },
-      {
-        coordinate: {
-          latitude: 6.802174,
-          longitude: 79.906524,
-        },
-        title: 'sky park',
-        description: '150 LKR/hr',
-        key: '13',
-      },
-      {
-        coordinate: {
-          latitude: 6.814324,
-          longitude: 79.92189,
-        },
-        title: 'sky park',
-        description: '150 LKR/hr',
-        key: '1',
-      },
-      {
-        coordinate: {
-          latitude: 6.847097,
-          longitude: 79.938028,
-        },
-        title: 'sky park',
-        description: '150 LKR/hr',
-        key: '14',
-      },
-      {
-        coordinate: {
-          latitude: 6.292562,
-          longitude: 80.166346,
-        },
-        title: 'New City park',
-        description: '150 LKR/hr',
-        key: '15',
-      },
-      {
-        coordinate: {
-          latitude: 6.069866,
-          longitude: 80.227717,
-        },
-        title: 'Galle park',
-        description: '150 LKR/hr',
-        key: '16',
-      },
-    ],
-    region: {
-      latitude: 6.865025,
-      longitude: 79.898305,
-      latitudeDelta: 0.015,
-      longitudeDelta: 0.0121,
-    },
-  };
+  const [state, setState] = useState([]);
 
-  const [state, setState] = React.useState(initialMapState);
+  axios
+    .get('http://localhost:8080/FindPark')
+    .then(res => {
+      console.log(res);
+      setState(res.data);
+    })
+    .catch(error => {
+      console.log(error);
+    });
+
+  const region = {
+    latitude: 6.865025,
+    longitude: 79.898305,
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.0121,
+  };
+  // const initialMapState = {
+  //   parks: [
+  //     {
+  //       coordinate: {
+  //         latitude: 6.867989,
+  //         longitude: 79.893557,
+  //       },
+  //       title: 'Sky New Park',
+  //       description: '100 LKR/hr',
+  //       key: '1',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.865025,
+  //         longitude: 79.898305,
+  //       },
+  //       title: 'AK park',
+  //       description: '100 LKR/hr',
+  //       key: '2',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.879077,
+  //         longitude: 79.87987,
+  //       },
+  //       title: 'KP park',
+  //       description: '50 LKR/hr',
+  //       key: '3',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.874886,
+  //         longitude: 79.866051,
+  //       },
+  //       title: 'HRM park',
+  //       description: '100 LKR/hr',
+  //       key: '4',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.856336,
+  //         longitude: 79.879806,
+  //       },
+  //       title: 'KM park',
+  //       description: '200 LKR/hr',
+  //       key: '5',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.838118,
+  //         longitude: 79.869262,
+  //       },
+  //       title: 'RT park',
+  //       description: '70 LKR/hr',
+  //       key: '6',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.83812,
+  //         longitude: 79.869262,
+  //       },
+  //       title: 'sK park',
+  //       description: '50 LKR/hr',
+  //       key: '7',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.838517,
+  //         longitude: 79.870335,
+  //       },
+  //       title: 'LM park',
+  //       description: '150 LKR/hr',
+  //       key: '8',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.784234,
+  //         longitude: 79.889947,
+  //       },
+  //       title: 'New YK park',
+  //       description: '150 LKR/hr',
+  //       key: '9',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.784234,
+  //         longitude: 79.898335,
+  //       },
+  //       title: 'sky park',
+  //       description: '150 LKR/hr',
+  //       key: '10',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.795873,
+  //         longitude: 79.875678,
+  //       },
+  //       title: 'sky park',
+  //       description: '150 LKR/hr',
+  //       key: '11',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.796928,
+  //         longitude: 79.879401,
+  //       },
+  //       title: 'sky park',
+  //       description: '150 LKR/hr',
+  //       key: '12',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.802174,
+  //         longitude: 79.906524,
+  //       },
+  //       title: 'sky park',
+  //       description: '150 LKR/hr',
+  //       key: '13',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.814324,
+  //         longitude: 79.92189,
+  //       },
+  //       title: 'sky park',
+  //       description: '150 LKR/hr',
+  //       key: '1',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.847097,
+  //         longitude: 79.938028,
+  //       },
+  //       title: 'sky park',
+  //       description: '150 LKR/hr',
+  //       key: '14',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.292562,
+  //         longitude: 80.166346,
+  //       },
+  //       title: 'New City park',
+  //       description: '150 LKR/hr',
+  //       key: '15',
+  //     },
+  //     {
+  //       coordinate: {
+  //         latitude: 6.069866,
+  //         longitude: 80.227717,
+  //       },
+  //       title: 'Galle park',
+  //       description: '150 LKR/hr',
+  //       key: '16',
+  //     },
+  //   ],
+  //   region: {
+  //     latitude: 6.865025,
+  //     longitude: 79.898305,
+  //     latitudeDelta: 0.015,
+  //     longitudeDelta: 0.0121,
+  //   },
+  // };
+
+  // const [state, setState] = React.useState(initialMapState);
 
   return (
     <View style={styles.container}>
-      <MapView initialRegion={state.region} style={styles.map}>
-        {state.parks.map(park => {
+      <MapView initialRegion={region} style={styles.map}>
+        {state.map(park => {
           return (
             <Marker
-              coordinate={park.coordinate}
+              coordinate={{
+                latitude: park.latitude,
+                longitude: park.longitude,
+              }}
               image={require('../../../assets/icons/marker.png')}>
               <Callout
                 style={styles.card}
                 onPress={() => navigation.navigate('viewPark')}>
                 <View style={styles.textContent}>
-                  <Text style={styles.titleText}>{park.title}</Text>
+                  <Text style={styles.titleText}>{park.parkname}</Text>
                   <Text>
                     {'\n'}
                     {park.description}

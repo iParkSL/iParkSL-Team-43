@@ -3,9 +3,9 @@ const router = express.Router();
 const db=require("../config/db");
 
   
-
   
-
+  
+     
 
 router.post("/",(req,res)=>{
     const parkname=req.body.parkName;
