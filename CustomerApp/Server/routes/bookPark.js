@@ -13,9 +13,11 @@ router.post('/',function(req, res){
     const EstimatedDuration=req.body.EstimatedDuration; 
 
 
-    
+    var today = new Date();
+    var Time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+    var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
-    const bookPark = `insert into booking(vehicleNo,vehicleType,paymentMethod,QrCode,CustomerID,ParkID) values(?,?,?,?,?,?)`;
+    const bookPark = `insert into booking(vehicleNo,vehicleType,paymentMethod,QrCode,CustomerID,ParkID,EstimatedDuration,Date,Time) values(?,?,?,?,?,?,?,?,?)`;
 
     db.query(bookPark,[vehicleNo,vehicleType,paymentMethod,QrCode,CustomerID,ParkID,EstimatedDuration,date,Time],(err,result)=>{
         res.json("SUCCESS");
