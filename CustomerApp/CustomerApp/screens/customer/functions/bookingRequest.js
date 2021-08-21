@@ -1,4 +1,5 @@
 import React, {useState} from 'react';
+import axios from 'axios';
 
 import {Picker} from '@react-native-picker/picker';
 import {
@@ -14,9 +15,33 @@ import {
   StatusBar,
 } from 'react-native';
 
-const bookingRequest = ({navigation}) => {
+const BookingRequest = ({navigation}) => {
   const [vehicle, setvehicle] = useState('');
+  const [vehicleNoText, setVehicleNo] = useState('');
   const [payment, setpayment] = useState('');
+  const [EstimatedTimeText, setEstimatedTime] = useState('');
+
+  const Booking = (vehicleType, vehicleNo, paymentType, estimatedTime) => {
+    const x = {
+      vehicleType: vehicleType,
+      vehicleNo: vehicleNo,
+      paymentMethod: paymentType,
+      EstimatedDuration: estimatedTime,
+      CustomerID: '1',
+      ParkID: '1',
+      QrCode: 'abcd',
+    };
+
+   
+    axios
+      .post('http://localhost:8080/book', x)
+      .then(res => {
+        if(res.data==='SUCCESS')navigation.push('QrCode');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  };
 
   return (
     <ScrollView>
@@ -29,11 +54,11 @@ const bookingRequest = ({navigation}) => {
             selectedValue={vehicle}
             onValueChange={Itemvalue => setvehicle(Itemvalue)}
             mode={'dropdown'}>
-            <Picker.Item label="A1" value="A1"/>
-            <Picker.Item label="A" value="A"/>
-            <Picker.Item label="B1" value="B1"/>
-            <Picker.Item label="B" value="B"/>        
-         
+            <Picker.Item label="-SELECT-" color="grey"/>
+            <Picker.Item label="A1" value="A1" />
+            <Picker.Item label="A" value="A" />
+            <Picker.Item label="B1" value="B1" />
+            <Picker.Item label="B" value="B" />
           </Picker>
         </View>
 
@@ -41,8 +66,9 @@ const bookingRequest = ({navigation}) => {
         <View style={styles.action}>
           <TextInput
             style={styles.textInput}
-            autoCapitalize="none"
-            // onChangeText={(val) => textInputChange(val)}
+            autoCapitalize="none"            
+            value={vehicleNoText}
+            onChangeText={val => setVehicleNo(val)}
           />
         </View>
 
@@ -54,6 +80,7 @@ const bookingRequest = ({navigation}) => {
             selectedValue={payment}
             onValueChange={Itemvalue => setpayment(Itemvalue)}
             mode={'dropdown'}>
+            <Picker.Item label="-SELECT-" color="grey"/>
             <Picker.Item label="Online" value="online" />
             <Picker.Item label="Cash" value="cash" />
           </Picker>
@@ -67,12 +94,15 @@ const bookingRequest = ({navigation}) => {
             style={styles.textInput}
             autoCapitalize="none"
             placeholder="04:00"
-            // onChangeText={(val) => textInputChange(val)}
+            value={EstimatedTimeText}
+            onChangeText={val => setEstimatedTime(val)}
           />
         </View>
 
         <View style={styles.button}>
-          <TouchableOpacity style={styles.signIn}onPress={() => navigation.push('QrCode')}>
+          <TouchableOpacity
+            style={styles.signIn}
+            onPress={()=>Booking(vehicle,vehicleNoText,payment,EstimatedTimeText)}>
             <View
               // colors={['#FDC73E', '#ffb907']}
               style={[styles.signIn]}>
@@ -104,7 +134,7 @@ const styles = StyleSheet.create({
     flex: Platform.OS === 'ios' ? 3 : 5,
     backgroundColor: '#fff',
     // marginLeft:5,
-    height:600,
+    height: 600,
     paddingHorizontal: 30,
     paddingVertical: 40,
   },
@@ -136,7 +166,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
     color: '#05375a',
     // borderWidth:1,
-    backgroundColor:'#F6F6F6',
+    backgroundColor: '#F6F6F6',
     borderRadius: 10,
     borderColor: '#ffb907',
   },
@@ -160,4 +190,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default bookingRequest;
+export default BookingRequest;
