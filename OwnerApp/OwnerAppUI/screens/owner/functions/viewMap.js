@@ -8,16 +8,17 @@ import {data} from 'browserslist';
 
 const viewMap = ({navigation}) => {
   const [state, setState] = useState([]);
-
-  axios
-    .get('http://localhost:8080/ViewMap')
-    .then(res => {
-      console.log(res);
-      setState(res.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  useEffect(() => {
+    axios
+      .get('http://localhost:8080/ViewMap')
+      .then(res => {
+        console.log(res);
+        setState(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   const region = {
     latitude: 6.865025,

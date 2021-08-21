@@ -1,11 +1,11 @@
 import React from 'react';
 import {View, Text} from 'react-native';
 
-const Charges = () => {
+const  Charges= () => {
   return (
     <View>
       <View>
-        <Text>Charges</Text>
+      
       </View>
     </View>
   );

@@ -15,6 +15,7 @@ import {
   ImageBackground,
   StatusBar,
   Alert,
+  Image,
 } from 'react-native';
 
 import LinearGradient from 'react-native-linear-gradient';
@@ -27,6 +28,7 @@ import ImagePicker from 'react-native-image-crop-picker';
 import MapPreview from './SelectMapView';
 
 import {images, icons, COLORS, FONTS, SIZES} from '../../../constants';
+import {colors} from 'react-native-elements';
 
 const HomeScreen = ({route, navigation}) => {
   const [parkName, setparkName] = React.useState(null);
@@ -34,14 +36,17 @@ const HomeScreen = ({route, navigation}) => {
   // const [lon, setlon] = React.useState(null);
   const [price, setprice] = React.useState(null);
   const [slots, setslots] = React.useState(null);
-  const [photo, setPhoto] = React.useState(null);
+  const [photo1, setPhoto1] = React.useState(null);
+  const [photo2, setPhoto2] = React.useState(null);
+  const [photo3, setPhoto3] = React.useState(null);
+  const [photo4, setPhoto4] = React.useState(null);
   const [description, setdescription] = React.useState(null);
   // const [selectedLocation, setSelectedLocation] = React.useState(null);
 
-  const oid = 1588;
+  const oid = 1556;
   //const {latitude, longitude} = route.params;
   const lat = route.params?.latitude;
- 
+
   const lon = route.params?.longitude; //route.params.longitude;
   const submitData = () => {
     fetch('http://localhost:8080/SubmitPark', {
@@ -56,7 +61,10 @@ const HomeScreen = ({route, navigation}) => {
         lon,
         price,
         slots,
-        photo,
+        photo1,
+        photo2,
+        photo3,
+        photo4,
         description,
       }),
     })
@@ -77,7 +85,7 @@ const HomeScreen = ({route, navigation}) => {
     navigation.navigate('MapScreen');
   };
 
-  const pickFromGallery = async () => {
+  const pickFromGallery1 = async () => {
     let data = await ImagePicker.openPicker({
       width: 300,
       height: 300,
@@ -91,12 +99,12 @@ const HomeScreen = ({route, navigation}) => {
         type: data.mime,
         name: data.mime,
       };
-      handleUpload(newfile);
+      handleUpload1(newfile);
       console.log(newfile);
     }
   };
 
-  const handleUpload = photo => {
+  const handleUpload1 = photo => {
     const data = new FormData();
     data.append('file', photo);
     data.append('upload_preset', 'iparksl');
@@ -110,7 +118,87 @@ const HomeScreen = ({route, navigation}) => {
       .then(data => {
         console.log(data);
 
-        setPhoto(data.url);
+        setPhoto1(data.url);
+      })
+      .catch(err => {
+        Alert.alert('error while uploading');
+      });
+  };
+
+  const pickFromGallery2 = async () => {
+    let data = await ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+      compressImageQuality: 0.7,
+    });
+
+    if (!data.cancelled) {
+      let newfile = {
+        uri: data.path,
+        type: data.mime,
+        name: data.mime,
+      };
+      handleUpload2(newfile);
+      console.log(newfile);
+    }
+  };
+
+  const handleUpload2 = photo => {
+    const data = new FormData();
+    data.append('file', photo);
+    data.append('upload_preset', 'iparksl');
+    data.append('cloud_name', 'dan3i3xkt');
+
+    fetch('https://api.cloudinary.com/v1_1/dan3i3xkt/image/upload', {
+      method: 'post',
+      body: data,
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+
+        setPhoto2(data.url);
+      })
+      .catch(err => {
+        Alert.alert('error while uploading');
+      });
+  };
+
+  const pickFromGallery3 = async () => {
+    let data = await ImagePicker.openPicker({
+      width: 300,
+      height: 300,
+      cropping: true,
+      compressImageQuality: 0.7,
+    });
+
+    if (!data.cancelled) {
+      let newfile = {
+        uri: data.path,
+        type: data.mime,
+        name: data.mime,
+      };
+      handleUpload3(newfile);
+      console.log(newfile);
+    }
+  };
+
+  const handleUpload3 = photo => {
+    const data = new FormData();
+    data.append('file', photo);
+    data.append('upload_preset', 'iparksl');
+    data.append('cloud_name', 'dan3i3xkt');
+
+    fetch('https://api.cloudinary.com/v1_1/dan3i3xkt/image/upload', {
+      method: 'post',
+      body: data,
+    })
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+
+        setPhoto3(data.url);
       })
       .catch(err => {
         Alert.alert('error while uploading');
@@ -146,13 +234,43 @@ const HomeScreen = ({route, navigation}) => {
               <Text>No location chosen yet!</Text>
             )}
           </MapPreview>
-          <Button
+          {/* <Button
             title="Pick on Map"
             color={'#ffb907'}
+            
             onPress={() => {
               pickOnMap();
             }}
-          />
+          /> */}
+          <TouchableOpacity
+            style={styles.pick}
+            onPress={() => {
+              pickOnMap();
+            }}>
+            <View style={[ styles.pick,{backgroundColor: '#ffb907'}]}>
+             <Image
+                source={icons.pick}
+                resizeMode="cover"
+                style={{
+                  tintColor: COLORS.black,
+                  width: 30,
+                  height: 30,
+                }}
+              />
+           
+              
+              <Text
+                style={[
+                  styles.textSign,
+                  {
+                    color: '#000000',
+                  },
+                ]}>
+                Pick
+              </Text>
+              </View>
+            
+          </TouchableOpacity>
         </View>
 
         <View style={[styles.action, {marginTop: 10}]}>
@@ -193,22 +311,17 @@ const HomeScreen = ({route, navigation}) => {
         <View style={styles.fixToText}>
           <TouchableOpacity
             style={styles.uploadBtnContainer}
-            onPress={pickFromGallery}>
+            onPress={pickFromGallery1}>
             <Text style={styles.uploadBtn}>Image</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.uploadBtnContainer}
-            onPress={pickFromGallery}>
+            onPress={pickFromGallery2}>
             <Text style={styles.uploadBtn}>Image</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.uploadBtnContainer}
-            onPress={pickFromGallery}>
-            <Text style={styles.uploadBtn}>Image</Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.uploadBtnContainer}
-            onPress={pickFromGallery}>
+            onPress={pickFromGallery3}>
             <Text style={styles.uploadBtn}>Image</Text>
           </TouchableOpacity>
         </View>
@@ -309,6 +422,13 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center',
     // alignItems: 'center',
+    //borderRadius: 10,
+  },
+  pick: {
+    width: '40%',
+    height: 70,
+    justifyContent: 'center',
+    alignItems: 'center',
     borderRadius: 10,
   },
   textSign: {

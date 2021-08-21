@@ -11,7 +11,9 @@ router.post("/",(req,res)=>{
     const parkname=req.body.parkName;
     const price=req.body.price;
     const slots=req.body.slots;
-    const photo=req.body.photo;
+    const photo1=req.body.photo1;
+    const photo2=req.body.photo2;
+    const photo3=req.body.photo3;
     const description=req.body.description;
       
     const oid=req.body.oid;
@@ -20,8 +22,8 @@ router.post("/",(req,res)=>{
     const action=0;
 
 //check for existing user
-let sql=`insert into parks(oid,parkname,latitude,longitude,slots,price,image1,description,review) values(?,?,?,?,?,?,?,?,?)`;
-db.query(sql,[oid,parkname,latitude,longitude,slots,price,photo,description,action],(err,result)=>{
+let sql=`insert into parks(oid,parkname,latitude,longitude,slots,price,image1,image2,image3,description,review) values(?,?,?,?,?,?,?,?,?,?,?)`;
+db.query(sql,[oid,parkname,latitude,longitude,slots,price,photo1,photo2,photo3,description,action],(err,result)=>{
 
     if(err){
         console.log(err)

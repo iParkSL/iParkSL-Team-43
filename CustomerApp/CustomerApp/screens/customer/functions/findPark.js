@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
 import {Text, StyleSheet, Button, TextInput} from 'react-native';
 import {View, ScrollView, Animated, Image} from 'react-native';
@@ -6,16 +6,17 @@ import MapView, {Marker, Callout} from 'react-native-maps';
 import axios from 'axios';
 const Find = ({navigation}) => {
   const [state, setState] = useState([]);
-
-  axios
-    .get('http://localhost:8080/FindPark')
-    .then(res => {
-      console.log(res);
-      setState(res.data);
-    })
-    .catch(error => {
-      console.log(error);
-    });
+  useEffect(() => {
+    axios
+      .get('http://localhost:8080/FindPark')
+      .then(res => {
+        console.log(res);
+        setState(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
 
   const region = {
     latitude: 6.865025,
@@ -23,171 +24,6 @@ const Find = ({navigation}) => {
     latitudeDelta: 0.015,
     longitudeDelta: 0.0121,
   };
-  // const initialMapState = {
-  //   parks: [
-  //     {
-  //       coordinate: {
-  //         latitude: 6.867989,
-  //         longitude: 79.893557,
-  //       },
-  //       title: 'Sky New Park',
-  //       description: '100 LKR/hr',
-  //       key: '1',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.865025,
-  //         longitude: 79.898305,
-  //       },
-  //       title: 'AK park',
-  //       description: '100 LKR/hr',
-  //       key: '2',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.879077,
-  //         longitude: 79.87987,
-  //       },
-  //       title: 'KP park',
-  //       description: '50 LKR/hr',
-  //       key: '3',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.874886,
-  //         longitude: 79.866051,
-  //       },
-  //       title: 'HRM park',
-  //       description: '100 LKR/hr',
-  //       key: '4',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.856336,
-  //         longitude: 79.879806,
-  //       },
-  //       title: 'KM park',
-  //       description: '200 LKR/hr',
-  //       key: '5',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.838118,
-  //         longitude: 79.869262,
-  //       },
-  //       title: 'RT park',
-  //       description: '70 LKR/hr',
-  //       key: '6',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.83812,
-  //         longitude: 79.869262,
-  //       },
-  //       title: 'sK park',
-  //       description: '50 LKR/hr',
-  //       key: '7',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.838517,
-  //         longitude: 79.870335,
-  //       },
-  //       title: 'LM park',
-  //       description: '150 LKR/hr',
-  //       key: '8',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.784234,
-  //         longitude: 79.889947,
-  //       },
-  //       title: 'New YK park',
-  //       description: '150 LKR/hr',
-  //       key: '9',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.784234,
-  //         longitude: 79.898335,
-  //       },
-  //       title: 'sky park',
-  //       description: '150 LKR/hr',
-  //       key: '10',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.795873,
-  //         longitude: 79.875678,
-  //       },
-  //       title: 'sky park',
-  //       description: '150 LKR/hr',
-  //       key: '11',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.796928,
-  //         longitude: 79.879401,
-  //       },
-  //       title: 'sky park',
-  //       description: '150 LKR/hr',
-  //       key: '12',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.802174,
-  //         longitude: 79.906524,
-  //       },
-  //       title: 'sky park',
-  //       description: '150 LKR/hr',
-  //       key: '13',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.814324,
-  //         longitude: 79.92189,
-  //       },
-  //       title: 'sky park',
-  //       description: '150 LKR/hr',
-  //       key: '1',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.847097,
-  //         longitude: 79.938028,
-  //       },
-  //       title: 'sky park',
-  //       description: '150 LKR/hr',
-  //       key: '14',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.292562,
-  //         longitude: 80.166346,
-  //       },
-  //       title: 'New City park',
-  //       description: '150 LKR/hr',
-  //       key: '15',
-  //     },
-  //     {
-  //       coordinate: {
-  //         latitude: 6.069866,
-  //         longitude: 80.227717,
-  //       },
-  //       title: 'Galle park',
-  //       description: '150 LKR/hr',
-  //       key: '16',
-  //     },
-  //   ],
-  //   region: {
-  //     latitude: 6.865025,
-  //     longitude: 79.898305,
-  //     latitudeDelta: 0.015,
-  //     longitudeDelta: 0.0121,
-  //   },
-  // };
-
-  // const [state, setState] = React.useState(initialMapState);
 
   return (
     <View style={styles.container}>
@@ -202,7 +38,19 @@ const Find = ({navigation}) => {
               image={require('../../../assets/icons/marker.png')}>
               <Callout
                 style={styles.card}
-                onPress={() => navigation.navigate('viewPark')}>
+                onPress={() => {
+                  navigation.navigate('viewPark', {
+                    pid: park.pid,
+                    oid: park.oid,
+                    parkname: park.parkname,
+                    slots: park.slots,
+                    price: park.price,
+                    image1: park.image1,
+                    image2: park.image2,
+                    image3: park.image3,
+                    description: park.description,
+                  });
+                }}>
                 <View style={styles.textContent}>
                   <Text style={styles.titleText}>{park.parkname}</Text>
                   <Text>
@@ -227,200 +75,6 @@ const Find = ({navigation}) => {
     </View>
   );
 };
-
-//   return (
-//     <View style={styles.container}>
-//       <MapView
-//         initialRegion={{
-//           latitude: 6.865025,
-//           longitude: 79.898305,
-//           latitudeDelta: 0.015,
-//           longitudeDelta: 0.0121,
-//         }}
-//         style={styles.map}>
-//         <Marker
-//           coordinate={{
-//             latitude: 6.867989,
-//             longitude: 79.893557,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="sky park"
-//           description="150 LKR/hr">
-//           <Callout
-//             style={styles.card}
-//             onPress={() => navigation.navigate('mybookings')}>
-//             <View style={styles.textContent}>
-//               <Text style={styles.titleText}>sky park</Text>
-
-//               <Text>{'\n'}150 LKR/hr</Text>
-//             </View>
-//             <View
-//               style={[
-//                 styles.BookNow,
-//                 {
-//                   color: '#FFF',
-//                 },
-//               ]}>
-//               <Button color="#ffb907" title={'Book Now'} />
-//             </View>
-//           </Callout>
-//         </Marker>
-//         <Marker
-//           coordinate={{
-//             latitude: 6.865025,
-//             longitude: 79.898305,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="AK park"
-//           description="100 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.879077,
-//             longitude: 79.87987,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="KP park"
-//           description="50 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.874886,
-//             longitude: 79.866051,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="HRM park"
-//           description="100 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.856336,
-//             longitude: 79.879806,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="KM park"
-//           description="200 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.838118,
-//             longitude: 79.869262,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="RT park"
-//           description="70 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.83812,
-//             longitude: 79.869262,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="sK park"
-//           description="50 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.838517,
-//             longitude: 79.870335,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="LM park"
-//           description="150 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.784234,
-//             longitude: 79.889947,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="sky park"
-//           description="150 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.784234,
-//             longitude: 79.898335,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="sky park"
-//           description="150 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.795873,
-//             longitude: 79.875678,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="sky park"
-//           description="150 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.796928,
-//             longitude: 79.879401,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="sky park"
-//           description="150 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.802174,
-//             longitude: 79.906524,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="sky park"
-//           description="150 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.814324,
-//             longitude: 79.92189,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="sky park"
-//           description="150 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.847097,
-//             longitude: 79.938028,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="sky park"
-//           description="150 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.292562,
-//             longitude: 80.166346,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="New City park"
-//           description="150 LKR/hr"
-//         />
-//         <Marker
-//           coordinate={{
-//             latitude: 6.069866,
-//             longitude: 80.227717,
-//           }}
-//           image={require('../../../assets/icons/marker.png')}
-//           title="Galle park"
-//           description="150 LKR/hr"
-//         />
-//       </MapView>
-//       <View style={styles.searchBox}>
-//         <TextInput
-//           placeholder="search place"
-//           placeholderTextColor="#000"
-//           autoCapitalize="none"
-//           style={{flex: 1, padding: 0}}
-//         />
-//       </View>
-//     </View>
-//   );
-// };
 
 const styles = StyleSheet.create({
   searchBox: {
