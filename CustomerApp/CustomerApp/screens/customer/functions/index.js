@@ -6,4 +6,5 @@ import BookingRequest from './bookingRequest';
 import QrCode from './Qrcode';
 import timer from './timer';
 import payment from './payment';
-export {findPark,viewPark, Payments, visitedParks,BookingRequest,QrCode,timer,payment};
+import upComming from './upComming';
+export {findPark,viewPark, Payments, visitedParks,BookingRequest,QrCode,timer,payment,upComming};

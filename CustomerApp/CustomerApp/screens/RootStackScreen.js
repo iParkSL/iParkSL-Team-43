@@ -28,6 +28,7 @@ import {
   timer,
   payment,
   viewPark,
+  upComming,
 } from './customer/functions/index';
 
 
@@ -229,6 +230,20 @@ const RootStackScreen = ({navigation}) => {
           component={visitedParks}
           options={{
             title: 'visited Parks',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="upComming"
+          component={upComming}
+          options={{
+            title: 'Up Coming Booking',
             headerStyle: {
               backgroundColor: COLORS.orange,
             },

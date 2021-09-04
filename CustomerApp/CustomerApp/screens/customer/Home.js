@@ -173,7 +173,7 @@ const Home = ({navigation}) => {
             icon={icons.coupon}
             bgColor={['#ffb907', '#ffb907']}
             label="Upcoming Bookings"
-            onPress={() => navigation.navigate('timer')}
+            onPress={() => navigation.navigate('upComming')}
           />
         </View>
         <View style={{flex: 0.7}}>

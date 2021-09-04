@@ -24,8 +24,12 @@ app.use(express.json());
 app.use("/register",require("./routes/register"));
 app.use("/login",require("./routes/login"));
 app.use("/FindPark",require("./routes/FindPark"));
+app.use("/visitedParks",require("./routes/visitedParks"));
 app.use("/book",require('./routes/bookPark'));
-
+app.use("/reviews",require("./routes/parkReview"));
+app.use("/timerOn",require("./routes/timerOn"));
+app.use("/upComing",require("./routes/upCommingRoute"));
+app.use("/isScaned",require("./routes/isScaned"));
 
 
 
