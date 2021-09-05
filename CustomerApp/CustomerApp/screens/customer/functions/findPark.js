@@ -1,11 +1,44 @@
 import React, {useState, useEffect} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Text, StyleSheet, Button, TextInput} from 'react-native';
+import {
+  ActivityIndicator,
+  Text,
+  StyleSheet,
+  Button,
+  TextInput,
+} from 'react-native';
 import {View, ScrollView, Animated, Image} from 'react-native';
 import MapView, {Marker, Callout} from 'react-native-maps';
+import geolocation from 'react-native-geolocation-service';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+
 import axios from 'axios';
 const Find = ({navigation}) => {
+  const region = {
+    latitude: null, //6.865025,
+    longitude: null, //79.898305,
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.0121,
+  };
+
   const [state, setState] = useState([]);
+  const [curentPosition, setcurentPosition] = useState(region);
+
+  useEffect(() => {
+    geolocation.getCurrentPosition(
+      pos => {
+        // alert(JSON.stringify(pos))
+        setcurentPosition({
+          ...curentPosition,
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+        });
+      },
+      error => alert(error.message),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+    );
+  }, []);
+
   useEffect(() => {
     axios
       .get('http://localhost:8080/FindPark')
@@ -18,16 +51,42 @@ const Find = ({navigation}) => {
       });
   }, []);
 
-  const region = {
-    latitude: 6.865025,
-    longitude: 79.898305,
-    latitudeDelta: 0.015,
-    longitudeDelta: 0.0121,
-  };
-
-  return (
+  return curentPosition.latitude ? (
     <View style={styles.container}>
-      <MapView initialRegion={region} style={styles.map}>
+      <GooglePlacesAutocomplete
+        placeholder="search"
+        fetchDetails={true}
+        GooglePlacesSearchQuery={{
+          rankby: 'distance',
+        }}
+        onPress={(data, details = null) => {
+          // 'details' is provided when fetchDetails = true
+          console.log(data, details);
+          setState({
+            latitude: details.geometry.location.lat,
+            longitude: details.geometry.location.lng,
+            latitudeDelta: 0.0922,
+            longitudeDelta: 0.0421,
+          });
+        }}
+        query={{
+          key: 'AIzaSyDLRh-6BV6-hXj-jJKMd6ZX1jHTl10wVaQ',
+          language: 'en',
+          components: 'country:us',
+          types: 'establishment',
+          radius: 30000,
+          location: `${region.latitude}, ${region.longitude}`,
+        }}
+        styles={{
+          container: {flex: 0, position: 'absolute', width: '100%', zIndex: 1},
+          listView: {backgroundColor: 'white'},
+        }}
+      />
+
+      <MapView
+        initialRegion={curentPosition}
+        style={styles.map}
+        showsUserLocation={true}>
         {state.map(park => {
           return (
             <Marker
@@ -73,6 +132,8 @@ const Find = ({navigation}) => {
         })}
       </MapView>
     </View>
+  ) : (
+    <ActivityIndicator style={{flex: 1}} animating size="large" />
   );
 };
 
