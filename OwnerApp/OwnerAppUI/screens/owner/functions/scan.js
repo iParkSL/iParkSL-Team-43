@@ -19,13 +19,24 @@ const deviceWidth = Dimensions.get('screen').width;
 const deviceHeight = Dimensions.get('screen').height;
 const Scan = ({navigation}) => {
   const onRead = async event => {
-    console.log('Data: ' + event.data);
+    // console.log('Data: ' + event.data);
+    // const param = 'Data: ' + event.data;
+    // console.log('date:' + event.date);
     const param = 'Data: ' + event.data;
-    console.log(event);
-    console.log(param);
+
+    const p1 = JSON.parse(event.data);
+    console.log(p1);
+
+    // console.log(event);
+    // console.log(param);
     Alert.alert('Scan Successfully');
 
-    navigation.navigate('SlotUP', {data: param});
+    navigation.navigate('SlotUP', {
+      bid: p1.bid,
+      cid: p1.cid,
+      date: p1.date,
+      time: p1.time,
+    });
   };
 
   function Header() {
