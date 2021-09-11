@@ -1,13 +1,45 @@
 import React, {useState, useEffect} from 'react';
 import {TouchableOpacity} from 'react-native-gesture-handler';
-import {Text, StyleSheet, Button, TextInput} from 'react-native';
+import {
+  ActivityIndicator,
+  Text,
+  StyleSheet,
+  Button,
+  TextInput,
+} from 'react-native';
 import {View, ScrollView, Animated, Image} from 'react-native';
 import MapView, {Marker, Callout} from 'react-native-maps';
+import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import geolocation from 'react-native-geolocation-service';
+
 import axios from 'axios';
 import {data} from 'browserslist';
 
 const viewMap = ({navigation}) => {
+  const region = {
+    latitude: null,
+    longitude: null,
+    latitudeDelta: 0.015,
+    longitudeDelta: 0.0121,
+  };
   const [state, setState] = useState([]);
+  const [curentPosition, setcurentPosition] = useState(region);
+
+  useEffect(() => {
+    geolocation.getCurrentPosition(
+      pos => {
+        // alert(JSON.stringify(pos))
+        setcurentPosition({
+          ...curentPosition,
+          latitude: pos.coords.latitude,
+          longitude: pos.coords.longitude,
+        });
+      },
+      error => alert(error.message),
+      {enableHighAccuracy: true, timeout: 20000, maximumAge: 1000},
+    );
+  }, []);
+
   useEffect(() => {
     axios
       .get('http://localhost:8080/ViewMap')
@@ -20,16 +52,34 @@ const viewMap = ({navigation}) => {
       });
   }, []);
 
-  const region = {
-    latitude: 6.865025,
-    longitude: 79.898305,
-    latitudeDelta: 0.015,
-    longitudeDelta: 0.0121,
-  };
+  // const region = {
+  //   latitude: 6.865025,
+  //   longitude: 79.898305,
+  //   latitudeDelta: 0.015,
+  //   longitudeDelta: 0.0121,
+  // };
 
-  return (
+  return curentPosition.latitude ? (
     <View style={styles.container}>
-      <MapView initialRegion={region} style={styles.map}>
+      <GooglePlacesAutocomplete
+        placeholder="Search"
+        onPress={(data, details = null) => {
+          // 'details' is provided when fetchDetails = true
+          console.log(data, details);
+        }}
+        query={{
+          key: 'AIzaSyCR1080-74Fre1JcCUPVUwmlorj2WYx-x0',
+          language: 'en',
+        }}
+        styles={{
+          container: {flex: 0, position: 'absolute', width: '100%', zIndex: 1},
+          listView: {backgroundColor: 'white'},
+        }}
+      />
+      <MapView
+        initialRegion={curentPosition}
+        style={styles.map}
+        showsUserLocation={true}>
         {state.map(parks => {
           return (
             <Marker
@@ -54,6 +104,8 @@ const viewMap = ({navigation}) => {
         })}
       </MapView>
     </View>
+  ) : (
+    <ActivityIndicator style={{flex: 1}} animating size="large" />
   );
 };
 
