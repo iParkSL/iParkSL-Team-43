@@ -62,7 +62,7 @@ const Find = ({navigation}) => {
         onPress={(data, details = null) => {
           // 'details' is provided when fetchDetails = true
           console.log(data, details);
-          setState({
+          setcurentPosition({
             latitude: details.geometry.location.lat,
             longitude: details.geometry.location.lng,
             latitudeDelta: 0.0922,
@@ -70,7 +70,7 @@ const Find = ({navigation}) => {
           });
         }}
         query={{
-          key: 'AIzaSyDLRh-6BV6-hXj-jJKMd6ZX1jHTl10wVaQ',
+          key: 'AIzaSyCR1080-74Fre1JcCUPVUwmlorj2WYx-x0',
           language: 'en',
           components: 'country:us',
           types: 'establishment',
