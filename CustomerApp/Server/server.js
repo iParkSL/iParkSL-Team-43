@@ -30,7 +30,7 @@ app.use("/reviews",require("./routes/parkReview"));
 app.use("/timerOn",require("./routes/timerOn"));
 app.use("/upComing",require("./routes/upCommingRoute"));
 app.use("/isScaned",require("./routes/isScaned"));
-
+app.use("/topParks",require("./routes/topParks"));
 
 
 app.listen('8080',()=>{
