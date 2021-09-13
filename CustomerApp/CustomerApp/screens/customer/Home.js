@@ -1,4 +1,5 @@
-import React from 'react';
+import React,{useState,useEffect} from 'react';
+import Axios from 'axios';
 import {
   StyleSheet,
   View,
@@ -50,59 +51,15 @@ const OptionItem = ({bgColor, icon, label, onPress}) => {
 };
 
 const Home = ({navigation}) => {
-  // Dummy Data
-  const [Parks, setParks] = React.useState([
-    {
-      id: 0,
 
-      name: 'Sky park',
-      img: images.p1,
-      price: '100 lkr/hr',
-    },
-    {
-      id: 1,
-      name: 'RT park',
-      img: images.p2,
-      price: '100 lkr/hr',
-    },
-    {
-      id: 2,
-      name: 'New KP park',
-      img: images.p3,
-      price: '100 lkr/hr',
-    },
-    {
-      id: 3,
-      name: 'KS Park',
-      img: images.p5,
-      price: '100 lkr/hr',
-    },
-    {
-      id: 4,
-
-      name: 'Sky park',
-      img: images.p1,
-      price: '100 lkr/hr',
-    },
-    {
-      id: 5,
-      name: 'RT park',
-      img: images.p2,
-      price: '100 lkr/hr',
-    },
-    {
-      id: 6,
-      name: 'New KP park',
-      img: images.p3,
-      price: '100 lkr/hr',
-    },
-    {
-      id: 7,
-      name: 'KS Park',
-      img: images.p5,
-      price: '100 lkr/hr',
-    },
-  ]);
+    const [Parks, setParks] =  useState('');
+  useEffect(() =>{
+    Axios.get('http://localhost:8080/topParks').then((response)=>{
+      setParks(response.data);     
+      console.log(response.data);
+    })
+    }, []) 
+  
 
   function renderParks(item, index) {
     return (
@@ -113,7 +70,6 @@ const Home = ({navigation}) => {
           style={{
             width: '100%',
             height: '50%',
-
             //borderRadius: 10,
           }}
         />
