@@ -23,7 +23,7 @@ import SplashScreen from './auth/SplashScreen';
 import SignInScreen from './auth/SignInScreen';
 import SignUpScreen from './auth/SignUpScreen';
 import Home from './customer/Home';
-import Setting from './SettingsScreen';
+import Setting from './DrawerContent/settings';
 import AboutUs from './DrawerContent/aboutUs';
 import ContactUs from './DrawerContent/contactUs';
 import NearBySpots from './DrawerContent/aboutUs';
