@@ -35,6 +35,9 @@ import {
   viewMap,
   MapScreen,
   SlotUP,
+  forgetPassword,
+  resetPassword,
+  checkPasscode,
 } from '../screens/owner/functions/index';
 
 const RootStack = createStackNavigator();
@@ -316,6 +319,48 @@ const RootStackScreen = ({navigation}) => {
           options={{
             title: 'Switch',
 
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="forgetPassword"
+          component={forgetPassword}
+          options={{
+            title: ' ',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="resetPassword"
+          component={resetPassword}
+          options={{
+            title: ' ',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="checkPasscode"
+          component={checkPasscode}
+          options={{
+            title: ' ',
             headerStyle: {
               backgroundColor: COLORS.orange,
             },

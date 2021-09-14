@@ -32,7 +32,10 @@ app.use("/SubmitPark",require("./routes/SubmitPark"));
 app.use("/ViewMap",require("./routes/ViewMap"));
 
 app.use("/SlotUpdate",require("./routes/SlotUpdate"));
-
+app.use("/forgetPassword",require("./routes/forgetPassword"));
+app.use("/resetPassword",require("./routes/resetPassword"));
+app.use("/checkCode",require("./routes/checkCode"));
+app.use("/getEmails",require("./routes/getEmails"));
 
 
 

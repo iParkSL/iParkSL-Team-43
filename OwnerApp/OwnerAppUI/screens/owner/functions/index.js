@@ -14,6 +14,9 @@ import stopwatch from './stopwatch';
 import viewMap from './viewMap';
 import MapScreen from './MapScreen';
 import SlotUP from './SlotUpdate';
+import forgetPassword from './forgetPassword';
+import resetPassword from './resetPassword';
+import checkPasscode from './checkPasscode';
 export {
   viewMap,
   MapScreen,
@@ -29,4 +32,7 @@ export {
   ViewPark,
   receivePayments,
   SlotUP,
+  forgetPassword,
+  resetPassword,
+  checkPasscode,
 };
