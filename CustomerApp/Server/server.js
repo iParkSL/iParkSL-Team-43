@@ -31,7 +31,10 @@ app.use("/timerOn",require("./routes/timerOn"));
 app.use("/upComing",require("./routes/upCommingRoute"));
 app.use("/isScaned",require("./routes/isScaned"));
 app.use("/topParks",require("./routes/topParks"));
-
+app.use("/forgetPassword",require("./routes/forgetPassword"));
+app.use("/resetPassword",require("./routes/resetPassword"));
+app.use("/checkCode",require("./routes/checkCode"));
+app.use("/getEmails",require("./routes/getEmails"));
 
 app.listen('8080',()=>{
     console.log('Server started on port 8080');

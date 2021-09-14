@@ -29,6 +29,9 @@ import {
   payment,
   viewPark,
   upComming,
+  forgetPassword,
+  resetPassword,
+  checkPasscode,
 } from './customer/functions/index';
 
 
@@ -244,6 +247,48 @@ const RootStackScreen = ({navigation}) => {
           component={upComming}
           options={{
             title: 'Up Coming Booking',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+         <RootStack.Screen
+          name="forgetPassword"
+          component={forgetPassword}
+          options={{
+            title: ' ',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="resetPassword"
+          component={resetPassword}
+          options={{
+            title: ' ',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="checkPasscode"
+          component={checkPasscode}
+          options={{
+            title: ' ',
             headerStyle: {
               backgroundColor: COLORS.orange,
             },

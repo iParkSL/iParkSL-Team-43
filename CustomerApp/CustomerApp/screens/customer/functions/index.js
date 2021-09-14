@@ -7,4 +7,8 @@ import QrCode from './Qrcode';
 import timer from './timer';
 import payment from './payment';
 import upComming from './upComming';
-export {findPark,viewPark, Payments, visitedParks,BookingRequest,QrCode,timer,payment,upComming};
+import forgetPassword from './forgetPassword';
+import resetPassword from './resetPassword';
+import checkPasscode from './checkPasscode';
+export {findPark,viewPark, Payments, visitedParks,BookingRequest,QrCode,timer,payment,upComming,forgetPassword,resetPassword,checkPasscode};
+
