@@ -37,9 +37,9 @@ router.post("/",(req,res)=>{
     
     var mailOptions = {
       from: 'iparksrilanka@gmail.com',
-      to: 'trchamod98@gmail.com',
-      subject: 'Sample',
-      text: `hello ${val}`
+      to: `${email}`,
+      subject: 'iParkSL password reset code',
+      text: `Your code is ${val}`
     };
 
     transporter.sendMail(mailOptions, function(error, info){
