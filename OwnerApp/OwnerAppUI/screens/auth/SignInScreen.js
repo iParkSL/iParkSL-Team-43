@@ -154,6 +154,10 @@ const SignInScreen = ({navigation}) => {
             <Text style={styles.textSign}>Sign Up</Text>
           </TouchableOpacity>
         </View>
+        <Text style={{color:'blue'}}
+            onPress={()=> navigation.navigate('forgetPassword')}>
+            Forget Password
+        </Text>
       </Animatable.View>
     </View>
   );
