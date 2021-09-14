@@ -34,7 +34,8 @@ router.post("/",(req,res)=>{
               if (!isMatch){
                 return res.status(400).json({ msg: "Invalid credentials" });
               }else{
-                res.json("SUCCESS");
+                // res.json("SUCCESS");
+                res.json({status:'SUCCESS',id:user[0].id,username:user[0].name})
               }
               const test={
                   username:"rashan",

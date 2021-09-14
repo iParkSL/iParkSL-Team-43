@@ -38,6 +38,7 @@ import {
   forgetPassword,
   resetPassword,
   checkPasscode,
+  updatePark,
 } from '../screens/owner/functions/index';
 
 const RootStack = createStackNavigator();
@@ -289,6 +290,20 @@ const RootStackScreen = ({navigation}) => {
           component={ViewPark}
           options={{
             title: 'View Park',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="updatePark"
+          component={updatePark}
+          options={{
+            title: 'Update Park',
             headerStyle: {
               backgroundColor: COLORS.orange,
             },

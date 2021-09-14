@@ -20,6 +20,7 @@ const height = width * 0.6;
 const images = [];
 var i=0;
 import LinearGradient from 'react-native-linear-gradient';
+import { NavigationContainer } from '@react-navigation/native';
 // const App = () => (
   export default class App extends Component{
     // constructor(props){
@@ -149,7 +150,7 @@ import LinearGradient from 'react-native-linear-gradient';
       </View>
 
       <View style={styles.button}>
-        <TouchableOpacity style={styles.signIn} onPress={() => {}}>
+        <TouchableOpacity style={styles.signIn} onPress={() => {this.props.navigation.push('updatePark')}}>
           <LinearGradient
             colors={['#FDC73E', '#ffb907']}
             style={[styles.signIn]}>

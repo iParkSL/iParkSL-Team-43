@@ -19,10 +19,10 @@ import {
   RecentBookings,
   Switch,
   myParks,
-  receivePayments,} from '../owner/functions/index';
+  receivePayments,
+} from '../owner/functions/index';
 
 import {createStackNavigator} from '@react-navigation/stack';
-
 
 const OptionItem = ({bgColor, icon, label, onPress}) => {
   return (
@@ -67,7 +67,10 @@ const OptionItem = ({bgColor, icon, label, onPress}) => {
   );
 };
 
-const Home = ({navigation}) => {
+const Home = ({route, navigation}) => {
+  const oid = route.params?.id;
+  const ownerName = route.params?.username;
+
   return (
     <View style={styles.container}>
       <View style={{flex: 2, justifyContent: 'center'}}>

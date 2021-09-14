@@ -30,7 +30,7 @@ import MapPreview from './SelectMapView';
 import {images, icons, COLORS, FONTS, SIZES} from '../../../constants';
 import {colors} from 'react-native-elements';
 
-const HomeScreen = ({route, navigation}) => {
+const updatePark = ({route, navigation}) => {
   const [parkName, setparkName] = React.useState(null);
   // const [lat, setlat] = React.useState(null);
   // const [lon, setlon] = React.useState(null);
@@ -54,8 +54,8 @@ const HomeScreen = ({route, navigation}) => {
 
   
   const submitData = () => {
-    fetch('http://localhost:8080/SubmitPark', {
-      method: 'post',
+    fetch('http://localhost:8080/UpdateSubmitPark', {
+      method: 'PUT',
       headers: {
         'Content-Type': 'application/json',
       },
@@ -518,4 +518,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default HomeScreen;
+export default updatePark;

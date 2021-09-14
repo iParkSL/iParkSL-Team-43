@@ -1,6 +1,8 @@
 import AddNewPark from './addpark';
 import AddNewParkNext from './addparknext';
 //import AddParkKeeper from './addParkKeeper';
+import updatePark from './updatePark';
+
 import Earnings from './earnings';
 
 import Charges from './charges';
@@ -35,4 +37,5 @@ export {
   forgetPassword,
   resetPassword,
   checkPasscode,
+  updatePark,
 };

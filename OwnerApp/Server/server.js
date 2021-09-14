@@ -13,7 +13,7 @@ const bcrypt=require('bcrypt');
 const  saltRounds=10;
 
     
-
+         
 
 const app =express();
 
@@ -24,6 +24,7 @@ app.use(express.json());
 app.use("/register",require("./routes/register"));
 app.use("/login",require("./routes/login"));
 app.use("/SubmitPark",require("./routes/SubmitPark"));
+app.use("/UpdateSubmitPark",require("./routes/UpdateSubmitPark"));
 app.use("/myParks",require("./routes/myParksRoute"));
 app.use("/reviews",require("./routes/parkReview"));
 app.use("/recentBookings",require("./routes/recentBookings"));

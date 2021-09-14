@@ -30,9 +30,18 @@ const SignInScreen = ({navigation}) => {
     axios
       .post('http://localhost:8080/login', x)
       .then(res => {
-        if (res.data == 'SUCCESS') {
-          navigation.navigate('Tabs');
-        }
+        // if (res.data == 'SUCCESS') {
+        //   navigation.navigate('Tabs');
+        // }
+
+        if (res.data.status == 'SUCCESS')
+          navigation.navigate('Tabs', {
+            id: res.data.id,
+            username: res.data.username,
+          });
+        // console.log(res.data.id);
+
+        console.log(res.data.username);
       })
       .catch(error => {
         console.log(error);
@@ -129,7 +138,7 @@ const SignInScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.Button}>
-          <TouchableOpacity onPress={()=>SignIn(emailtext,passwordtext)}>
+          <TouchableOpacity onPress={() => SignIn(emailtext, passwordtext)}>
             <LinearGradient
               colors={['#ffb907', '#ffb907']}
               style={[
@@ -154,9 +163,10 @@ const SignInScreen = ({navigation}) => {
             <Text style={styles.textSign}>Sign Up</Text>
           </TouchableOpacity>
         </View>
-        <Text style={{color:'blue'}}
-            onPress={()=> navigation.navigate('forgetPassword')}>
-            Forget Password
+        <Text
+          style={{color: 'blue'}}
+          onPress={() => navigation.navigate('forgetPassword')}>
+          Forget Password
         </Text>
       </Animatable.View>
     </View>

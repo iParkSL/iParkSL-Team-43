@@ -93,7 +93,7 @@ const MapScreen = ({navigation}) => {
           console.log(data, details);
         }}
         query={{
-          key: 'AIzaSyCR1080-74Fre1JcCUPVUwmlorj2WYx-x0',
+          key: 'AIzaSyDLRh-6BV6-hXj-jJKMd6ZX1jHTl10wVaQ',
           language: 'en',
         }}
         styles={{
