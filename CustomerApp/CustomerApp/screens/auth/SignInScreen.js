@@ -26,12 +26,22 @@ const SignInScreen = ({navigation}) => {
       email: email,
       password: password,
     };
-    axios.post('http://localhost:8080/login',x).then(res=>{
-      if(res.data==='SUCCESS')navigation.navigate('Home');
+    axios
+      .post('http://localhost:8080/login', x)
+      .then(res => {
+        // if(res.data==='SUCCESS')navigation.navigate('Home');
+        if (res.data.status === 'SUCCESS')
+          navigation.navigate('Home', {
+            id: res.data.id,
+            username: res.data.username,
+          });
+        // console.log(res.data.id);
 
-    }).catch(error=>{
-      console.log(error);
-    });
+        console.log(res.data.username);
+      })
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   const [data, setData] = React.useState({
@@ -124,7 +134,7 @@ const SignInScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <View style={styles.Button}>
-          <TouchableOpacity onPress={()=>  login(emailtext, passwordtext)     }>
+          <TouchableOpacity onPress={() => login(emailtext, passwordtext)}>
             <LinearGradient
               colors={['#ffb907', '#ffb907']}
               style={[
@@ -149,9 +159,10 @@ const SignInScreen = ({navigation}) => {
             <Text style={styles.textSign}>Sign Up</Text>
           </TouchableOpacity>
         </View>
-        <Text style={{color:'blue'}}
-            onPress={()=> navigation.navigate('forgetPassword')}>
-            Forget Password
+        <Text
+          style={{color: 'blue'}}
+          onPress={() => navigation.navigate('forgetPassword')}>
+          Forget Password
         </Text>
       </Animatable.View>
     </View>

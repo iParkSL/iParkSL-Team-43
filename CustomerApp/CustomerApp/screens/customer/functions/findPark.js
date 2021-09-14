@@ -6,13 +6,22 @@ import {
   StyleSheet,
   Button,
   TextInput,
+  Dimensions,
 } from 'react-native';
 import {View, ScrollView, Animated, Image} from 'react-native';
 import MapView, {Marker, Callout} from 'react-native-maps';
 import geolocation from 'react-native-geolocation-service';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
+import MapViewDirections from 'react-native-maps-directions';
+const GOOGLE_MAP_KEY = 'AIzaSyBDrKz0PJJisUQwq5OAPdH_wEh1oxaReKQ';
 
 import axios from 'axios';
+
+const screen = Dimensions.get('window');
+const ASPECT_RATIO = screen.width / screen.height;
+const LATITUDE_DELTA = 0.04;
+const LONGITUDE_DELTA = LATITUDE_DELTA * ASPECT_RATIO;
+
 const Find = ({navigation}) => {
   const region = {
     latitude: null, //6.865025,
@@ -70,9 +79,9 @@ const Find = ({navigation}) => {
           });
         }}
         query={{
-          key: 'AIzaSyCR1080-74Fre1JcCUPVUwmlorj2WYx-x0',
+          key: 'AIzaSyDLRh-6BV6-hXj-jJKMd6ZX1jHTl10wVaQ',
           language: 'en',
-          components: 'country:us',
+          // components: 'country:sl',
           types: 'establishment',
           radius: 30000,
           location: `${region.latitude}, ${region.longitude}`,
@@ -130,6 +139,19 @@ const Find = ({navigation}) => {
             </Marker>
           );
         })}
+
+        <MapViewDirections
+          origin={curentPosition}
+          destination={{
+            latitude: 6.86724,
+            longitude: 79.8991,
+            latitudeDelta: LATITUDE_DELTA,
+            longitudeDelta: LONGITUDE_DELTA,
+          }}
+          apikey={GOOGLE_MAP_KEY}
+          strokeWidth={6}
+          strokeColor="red"
+        />
       </MapView>
     </View>
   ) : (
