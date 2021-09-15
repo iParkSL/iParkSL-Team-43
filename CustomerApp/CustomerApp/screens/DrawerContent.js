@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet} from 'react-native';
+import {View, StyleSheet, Image} from 'react-native';
 import {
   useTheme,
   Avatar,
@@ -16,129 +16,98 @@ import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import Feather from 'react-native-vector-icons/Feather';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
-
-
 export function DrawerContent(props) {
-    
-  
   return (
     <View style={{flex: 1}}>
       <DrawerContentScrollView {...props}>
-            <View  style={styles.drawerContent}>
-                <View style={styles.userInfoSection}>
-                    <View style={{flexDirection:'row',marginTop: 20}}>
-                        <Avatar.Image
-                            source={require('../assets/car.png')}
-                                size={60}
-                        /> 
-                        <View style={{marginLeft:15, flexDirection:'column'}}>
-                                <Title style={styles.title}>Tom Riddle</Title> 
-                                <Caption style={styles.caption}>tomriddle@gmail.com</Caption>                             
-                        </View>
-
-                    </View>
-                </View>
-
-                
-                <Drawer.Section style={[styles.drawerSection,{marginTop:20}]}>
-                       
-                        <DrawerItem 
-                            icon={({color, size}) => (
-                              <Icon 
-                                name="near-me" 
-                                color={color}
-                                size={size}
-                                />
-                              
-                            )}
-                            label="Nearby Spots"
-                            labelStyle={{ color: '#000000',fontWeight: '600' ,fontSize: 15}}
-                            onPress={() => {props.navigation.navigate('Near By Spots')}}
-                        />
-                    
-                        <DrawerItem 
-                            icon={({color, size}) => (
-                              <Feather 
-                                name="settings" 
-                                color={color}
-                                size={size}
-                                />
-                               
-                            )}    
-                            label="Settings"
-                            labelStyle={{ color: '#000000',fontWeight: '600' ,fontSize: 15}}
-                            onPress={() => {props.navigation.navigate('Settings')}}
-                        />
-                        <DrawerItem 
-                            icon={({color, size}) => (
-                              <Icon 
-                                name="information-outline" 
-                                color={color}
-                                size={size}
-                                />
-                            )} 
-                            label="About us"
-                            labelStyle={{ color: '#000000',fontWeight: '600' ,fontSize: 15}}
-                            onPress={() => {props.navigation.navigate('About us')}}
-                        />
-
-                          <DrawerItem 
-                            icon={({color, size}) => (
-                              <Icon 
-                                name="heart-outline" 
-                                color={color}
-                                size={size}
-                                />
-                            )} 
-                            label="Rate us"
-                            labelStyle={{ color: '#000000',fontWeight: '600' ,fontSize: 15}}
-                            onPress={() => {props.navigation.navigate('Rate us')}}
-                        />
-                        <DrawerItem 
-                            icon={({color, size}) => (
-                              <Icon 
-                                name="help-circle-outline" 
-                                color={color}
-                                size={size}
-                                />
-                            )} 
-                            label="Contact Us"
-                            labelStyle={{ color: '#000000',fontWeight: '600' ,fontSize: 15}}
-                            onPress={() => {props.navigation.navigate('Contact us')}}
-                        />
-                    </Drawer.Section>
-             
-
+        <View style={styles.drawerContent}>
+          <View style={styles.userInfoSection}>
+            <View style={{flexDirection: 'row', marginTop: 20}}>
+              <Avatar.Image source={require('../assets/car.png')} size={60} />
+              <View style={{marginLeft: 15, flexDirection: 'column'}}>
+                <Title style={styles.title}>Tom Riddle</Title>
+                <Caption style={styles.caption}>tomriddle@gmail.com</Caption>
+              </View>
             </View>
+          </View>
+
+          <Drawer.Section style={[styles.drawerSection, {marginTop: 20}]}>
+            <DrawerItem
+              icon={({color, size}) => (
+                <Image
+                  style={styles.icons1}
+                  source={require('./DrawerContent/img/icons8-settings-64.png')}
+                />
+              )}
+              label="Settings"
+              labelStyle={{color: '#000000', fontWeight: '600', fontSize: 15}}
+              onPress={() => {
+                props.navigation.navigate('Settings');
+              }}
+            />
+            <DrawerItem
+              icon={({color, size}) => (
+                <Image
+                  style={styles.icons}
+                  source={require('./DrawerContent/img/icons8-about-50.png')}
+                />
+              )}
+              label="About us"
+              labelStyle={{color: '#000000', fontWeight: '600', fontSize: 15}}
+              onPress={() => {
+                props.navigation.navigate('About us');
+              }}
+            />
+
+            <DrawerItem
+              icon={({color, size}) => (
+                <Image
+                  style={styles.icons}
+                  source={require('./DrawerContent/img/icons8-heart-50.png')}
+                />
+              )}
+              label="Rate us"
+              labelStyle={{color: '#000000', fontWeight: '600', fontSize: 15}}
+              onPress={() => {
+                props.navigation.navigate('Rate us');
+              }}
+            />
+            <DrawerItem
+              icon={({color, size}) => (
+                <Image
+                  style={styles.icons}
+                  source={require('./DrawerContent/img/telephone.png')}
+                />
+              )}
+              label="Contact Us"
+              labelStyle={{color: '#000000', fontWeight: '600', fontSize: 15}}
+              onPress={() => {
+                props.navigation.navigate('Contact us');
+              }}
+            />
+          </Drawer.Section>
+        </View>
       </DrawerContentScrollView>
 
-      
       <Drawer.Section style={styles.bottomDrawerSection}>
         <DrawerItem
-        
-            icon={({color, size}) => (
-              <Icon 
-                        name="exit-to-app" 
-                        color={color}
-                        size={size}
-                        />
-            
-            )}
-            style={{ backgroundColor: '#ffb907', }}
-            label="Sign Out"
-            labelStyle={{ color: '#000000',fontWeight: '600' ,fontSize: 16}}
-            onPress={() => {
-                signOut();
-            }}
+          icon={({color, size}) => (
+            <Image
+              style={styles.icons}
+              source={require('./DrawerContent/img/logout.png')}
             />
+          )}
+          style={{backgroundColor: '#ffb907'}}
+          label="Sign Out"
+          labelStyle={{color: '#000000', fontWeight: '600', fontSize: 16}}
+          onPress={() => {
+            props.navigation.navigate('SplashScreen');
+          }}
+        />
       </Drawer.Section>
     </View>
   );
 }
-
-
-
 
 const styles = StyleSheet.create({
   drawerContent: {
@@ -177,7 +146,15 @@ const styles = StyleSheet.create({
     marginBottom: 40,
     borderTopColor: '#f4f4f4',
     borderTopWidth: 1,
-  
   },
- 
+  icons1: {
+    height: 28,
+    width: 28,
+    marginLeft: 4,
+  },
+  icons: {
+    height: 21,
+    width: 21,
+    marginLeft: 7,
+  },
 });
