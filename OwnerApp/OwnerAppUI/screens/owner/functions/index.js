@@ -16,6 +16,7 @@ import stopwatch from './stopwatch';
 import viewMap from './viewMap';
 import MapScreen from './MapScreen';
 import SlotUP from './SlotUpdate';
+import timerUpdate from './timerUpdate';
 import forgetPassword from './forgetPassword';
 import resetPassword from './resetPassword';
 import checkPasscode from './checkPasscode';
@@ -38,4 +39,5 @@ export {
   resetPassword,
   checkPasscode,
   updatePark,
+  timerUpdate,
 };

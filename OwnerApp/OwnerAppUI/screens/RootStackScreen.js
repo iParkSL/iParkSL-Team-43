@@ -39,6 +39,7 @@ import {
   resetPassword,
   checkPasscode,
   updatePark,
+  timerUpdate,
 } from '../screens/owner/functions/index';
 
 const RootStack = createStackNavigator();
@@ -214,7 +215,7 @@ const RootStackScreen = ({navigation}) => {
             },
           }}
         />
-         <RootStack.Screen
+        <RootStack.Screen
           name="SlotUP"
           component={SlotUP}
           options={{
@@ -233,6 +234,20 @@ const RootStackScreen = ({navigation}) => {
           component={RecentBookings}
           options={{
             title: 'Recent Bookings',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="timerUpdate"
+          component={timerUpdate}
+          options={{
+            title: '',
             headerStyle: {
               backgroundColor: COLORS.orange,
             },
