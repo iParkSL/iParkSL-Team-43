@@ -33,6 +33,8 @@ app.use("/SubmitPark",require("./routes/SubmitPark"));
 app.use("/ViewMap",require("./routes/ViewMap"));
 
 app.use("/SlotUpdate",require("./routes/SlotUpdate"));
+app.use("/timerUpdate",require("./routes/timerUpdate"));
+
 app.use("/forgetPassword",require("./routes/forgetPassword"));
 app.use("/resetPassword",require("./routes/resetPassword"));
 app.use("/checkCode",require("./routes/checkCode"));
