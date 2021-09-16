@@ -35,6 +35,7 @@ app.use("/forgetPassword",require("./routes/forgetPassword"));
 app.use("/resetPassword",require("./routes/resetPassword"));
 app.use("/checkCode",require("./routes/checkCode"));
 app.use("/getEmails",require("./routes/getEmails"));
+app.use("/editprofile",require("./routes/editProfile"));
 
 app.listen('8080',()=>{
     console.log('Server started on port 8080');
