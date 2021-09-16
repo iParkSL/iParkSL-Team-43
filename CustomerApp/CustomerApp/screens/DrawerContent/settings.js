@@ -30,7 +30,7 @@ const Setting = ({navigation}) => {
       phone,
     };
 
-   
+  //  axios make
     axios
       .post('http://localhost:8080/editprofile', x)
       .then(res => {
@@ -40,6 +40,8 @@ const Setting = ({navigation}) => {
         console.log(error);
       });
     }
+
+
  
 
   return (
