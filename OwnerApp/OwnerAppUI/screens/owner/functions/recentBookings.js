@@ -69,10 +69,9 @@ export default class myParks extends Component {
                   <Text key={item.bid} style={{fontSize: 16, marginBottom: 3}}>
                     {item.name}
                   </Text>
-                  <View  style={{flexDirection: 'row'}} >
+                  <View style={{flexDirection: 'row'}}>
                     {item.isScaned == 0 && (
                       <TouchableOpacity
-                        
                         style={styles.signIn}
                         onPress={() => {
                           this.props.navigation.push('Scan');
@@ -94,7 +93,7 @@ export default class myParks extends Component {
                     )}
                     {item.isScaned != 0 && (
                       <TouchableOpacity
-                          key={item.bid}
+                        key={item.bid}
                         style={styles.signIn}
                         onPress={() => {
                           this.props.navigation.push('timerUpdate', {
@@ -105,7 +104,7 @@ export default class myParks extends Component {
                         <View
                           style={[styles.signIn, {backgroundColor: '#87cefa'}]}>
                           <Text
-                             key={item.bid}
+                            key={item.bid}
                             style={[
                               styles.textSign,
                               {

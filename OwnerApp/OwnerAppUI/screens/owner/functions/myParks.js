@@ -11,7 +11,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
-import { Component } from 'react';
+import {Component} from 'react';
 import axios from 'axios';
 
 // import Icon from 'react-native-vector-icons/FontAwesome';
@@ -20,110 +20,113 @@ const {width} = Dimensions.get('window');
 const height = width * 0.6;
 
 export default class myParks extends Component {
-    state ={
-      data:[]
-  }
+  state = {
+    data: [],
+  };
 
-  componentDidMount(){
-      axios.get('http://localhost:8080/myParks').then(res=>{
-        console.log(res);
+  componentDidMount() {
+    axios.get('http://localhost:8080/myParks').then(res => {
+      console.log(res);
       this.setState({
-        data:res.data,
-        });
+        data: res.data,
       });
-
+    });
   }
- 
-  render(){
-    return(
+
+  render() {
+    return (
       <View style={{width}}>
-    <ScrollView>
-    <View>
-      {
-       
-        this.state.data.map((item)=>
-          <View
-          key={item.pid}
-        style={{
-          marginTop: 10,
-          marginBottom: 20,
-          flexDirection: 'row',
-          paddingHorizontal: 6,
-        }}>
-        
-        <View style={{width: '40%', height: '110%'}}>
-        
-          <Image
-           
-            // var img = {item.image1}
-            // console.log(img)
-            // ../parkImages/SkyPark1.jpg
-            // `${item.item.image1}`
-            // src={item.image1}
-            source={{uri:item.image1}}
-            style={{
-              margin: 10,
-              flex: 1,
-              width: null,
-              height: null,
-              resizeMode: 'cover',
-              borderRadius: 10,
-            }}
-          />
-        </View>
-        <View style={{width: '60%', height: '50%', marginTop: 8}}>
+        <ScrollView>
           <View>
-            <Text style={{marginLeft: 10, fontWeight: 'bold', fontSize: 20}}>{item.parkname}</Text>
-
-            <Text style={{marginLeft: 10, fontSize: 16}}>{item.address}</Text>
-            <Text style={{marginLeft: 10, fontSize: 16}}>Rental per hour Rs{item.price}</Text>
-
-            <View style={{marginTop: 6, marginLeft: 10}}>
-              <TouchableOpacity
-                style={styles.signIn}
-                onPress={() => this.props.navigation.push('viewPark',
-                {
-                  name: `${item.parkname}`, 
-                  image1: `${item.image1}`,
-                  image2: `${item.image2}`, 
-                  image3: `${item.image3}`, 
-                  image4:`${item.image4}`,
-                  slots:`${item.slots}`,
-                  pid:`${item.pid}`,
-                  description:`${item.description}`,
-
-                  })}>
-                <View
-                  // colors={['#FDC73E', '#ffb907']}
-
-                  style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
-                  <Text
-                    style={[
-                      styles.textSign,
-                      {
-                        color: '#000000',
-                      },
-                    ]}>
-                    View Details
-                  </Text>
+            {this.state.data.map(item => (
+              <View
+                key={item.pid}
+                style={{
+                  marginTop: 10,
+                  marginBottom: 20,
+                  flexDirection: 'row',
+                  paddingHorizontal: 6,
+                }}>
+                <View style={{width: '40%', height: '110%'}}>
+                  <Image
+                    // var img = {item.image1}
+                    // console.log(img)
+                    // ../parkImages/SkyPark1.jpg
+                    // `${item.item.image1}`
+                    // src={item.image1}
+                    source={{uri: item.image1}}
+                    style={{
+                      margin: 10,
+                      flex: 1,
+                      width: null,
+                      height: null,
+                      resizeMode: 'cover',
+                      borderRadius: 10,
+                    }}
+                  />
                 </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-      </View>
-        )
-      }
-        {/* data={this.state.data}
+                <View style={{width: '60%', height: '50%', marginTop: 8}}>
+                  <View>
+                    <Text
+                      style={{
+                        marginLeft: 10,
+                        fontWeight: 'bold',
+                        fontSize: 20,
+                      }}>
+                      {item.parkname}
+                    </Text>
+
+                    <Text style={{marginLeft: 10, fontSize: 16}}>
+                      {item.address}
+                    </Text>
+                    <Text style={{marginLeft: 10, fontSize: 16}}>
+                      Rental per hour Rs{item.price}
+                    </Text>
+
+                    <View style={{marginTop: 6, marginLeft: 10}}>
+                      <TouchableOpacity
+                        style={styles.signIn}
+                        onPress={() =>
+                          this.props.navigation.push('viewPark', {
+                            name: `${item.parkname}`,
+                            image1: `${item.image1}`,
+                            image2: `${item.image2}`,
+                            image3: `${item.image3}`,
+                            image4: `${item.image4}`,
+                            slots: `${item.slots}`,
+                            pid: `${item.pid}`,
+                            description: `${item.description}`,
+                          })
+                        }>
+                        <View
+                          // colors={['#FDC73E', '#ffb907']}
+
+                          style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
+                          <Text
+                            style={[
+                              styles.textSign,
+                              {
+                                color: '#000000',
+                              },
+                            ]}>
+                            View Details
+                          </Text>
+                        </View>
+                      </TouchableOpacity>
+                    </View>
+                  </View>
+                </View>
+              </View>
+            ))}
+            {/* data={this.state.data}
                 keyExtractor={(item,index)=>index.toString()}
                 renderItem={({item})=>
                         <View>
                             <Text>{item.parkname}</Text>
                         </View>
                     }  */}
-      
-    </View>
-      {/* <View
+          </View>
+          {/* <View
         style={{
           marginTop: 10,
           marginBottom: 20,
@@ -181,16 +184,13 @@ export default class myParks extends Component {
           </View>
         </View>
       </View> */}
-
-      
-    </ScrollView>
-  </View>
-    )
+        </ScrollView>
+      </View>
+    );
   }
 }
 
 // export default myParks;
-
 
 const styles = StyleSheet.create({
   title: {
