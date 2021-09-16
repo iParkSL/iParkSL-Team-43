@@ -71,7 +71,7 @@ useEffect(() => {
     
       {state.map(book=>{
         return(
-          <View style={styles.footer}>
+          <View key={book.bid} style={styles.footer}>
           <Text style={[styles.text_footer]}>Date :{book.date}
          </Text>
          <Text 

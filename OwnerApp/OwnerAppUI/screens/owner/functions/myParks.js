@@ -43,6 +43,7 @@ export default class myParks extends Component {
        
         this.state.data.map((item)=>
           <View
+          key={item.pid}
         style={{
           marginTop: 10,
           marginBottom: 20,
@@ -53,7 +54,7 @@ export default class myParks extends Component {
         <View style={{width: '40%', height: '110%'}}>
         
           <Image
-           key={item.pid}
+           
             // var img = {item.image1}
             // console.log(img)
             // ../parkImages/SkyPark1.jpg

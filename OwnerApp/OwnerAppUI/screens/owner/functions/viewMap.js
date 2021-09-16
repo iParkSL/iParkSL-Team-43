@@ -83,6 +83,7 @@ const viewMap = ({navigation}) => {
         {state.map(parks => {
           return (
             <Marker
+              key={parks.pid}
               coordinate={{
                 latitude: parks.latitude,
                 longitude: parks.longitude,
