@@ -21,7 +21,26 @@ const Setting = ({navigation}) => {
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
 
-  
+  const update = () => {
+    // e.preventDefault();
+    const x = {
+      firstName,
+      lastName,
+      email,
+      phone,
+    };
+
+   
+    axios
+      .post('http://localhost:8080/editprofile', x)
+      .then(res => {
+        if(res.data==='SUCCESS')navigation.push('QrCode');
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }
+ 
 
   return (
     <View>
