@@ -10,5 +10,17 @@ import upComming from './upComming';
 import forgetPassword from './forgetPassword';
 import resetPassword from './resetPassword';
 import checkPasscode from './checkPasscode';
-export {findPark,viewPark, Payments, visitedParks,BookingRequest,QrCode,timer,payment,upComming,forgetPassword,resetPassword,checkPasscode};
-
+export {
+  findPark,
+  viewPark,
+  Payments,
+  visitedParks,
+  BookingRequest,
+  QrCode,
+  timer,
+  payment,
+  upComming,
+  forgetPassword,
+  resetPassword,
+  checkPasscode,
+};

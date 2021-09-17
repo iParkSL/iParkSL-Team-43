@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {TouchableOpacity} from 'react-native-gesture-handler';
+import {Directions, TouchableOpacity} from 'react-native-gesture-handler';
 import {
   ActivityIndicator,
   Text,
@@ -14,7 +14,7 @@ import geolocation from 'react-native-geolocation-service';
 import {GooglePlacesAutocomplete} from 'react-native-google-places-autocomplete';
 import MapViewDirections from 'react-native-maps-directions';
 const GOOGLE_MAP_KEY = 'AIzaSyBDrKz0PJJisUQwq5OAPdH_wEh1oxaReKQ';
-
+import SearchableDropdown from 'react-native-searchable-dropdown';
 import axios from 'axios';
 
 const screen = Dimensions.get('window');
@@ -59,37 +59,76 @@ const Find = ({navigation}) => {
         console.log(error);
       });
   }, []);
+  const [serverData, setServerData] = useState([]);
+
+  useEffect(() => {
+    axios
+      .get('http://localhost:8080/parkSearch')
+      .then(res => {
+        // console.log(res.data);
+        res.data.forEach((item, i) => {
+          item.id = i + 1;
+        });
+
+        console.log(res.data);
+        setServerData(res.data);
+      })
+      .catch(error => {
+        console.log(error);
+      });
+  }, []);
+
+  const [destination, setdestination] = useState({
+    destinationCords: {},
+  });
+  const {destinationCords} = destination;
+
+  const directions = (x, y) => {
+    console.log(x);
+    console.log(y);
+
+    setdestination({
+      ...destination,
+      destinationCords: {
+        latitude: x,
+        longitude: y,
+      },
+    });
+  };
 
   return curentPosition.latitude ? (
     <View style={styles.container}>
-      <GooglePlacesAutocomplete
-        placeholder="search"
-        fetchDetails={true}
-        GooglePlacesSearchQuery={{
-          rankby: 'distance',
+      <SearchableDropdown
+        onTextChange={text => console.log(text)}
+        onItemSelect={item => {
+          alert(JSON.stringify(item));
+          directions(item.latitude, item.longitude);
         }}
-        onPress={(data, details = null) => {
-          // 'details' is provided when fetchDetails = true
-          console.log(data, details);
-          setcurentPosition({
-            latitude: details.geometry.location.lat,
-            longitude: details.geometry.location.lng,
-            latitudeDelta: 0.0922,
-            longitudeDelta: 0.0421,
-          });
+        containerStyle={{padding: 5}}
+        textInputStyle={{
+          padding: 12,
+          borderWidth: 1,
+          borderColor: '#ccc',
+          backgroundColor: '#FAF7F6',
         }}
-        query={{
-          key: 'AIzaSyDLRh-6BV6-hXj-jJKMd6ZX1jHTl10wVaQ',
-          language: 'en',
-          // components: 'country:sl',
-          types: 'establishment',
-          radius: 30000,
-          location: `${region.latitude}, ${region.longitude}`,
+        itemStyle={{
+          padding: 10,
+          marginTop: 2,
+          backgroundColor: '#FAF9F8',
+          borderColor: '#bbb',
+          borderWidth: 1,
         }}
-        styles={{
-          container: {flex: 0, position: 'absolute', width: '100%', zIndex: 1},
-          listView: {backgroundColor: 'white'},
+        itemTextStyle={{
+          color: '#222',
         }}
+        itemsContainerStyle={{
+          maxHeight: '50%',
+        }}
+        items={serverData}
+        defaultIndex={2}
+        placeholder="Search Park"
+        resetValue={false}
+        underlineColorAndroid="transparent"
       />
 
       <MapView
@@ -99,6 +138,7 @@ const Find = ({navigation}) => {
         {state.map(park => {
           return (
             <Marker
+              key={park.pid}
               coordinate={{
                 latitude: park.latitude,
                 longitude: park.longitude,
@@ -142,12 +182,7 @@ const Find = ({navigation}) => {
 
         <MapViewDirections
           origin={curentPosition}
-          destination={{
-            latitude: 6.86724,
-            longitude: 79.8991,
-            latitudeDelta: LATITUDE_DELTA,
-            longitudeDelta: LONGITUDE_DELTA,
-          }}
+          destination={destinationCords}
           apikey={GOOGLE_MAP_KEY}
           strokeWidth={6}
           strokeColor="red"

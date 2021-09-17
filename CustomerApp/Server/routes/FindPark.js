@@ -16,5 +16,4 @@ router.get("/",(req,res)=>{
         res.json(result);
    });
 });
-
 module.exports=router;   
