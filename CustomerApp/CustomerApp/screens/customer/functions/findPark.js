@@ -79,7 +79,7 @@ const Find = ({navigation}) => {
   }, []);
 
   const [destination, setdestination] = useState({
-    destinationCords: {},
+    destinationCords: {latitude: 6.865025, longitude: 79.898305},
   });
   const {destinationCords} = destination;
 
@@ -101,7 +101,7 @@ const Find = ({navigation}) => {
       <SearchableDropdown
         onTextChange={text => console.log(text)}
         onItemSelect={item => {
-          alert(JSON.stringify(item));
+          alert(item.name);
           directions(item.latitude, item.longitude);
         }}
         containerStyle={{padding: 5}}
@@ -161,10 +161,7 @@ const Find = ({navigation}) => {
                 }}>
                 <View style={styles.textContent}>
                   <Text style={styles.titleText}>{park.parkname}</Text>
-                  <Text>
-                    {'\n'}
-                    {park.description}
-                  </Text>
+                  <Text>LKR.{park.price}/hr</Text>
                 </View>
                 <View
                   style={[
@@ -173,7 +170,7 @@ const Find = ({navigation}) => {
                       color: '#FFF',
                     },
                   ]}>
-                  <Button color="#ffb907" title={'Book Now'} />
+                  <Button color="#ffb907" title={'Book'} />
                 </View>
               </Callout>
             </Marker>
