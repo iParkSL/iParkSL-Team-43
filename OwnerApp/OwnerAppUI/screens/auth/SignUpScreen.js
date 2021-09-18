@@ -18,6 +18,7 @@ import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const SignInScreen = ({navigation}) => {
   const [nametext, setnametext] = useState('');
@@ -96,25 +97,20 @@ const SignInScreen = ({navigation}) => {
     };
 
     if (validate()) {
-    axios
-      .post('http://localhost:8080/register', x)
-      .then(res => {
-        if (res.data == 'SUCCESS') {
-          navigation.navigate('Tabs');
-        }
-      })
-      .catch(error => {
-        if (error.response.data == 'User already registered') {
-          Alert.alert(
-            "Failed To Sign Up",
-            "User is already registered",
-            [
-              { text: "OK" }
-            ]
-          );
-          
-        }
-      });
+      axios
+        .post('http://localhost:8080/register', x)
+        .then(res => {
+          if (res.data == 'SUCCESS') {
+            navigation.navigate('Tabs');
+          }
+        })
+        .catch(error => {
+          if (error.response.data == 'User already registered') {
+            Alert.alert('Failed To Sign Up', 'User is already registered', [
+              {text: 'OK'},
+            ]);
+          }
+        });
     }
   };
 
@@ -177,136 +173,136 @@ const SignInScreen = ({navigation}) => {
         <Text style={styles.text_header}>Register with iParkSL</Text>
       </View>
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
-      <ScrollView>
-        <Text style={styles.text_footer}>Name</Text>
-        <View style={styles.action}>
-          <FontAwesome name="user-o" color="#05375a" size={20} />
-          <TextInput
-            placeholder="Your Name"
-            style={styles.textInput}
-            autoCapitalize="none"
-            name="nametext"
-            value={nametext}
-            onChangeText={val => setnametext(val)}
-          />
-          {data.check_textInputChange ? (
-            <Animatable.View animation="bounceIn">
-              <Feather name="check-circle" color="#ffb907" size={20} />
-            </Animatable.View>
-          ) : null}
-        </View>
-        <Text style={styles.error}>{Data.nameError}</Text>
+        <ScrollView>
+          <Text style={styles.text_footer}>Name</Text>
+          <View style={styles.action}>
+            <FontAwesome name="user-o" color="#05375a" size={20} />
+            <TextInput
+              placeholder="Your Name"
+              style={styles.textInput}
+              autoCapitalize="none"
+              name="nametext"
+              value={nametext}
+              onChangeText={val => setnametext(val)}
+            />
+            {data.check_textInputChange ? (
+              <Animatable.View animation="bounceIn">
+                <Feather name="check-circle" color="#ffb907" size={20} />
+              </Animatable.View>
+            ) : null}
+          </View>
+          <Text style={styles.error}>{Data.nameError}</Text>
 
-        <Text style={styles.text_footer}>Email</Text>
-        <View style={styles.action}>
-          <FontAwesome name="user-o" color="#05375a" size={20} />
-          <TextInput
-            placeholder="Your Email"
-            style={styles.textInput}
-            autoCapitalize="none"
-            name="emailtext"
-            value={emailtext}
-            onChangeText={val => setemailtext(val)}
-          />
-          {data.check_textInputChange ? (
-            <Animatable.View animation="bounceIn">
-              <Feather name="check-circle" color="#ffb907" size={20} />
-            </Animatable.View>
-          ) : null}
-        </View>
-        {Data.emailEmptyError ? (
+          <Text style={styles.text_footer}>Email</Text>
+          <View style={styles.action}>
+            <FontAwesome name="user-o" color="#05375a" size={20} />
+            <TextInput
+              placeholder="Your Email"
+              style={styles.textInput}
+              autoCapitalize="none"
+              name="emailtext"
+              value={emailtext}
+              onChangeText={val => setemailtext(val)}
+            />
+            {data.check_textInputChange ? (
+              <Animatable.View animation="bounceIn">
+                <Feather name="check-circle" color="#ffb907" size={20} />
+              </Animatable.View>
+            ) : null}
+          </View>
+          {Data.emailEmptyError ? (
             <Text style={styles.error}>{Data.emailEmptyError}</Text>
           ) : (
             <Text style={styles.error}>{Data.emailError}</Text>
           )}
 
-        <Text
-          style={[
-            styles.text_footer,
-            {
-              marginTop: 35,
-            },
-          ]}>
-          Password
-        </Text>
-        <View style={styles.action}>
-          <Feather name="lock" color="#05375a" size={20} />
-          <TextInput
-            placeholder="Your Password"
-            secureTextEntry={data.secureTextEntry ? true : false}
-            style={[styles.textInput, {marginLeft: 5}]}
-            autoCapitalize="none"
-            name="passwordtext"
-            value={passwordtext}
-            onChangeText={val => setpasswordtext(val)}
-          />
-          <TouchableOpacity onPress={updateSecureTextEntry}>
-            {data.secureTextEntry ? (
-              <Feather name="eye-off" color="#ffb907" size={20} />
-            ) : (
-              <Feather name="eye" color="#ffb907" size={20} />
-            )}
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.error}>{Data.passwordError}</Text>
-        <Text
-          style={[
-            styles.text_footer,
-            {
-              marginTop: 35,
-            },
-          ]}>
-          Confirm Password
-        </Text>
-        <View style={styles.action}>
-          <Feather name="lock" color="#05375a" size={20} />
-          <TextInput
-            placeholder="Confirm Password"
-            secureTextEntry={data.confirm_secureTextEntry ? true : false}
-            style={[styles.textInput, {marginLeft: 5}]}
-            autoCapitalize="none"
-            name="cpasswordtext"
-            value={cpasswordtext}
-            onChangeText={val => setcpasswordtext(val)}
-          />
-          <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
-            {data.secureTextEntry ? (
-              <Feather name="eye-off" color="#ffb907" size={20} />
-            ) : (
-              <Feather name="eye" color="#ffb907" size={20} />
-            )}
-          </TouchableOpacity>
-        </View>
-        <Text style={styles.error}>{Data.cpasswordError}</Text>
-        <View style={styles.Button}>
-          <TouchableOpacity
-            onPress={() =>
-              SignUp(nametext, emailtext, passwordtext, cpasswordtext)
-            }>
-            <LinearGradient
-              colors={['#ffb907', '#ffb907']}
+          <Text
+            style={[
+              styles.text_footer,
+              {
+                marginTop: 35,
+              },
+            ]}>
+            Password
+          </Text>
+          <View style={styles.action}>
+            <Feather name="lock" color="#05375a" size={20} />
+            <TextInput
+              placeholder="Your Password"
+              secureTextEntry={data.secureTextEntry ? true : false}
+              style={[styles.textInput, {marginLeft: 5}]}
+              autoCapitalize="none"
+              name="passwordtext"
+              value={passwordtext}
+              onChangeText={val => setpasswordtext(val)}
+            />
+            <TouchableOpacity onPress={updateSecureTextEntry}>
+              {data.secureTextEntry ? (
+                <Feather name="eye-off" color="#ffb907" size={20} />
+              ) : (
+                <Feather name="eye" color="#ffb907" size={20} />
+              )}
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.error}>{Data.passwordError}</Text>
+          <Text
+            style={[
+              styles.text_footer,
+              {
+                marginTop: 35,
+              },
+            ]}>
+            Confirm Password
+          </Text>
+          <View style={styles.action}>
+            <Feather name="lock" color="#05375a" size={20} />
+            <TextInput
+              placeholder="Confirm Password"
+              secureTextEntry={data.confirm_secureTextEntry ? true : false}
+              style={[styles.textInput, {marginLeft: 5}]}
+              autoCapitalize="none"
+              name="cpasswordtext"
+              value={cpasswordtext}
+              onChangeText={val => setcpasswordtext(val)}
+            />
+            <TouchableOpacity onPress={updateConfirmSecureTextEntry}>
+              {data.secureTextEntry ? (
+                <Feather name="eye-off" color="#ffb907" size={20} />
+              ) : (
+                <Feather name="eye" color="#ffb907" size={20} />
+              )}
+            </TouchableOpacity>
+          </View>
+          <Text style={styles.error}>{Data.cpasswordError}</Text>
+          <View style={styles.Button}>
+            <TouchableOpacity
+              onPress={() =>
+                SignUp(nametext, emailtext, passwordtext, cpasswordtext)
+              }>
+              <LinearGradient
+                colors={['#ffb907', '#ffb907']}
+                style={[
+                  styles.signIn,
+                  {
+                    marginTop: 30,
+                  },
+                ]}>
+                <Text style={[styles.textSign, {}]}>Sign Up</Text>
+              </LinearGradient>
+            </TouchableOpacity>
+            <TouchableOpacity
+              onPress={() => navigation.goBack()}
               style={[
                 styles.signIn,
                 {
-                  marginTop: 30,
+                  borderColor: '#ffb907',
+                  borderWidth: 1,
+                  marginTop: 15,
                 },
               ]}>
-              <Text style={[styles.textSign, {}]}>Sign Up</Text>
-            </LinearGradient>
-          </TouchableOpacity>
-          <TouchableOpacity
-            onPress={() => navigation.goBack()}
-            style={[
-              styles.signIn,
-              {
-                borderColor: '#ffb907',
-                borderWidth: 1,
-                marginTop: 15,
-              },
-            ]}>
-            <Text style={styles.textSign}>Sign In</Text>
-          </TouchableOpacity>
-        </View>
+              <Text style={styles.textSign}>Sign In</Text>
+            </TouchableOpacity>
+          </View>
         </ScrollView>
       </Animatable.View>
     </View>

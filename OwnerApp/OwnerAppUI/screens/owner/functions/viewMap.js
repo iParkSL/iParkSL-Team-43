@@ -96,7 +96,7 @@ const viewMap = ({navigation}) => {
                   <Text style={styles.titleText}>{parks.parkname}</Text>
                   <Text>
                     {'\n'}
-                    {parks.description}
+                    LKR.{parks.price}/hr
                   </Text>
                 </View>
               </Callout>
@@ -156,7 +156,7 @@ const styles = StyleSheet.create({
     fontFamily: 'Cochin',
   },
   titleText: {
-    fontSize: 20,
+    fontSize: 15,
     fontWeight: 'bold',
   },
   BookNow: {

@@ -7,12 +7,12 @@ const  saltRounds=10;
 
 
 
-
+  
 
 
 router.post("/",(req,res)=>{
     const name=req.body.name;
-    const email=req.body.email;
+    const email=req.body.email;  
     const password=req.body.password;
     const cpassword=req.body.cpassword;
 

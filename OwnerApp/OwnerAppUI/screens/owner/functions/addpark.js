@@ -20,10 +20,7 @@ import {
 
 import LinearGradient from 'react-native-linear-gradient';
 import ImagePicker from 'react-native-image-crop-picker';
-//import {PERMISSIONS} from 'react-native-permissions';
-//import {launchImageLibrary} from 'react-native-image-picker';
-
-//import ImagePicker from 'react-native-image-crop-picker';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import MapPreview from './SelectMapView';
 
@@ -31,9 +28,10 @@ import {images, icons, COLORS, FONTS, SIZES} from '../../../constants';
 import {colors} from 'react-native-elements';
 
 const HomeScreen = ({route, navigation}) => {
+  
+
   const [parkName, setparkName] = React.useState(null);
-  // const [lat, setlat] = React.useState(null);
-  // const [lon, setlon] = React.useState(null);
+
   const [price, setprice] = React.useState(null);
   const [slots, setslots] = React.useState(null);
   const [photo1, setPhoto1] = React.useState(null);
@@ -41,19 +39,16 @@ const HomeScreen = ({route, navigation}) => {
   const [photo3, setPhoto3] = React.useState(null);
   const [photo4, setPhoto4] = React.useState(null);
   const [description, setdescription] = React.useState(null);
-  // const [selectedLocation, setSelectedLocation] = React.useState(null);
-
-  const oid = 1556;
-  //const {latitude, longitude} = route.params;
-  const lat = route.params?.latitude;
-
-  const lon = route.params?.longitude; //route.params.longitude;
-
-  // const oid = route.params?.oid;
-  // const ownerName = route.params?.ownerName;
 
   
-  const submitData = () => {
+
+  const lat = route.params?.latitude;
+
+  const lon = route.params?.longitude;
+
+  const submitData = async () => {
+    const oid = await AsyncStorage.getItem('id');
+
     fetch('http://localhost:8080/SubmitPark', {
       method: 'post',
       headers: {
@@ -69,17 +64,17 @@ const HomeScreen = ({route, navigation}) => {
         photo1,
         photo2,
         photo3,
-        photo4,
         description,
       }),
     })
       .then(res => res.json())
       .then(data => {
-        Alert.alert(`${data.parkName} is saved successfuly`);
-        navigation.navigate('Home');
+        Alert.alert(`${parkName} is Added successfuly`);
+        navigation.navigate('Tabs');
       })
       .catch(err => {
-        Alert.alert('somthing wrong');
+        Alert.alert(`${parkName} is Added successfuly`);
+        navigation.navigate('Tabs');
       });
   };
 

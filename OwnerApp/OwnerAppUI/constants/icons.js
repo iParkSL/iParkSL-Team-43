@@ -27,13 +27,18 @@ export const area = require('../assets/icons/area.png');
 export const budget = require('../assets/icons/budget.png');
 export const Psearch = require('../assets/icons/Psearch.png');
 export const carparking = require('../assets/icons/carparking.png');
-export const cancel=require('../assets/icons/cancel.png');
-export const Focus=require('../assets/icons/focus.png');
-export const marker=require('../assets/icons/marker.png');
-export const operator=require('../assets/icons/operator.png');
-export const photo=require('../assets/icons/photo.png');
-export const pick=require('../assets/icons/pick.png');
+export const cancel = require('../assets/icons/cancel.png');
+export const Focus = require('../assets/icons/focus.png');
+export const marker = require('../assets/icons/marker.png');
+export const operator = require('../assets/icons/operator.png');
+export const photo = require('../assets/icons/photo.png');
+export const pick = require('../assets/icons/pick.png');
+export const ViewReport = require('../assets/icons/ViewReport.png');
+export const addpoint = require('../assets/icons/addpoint.png');
+
 export default {
+  addpoint,
+  ViewReport,
   pick,
   photo,
   operator,

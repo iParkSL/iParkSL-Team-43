@@ -4,7 +4,7 @@ import { Alert } from 'react-native';
 import {View, Text,StyleSheet,TouchableOpacity,TouchableHighlight} from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 
-const SlotUP = ({route}) => {
+const SlotUP = ({route,navigation}) => {
   const bid = route.params?.bid;
   const cid = route.params?.cid;
   const date = route.params?.date;
@@ -21,7 +21,11 @@ const slotUpdate =()=>{
       pid,
       bid,
     }),
-  }).then(res=>console.log(res)).catch(err=>{
+  }).then(res=>{console.log(res);
+    Alert.alert(`Timer Start successfuly`);
+    navigation.navigate('RecentBookings');
+  
+  }).catch(err=>{
     console.log(err);
   })
   

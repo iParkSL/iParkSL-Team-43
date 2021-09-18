@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   View,
@@ -10,6 +10,7 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import {images, icons, COLORS, FONTS, SIZES} from '../../constants';
 import {Tabs} from './tab';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import {
   AddNewPark,
@@ -67,9 +68,8 @@ const OptionItem = ({bgColor, icon, label, onPress}) => {
   );
 };
 
-const Home = ({route, navigation}) => {
-  const oid = route.params?.id;
-  const ownerName = route.params?.username;
+const Home = ({navigation}) => {
+  
 
   return (
     <View style={styles.container}>
@@ -82,17 +82,21 @@ const Home = ({route, navigation}) => {
             paddingHorizontal: SIZES.base,
           }}>
           <OptionItem
-            icon={icons.parking}
+            icon={icons.addpoint}
             bgColor={['#ffb907', '#ffb907']}
             label="Add Park"
-            onPress={() => navigation.navigate('AddNewPark')}
+            onPress={() => {
+              navigation.navigate('AddNewPark');
+            }}
           />
 
           <OptionItem
             icon={icons.Vpark}
             bgColor={['#ffb907', '#ffb907']}
             label="Bookings"
-            onPress={() => navigation.navigate('RecentBookings')}
+            onPress={() => {
+              navigation.navigate('RecentBookings');
+            }}
           />
         </View>
         <View
@@ -130,10 +134,9 @@ const Home = ({route, navigation}) => {
             onPress={() => navigation.navigate('Charges')}
           />
           <OptionItem
-            icon={icons.Switch}
+            icon={icons.ViewReport}
             bgColor={['#ffb907', '#ffb907']}
-            label="Switch 
-            Customer"
+            label="View Report"
             onPress={() => navigation.navigate('Switch')}
           />
         </View>

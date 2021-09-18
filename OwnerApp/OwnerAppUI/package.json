@@ -10,6 +10,7 @@
     "lint": "eslint ."
   },
   "dependencies": {
+    "@react-native-community/async-storage": "^1.12.1",
     "@react-native-community/checkbox": "^0.5.8",
     "@react-native-community/geolocation": "^2.0.2",
     "@react-native-community/masked-view": "^0.1.11",
@@ -26,7 +27,7 @@
     "react-native-camera": "^4.0.0",
     "react-native-elements": "^3.4.2",
     "react-native-fetching-indicator": "^0.2.0",
-    "react-native-fs": "2.18.0",
+    "react-native-fs": "^2.18.0",
     "react-native-geolocation-service": "^5.3.0-beta.2",
     "react-native-gesture-handler": "^1.10.3",
     "react-native-google-places-autocomplete": "^2.4.1",

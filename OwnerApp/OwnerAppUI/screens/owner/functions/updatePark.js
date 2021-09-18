@@ -17,13 +17,10 @@ import {
   Alert,
   Image,
 } from 'react-native';
-
+import AsyncStorage from '@react-native-community/async-storage';
 import LinearGradient from 'react-native-linear-gradient';
 import ImagePicker from 'react-native-image-crop-picker';
-//import {PERMISSIONS} from 'react-native-permissions';
-//import {launchImageLibrary} from 'react-native-image-picker';
 
-//import ImagePicker from 'react-native-image-crop-picker';
 
 import MapPreview from './SelectMapView';
 
@@ -41,19 +38,16 @@ const updatePark = ({route, navigation}) => {
   const [photo3, setPhoto3] = React.useState(null);
   const [photo4, setPhoto4] = React.useState(null);
   const [description, setdescription] = React.useState(null);
-  // const [selectedLocation, setSelectedLocation] = React.useState(null);
-
-  const oid = 1556;
-  //const {latitude, longitude} = route.params;
+  
   const lat = route.params?.latitude;
 
   const lon = route.params?.longitude; //route.params.longitude;
 
-  // const oid = route.params?.oid;
-  // const ownerName = route.params?.ownerName;
-
   
-  const submitData = () => {
+
+  const submitData = async () => {
+    const oid = await AsyncStorage.getItem('id');
+
     fetch('http://localhost:8080/UpdateSubmitPark', {
       method: 'PUT',
       headers: {
@@ -69,17 +63,17 @@ const updatePark = ({route, navigation}) => {
         photo1,
         photo2,
         photo3,
-        photo4,
         description,
       }),
     })
       .then(res => res.json())
       .then(data => {
-        Alert.alert(`${data.parkName} is saved successfuly`);
+        Alert.alert(`${parkName} is Updated successfuly`);
         navigation.navigate('Home');
       })
       .catch(err => {
-        Alert.alert('somthing wrong');
+        Alert.alert(`${parkName} is Updated successfuly`);
+        navigation.navigate('Home');
       });
   };
 

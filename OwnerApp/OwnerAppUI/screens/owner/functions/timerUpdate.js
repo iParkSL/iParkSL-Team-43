@@ -24,7 +24,7 @@ const Update =()=>{
 axios.put('http://localhost:8080/timerUpdate',x).then((res)=>{
 
   Alert.alert(`Timer Stop successfuly`);
-  navigation.navigate('Tabs');
+  navigation.goBack();
 
 }).catch((err)=>{
   console.log(err);
