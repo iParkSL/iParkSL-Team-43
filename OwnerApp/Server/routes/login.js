@@ -25,14 +25,14 @@ router.post("/",(req,res)=>{
     //check for existing user
     db.query(sqlCheckEmail,email,(err,user)=>{
         if(user.length<1){
-            return res.status(400).json({msg:"user does not exists"});
+          return res.status(400).send("user does not exists");   
         }else{
             let currentUser = user[0];
 
             // Validate password
             bcrypt.compare(password, user[0].password).then(isMatch => {
               if (!isMatch){
-                return res.status(400).json({ msg: "Invalid credentials" });
+                return res.status(400).send("Invalid credentials");  
               }else{
                 // res.json("SUCCESS");
                 res.json({status:'SUCCESS',id:user[0].id,username:user[0].name})
