@@ -10,6 +10,8 @@ import {
   Image,
   TextInput,
   StatusBar,
+  ScrollView,
+  Alert,
 } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
@@ -23,6 +25,68 @@ const SignInScreen = ({navigation}) => {
   const [passwordtext, setpasswordtext] = useState('');
   const [cpasswordtext, setcpasswordtext] = useState('');
 
+  const [Data, setdata] = React.useState({
+    nameError: '',
+    emailEmptyError: '',
+    emailError: '',
+    passwordError: '',
+    cpasswordError: '',
+  });
+
+  const validate = () => {
+    let nameError = '';
+    let emailError = '';
+    let emailEmptyError = '';
+    let passwordError = '';
+    let cpasswordError = '';
+    if (!nametext) {
+      nameError = 'Name field is required';
+    }
+
+    if (!emailtext) {
+      emailEmptyError = 'Email field is required';
+    }
+
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (reg.test(emailtext) === false) {
+      emailError = 'Invalid Email';
+    }
+
+    const strongRegex = new RegExp(
+      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*])(?=.{8,})',
+    );
+    if (!passwordtext) {
+      passwordError = 'Password field is required';
+    } else if (strongRegex.test(passwordtext) == false) {
+      passwordError = 'Enter a strong password';
+    }
+
+    if (!cpasswordtext) {
+      cpasswordError = 'Confirm password field is required';
+    } else if (!(passwordtext === cpasswordtext)) {
+      cpasswordError = 'Enter the same password';
+    }
+
+    if (
+      emailError ||
+      nameError ||
+      passwordError ||
+      emailEmptyError ||
+      cpasswordError
+    ) {
+      setdata({
+        nameError,
+        emailError,
+        passwordError,
+        emailEmptyError,
+        cpasswordError,
+      });
+      return false;
+    }
+
+    return true;
+  };
+
   const SignUp = (name, email, password, cpassword) => {
     const x = {
       name: name,
@@ -31,6 +95,7 @@ const SignInScreen = ({navigation}) => {
       cpassword: cpassword,
     };
 
+    if (validate()) {
     axios
       .post('http://localhost:8080/register', x)
       .then(res => {
@@ -39,8 +104,18 @@ const SignInScreen = ({navigation}) => {
         }
       })
       .catch(error => {
-        console.log(error);
+        if (error.response.data == 'User already registered') {
+          Alert.alert(
+            "Failed To Sign Up",
+            "User is already registered",
+            [
+              { text: "OK" }
+            ]
+          );
+          
+        }
       });
+    }
   };
 
   const [data, setData] = React.useState({
@@ -102,6 +177,7 @@ const SignInScreen = ({navigation}) => {
         <Text style={styles.text_header}>Register with iParkSL</Text>
       </View>
       <Animatable.View animation="fadeInUpBig" style={styles.footer}>
+      <ScrollView>
         <Text style={styles.text_footer}>Name</Text>
         <View style={styles.action}>
           <FontAwesome name="user-o" color="#05375a" size={20} />
@@ -119,6 +195,8 @@ const SignInScreen = ({navigation}) => {
             </Animatable.View>
           ) : null}
         </View>
+        <Text style={styles.error}>{Data.nameError}</Text>
+
         <Text style={styles.text_footer}>Email</Text>
         <View style={styles.action}>
           <FontAwesome name="user-o" color="#05375a" size={20} />
@@ -136,6 +214,12 @@ const SignInScreen = ({navigation}) => {
             </Animatable.View>
           ) : null}
         </View>
+        {Data.emailEmptyError ? (
+            <Text style={styles.error}>{Data.emailEmptyError}</Text>
+          ) : (
+            <Text style={styles.error}>{Data.emailError}</Text>
+          )}
+
         <Text
           style={[
             styles.text_footer,
@@ -164,6 +248,7 @@ const SignInScreen = ({navigation}) => {
             )}
           </TouchableOpacity>
         </View>
+        <Text style={styles.error}>{Data.passwordError}</Text>
         <Text
           style={[
             styles.text_footer,
@@ -192,6 +277,7 @@ const SignInScreen = ({navigation}) => {
             )}
           </TouchableOpacity>
         </View>
+        <Text style={styles.error}>{Data.cpasswordError}</Text>
         <View style={styles.Button}>
           <TouchableOpacity
             onPress={() =>
@@ -221,6 +307,7 @@ const SignInScreen = ({navigation}) => {
             <Text style={styles.textSign}>Sign In</Text>
           </TouchableOpacity>
         </View>
+        </ScrollView>
       </Animatable.View>
     </View>
   );
@@ -283,5 +370,9 @@ const styles = StyleSheet.create({
   textSign: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  error: {
+    color: '#ff0000',
+    fontSize: 14,
   },
 });
