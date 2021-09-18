@@ -10,6 +10,7 @@ import {
   Image,
   TextInput,
   StatusBar,
+  Alert
 } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
@@ -20,12 +21,50 @@ import Feather from 'react-native-vector-icons/Feather';
 const SignInScreen = ({navigation}) => {
   const [emailtext, setemailtext] = useState('');
   const [passwordtext, setpasswordtext] = useState('');
+  const [Data, setdata] = React.useState({   
+    emailError: '',
+    passwordError: '',   
+  });
+
+  const validate = () => {   
+    let emailError = '';   
+    let passwordError = '';
+
+    const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if (!emailtext) {
+      emailError = 'Email field is required';
+    }else if(reg.test(emailtext) === false) {
+      emailError = 'Invalid Email';
+    }
+   
+    if (!passwordtext) {
+      passwordError = 'Password field is required';
+    } 
+
+  
+    if (
+      emailError ||    
+      passwordError 
+        
+    ) {
+      setdata({       
+        emailError,
+        passwordError,
+               
+      });
+      return false;
+    }
+
+    return true;
+  };
+
 
   const login = (email, password) => {
     const x = {
       email: email,
       password: password,
     };
+    if (validate()) {
     axios
       .post('http://localhost:8080/login', x)
       .then(res => {
@@ -40,8 +79,18 @@ const SignInScreen = ({navigation}) => {
         console.log(res.data.username);
       })
       .catch(error => {
-        console.log(error);
+        if (error.response.data == 'user does not exists'||error.response.data == 'Invalid credentials') {
+          Alert.alert(
+            "Failed To Sign In",
+            "Incorrect email or password has been enterted. Please try again",
+            [
+              { text: "OK" }
+            ]
+          );
+        }
+      
       });
+    }
   };
 
   const [data, setData] = React.useState({
@@ -105,6 +154,7 @@ const SignInScreen = ({navigation}) => {
             </Animatable.View>
           ) : null}
         </View>
+        <Text style={styles.error}>{Data.emailError}</Text>
         <Text
           style={[
             styles.text_footer,
@@ -133,6 +183,7 @@ const SignInScreen = ({navigation}) => {
             )}
           </TouchableOpacity>
         </View>
+        <Text style={styles.error}>{Data.passwordError}</Text>
         <View style={styles.Button}>
           <TouchableOpacity onPress={() => login(emailtext, passwordtext)}>
             <LinearGradient
@@ -226,5 +277,9 @@ const styles = StyleSheet.create({
   textSign: {
     fontSize: 18,
     fontWeight: 'bold',
+  },
+  error: {
+    color: '#ff0000',
+    fontSize: 14,
   },
 });
