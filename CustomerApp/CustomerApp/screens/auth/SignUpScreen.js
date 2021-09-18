@@ -103,7 +103,14 @@ const SignUPScreen = ({navigation}) => {
         })
         .catch(error => {
           if (error.response.data == 'User already registered') {
-            Alert.alert('User already registered');
+            Alert.alert(
+              "Failed To Sign Up",
+              "User is already registered",
+              [
+                { text: "OK" }
+              ]
+            );
+            
           }
         });
     }
