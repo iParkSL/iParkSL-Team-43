@@ -37,7 +37,7 @@ router.post("/",(req,res)=>{
 
 db.query(sqlCheckEmail,email,(err,user)=>{
     if(user.length>0){
-         return res.status(400).json({msg:"this user already"});
+        return res.status(400).send("User already registered");
     }else{
         let sql=`insert into customers(name,email,password) values(?,?,?)`;
  bcrypt.hash(password,saltRounds,(err,hash)=>{  
