@@ -6,11 +6,16 @@ const db=require("../config/db");
 router.put("/",(req,res)=>{
     const bid=req.body.bid;
 
-    let sql=`UPDATE bookings SET timerOn=0 where bid=? `;
-    db.query(sql,[bid],(err,result)=>{
+           
+    var today = new Date();
+    var Time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
+
+
+    let sql=`UPDATE bookings SET timerOn=0 ,timerEndTime='${Time}' where bid='${bid}'`;
+    db.query(sql,(err,result)=>{
                if(err){
                   console.log(err)
-               }else{
+               }else{  
                 
 
                      res.send("timer stoped");
