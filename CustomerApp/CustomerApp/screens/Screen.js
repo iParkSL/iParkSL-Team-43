@@ -30,7 +30,7 @@ import NearBySpots from './DrawerContent/aboutUs';
 import RateUs from './DrawerContent/rateUs';
 
 import {
-  findPark,
+  findPark,  
   Payments,
   visitedParks,
   BookingRequest,
@@ -39,7 +39,11 @@ import {
   payment,
   viewPark,
   upComming,
+  forgetPassword,
+  resetPassword,
+  checkPasscode,
 } from './customer/functions/index';
+
 import {DrawerContent} from './DrawerContent';
 const RootStack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -158,7 +162,6 @@ const RootStackScreen = ({navigation}) => (
         },
       }}
     />
-
     <RootStack.Screen
       name="viewPark"
       component={viewPark}
@@ -173,7 +176,6 @@ const RootStackScreen = ({navigation}) => (
         },
       }}
     />
-
     <RootStack.Screen
       name="bookingRequest"
       component={BookingRequest}
@@ -188,7 +190,6 @@ const RootStackScreen = ({navigation}) => (
         },
       }}
     />
-
     <RootStack.Screen
       name="QrCode"
       component={QrCode}
@@ -264,6 +265,48 @@ const RootStackScreen = ({navigation}) => (
       component={upComming}
       options={{
         title: 'Up Coming Booking',
+        headerStyle: {
+          backgroundColor: COLORS.orange,
+        },
+        headerTintColor: COLORS.black,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    />
+    <RootStack.Screen
+      name="forgetPassword"
+      component={forgetPassword}
+      options={{
+        title: ' ',
+        headerStyle: {
+          backgroundColor: COLORS.orange,
+        },
+        headerTintColor: COLORS.black,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    />
+    <RootStack.Screen
+      name="resetPassword"
+      component={resetPassword}
+      options={{
+        title: ' ',
+        headerStyle: {
+          backgroundColor: COLORS.orange,
+        },
+        headerTintColor: COLORS.black,
+        headerTitleStyle: {
+          fontWeight: 'bold',
+        },
+      }}
+    />
+    <RootStack.Screen
+      name="checkPasscode"
+      component={checkPasscode}
+      options={{
+        title: ' ',
         headerStyle: {
           backgroundColor: COLORS.orange,
         },

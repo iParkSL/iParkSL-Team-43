@@ -30,8 +30,7 @@ const BookingRequest = ({navigation,route}) => {
       paymentMethod: paymentType,
       EstimatedDuration: estimatedTime,
       CustomerID: 1,
-      ParkID: pid,
-      QrCode: 41,
+      ParkID: pid,     
     };
 
    

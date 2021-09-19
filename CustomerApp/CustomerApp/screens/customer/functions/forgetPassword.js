@@ -120,7 +120,7 @@ export default class App extends Component{
         <Animatable.View animation="fadeInUpBig" style={styles.footer}>
           <Text style={styles.text_footer}>Email</Text>
           <View style={styles.action}>
-            <FontAwesome name="user-o" color="#05375a" size={20} />
+            {/* <FontAwesome name="user-o" color="#05375a" size={20} /> */}
             <TextInput
               placeholder="Your Email"
               style={styles.textInput}
