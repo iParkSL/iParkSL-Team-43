@@ -9,7 +9,7 @@ router.get('/',function(req, res){
     
 
     const topParks = 
-    `SELECT parks.pid AS id,parks.parkname AS name,parks.image1 AS img,parks.price AS price,a.count 
+    `SELECT parks.pid AS id,parks.parkname AS name,parks.image1 AS img,parks.price AS price,a.count,parks.oid,parks.parkname,parks.slots,parks.price,parks.image2,parks.image3,parks.description 
     FROM parks 
     INNER JOIN
     (SELECT pid,COUNT(pid) AS count FROM bookings GROUP BY pid ORDER BY COUNT(pid) DESC LIMIT 10) AS a

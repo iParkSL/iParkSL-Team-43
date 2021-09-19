@@ -83,7 +83,7 @@ export default class App extends Component {
                           image3: `${item.image3}`,
                           image4: `${item.image4}`,
                           slots: `${item.slots}`,
-                          pid: `${item.pid}`,
+                          pid: item.pid,
                           description: `${item.description}`,
                         })
                       }>

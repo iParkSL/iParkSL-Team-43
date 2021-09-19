@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   FlatList,
+  ScrollView,
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import {images, icons, COLORS, FONTS, SIZES} from '../../constants';
@@ -51,7 +52,7 @@ const OptionItem = ({bgColor, icon, label, onPress}) => {
 };
 
 const Home = ({navigation}) => {
-
+    
     const [Parks, setParks] =  useState('');
   useEffect(() =>{
     Axios.get('http://localhost:8080/topParks').then((response)=>{
@@ -64,8 +65,8 @@ const Home = ({navigation}) => {
   function renderParks(item, index) {
     return (
       <View style={styles.card}>
-        <Image
-          source={item.img}
+         <Image
+          source={{uri: item.img}}
           resizeMode="cover"
           style={{
             width: '100%',
@@ -82,18 +83,47 @@ const Home = ({navigation}) => {
           ]}>
           <Text style={styles.cardtitle}> {item.name}</Text>
           <Text style={styles.cardDescription}>{item.price}</Text>
-          <Button
-            onPress={() => navigation.navigate('mybookings')}
-            color="#ffb907"
-            title={'Book Now'}
-          />
-        </View>
+          
+          <View style={styles.button}>
+            <TouchableOpacity
+              style={styles.signIn}
+              onPress={() => {
+                navigation.navigate('viewPark', { 
+                    pid: item.id,
+                    oid: item.oid,
+                    name: item.parkname,
+                    slots: item.slots,
+                    price: item.price,
+                    image1: item.image1,
+                    image2: item.image2,
+                    image3: item.image3,
+                    description: item.description,
+                                   
+                    });
+              }}>
+              <LinearGradient
+                colors={['#FDC73E', '#ffb907']}
+                style={[styles.signIn]}>
+                <Text
+                  style={[
+                    styles.textSign,
+                    {
+                      color: '#000000',
+                    },
+                  ]}>
+                  Book Now
+                </Text>
+              </LinearGradient>
+            </TouchableOpacity>
+          </View>
+        </View>        
       </View>
     );
   }
 
   return (
     <View style={styles.container}>
+    <ScrollView>
       {/* Options */}
       <View style={{flex: 1, justifyContent: 'center'}}>
         <View
@@ -152,6 +182,7 @@ const Home = ({navigation}) => {
           />
         </View>
       </View>
+      </ScrollView>
     </View>
   );
 };
@@ -206,6 +237,30 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     borderRadius: 3,
+  },
+  button: {
+    flexDirection: 'row',
+    // borderTopWidth: 1,
+    borderTopColor: '#f2f2f2',
+    paddingBottom: 5,
+    alignSelf: 'center',
+    marginBottom: 20,
+    
+  },
+
+  signIn: {
+    width: '100%',
+    marginTop: 3,
+    height: 30,
+    justifyContent: 'center',
+    // alignItems: 'center',
+    borderRadius: 6,
+    alignSelf: 'center',
+  },
+  textSign: {
+    fontSize: 16,
+    alignSelf: 'center',
+    fontWeight: '600',
   },
 });
 

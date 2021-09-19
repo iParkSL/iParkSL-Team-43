@@ -139,8 +139,13 @@ import LinearGradient from 'react-native-linear-gradient';
         </View>
       </View>
 
-      <View style={styles.button}>
-        <TouchableOpacity style={styles.signIn} onPress={() =>this.props.navigation.push('bookingRequest')}>
+      <View style={styles.button}>        
+        <TouchableOpacity style={styles.signIn} 
+        onPress={() => {
+          this.props.navigation.navigate('bookingRequest',{               
+                    pid: pid,
+                    });
+              }}>
           <LinearGradient
             colors={['#FDC73E', '#ffb907']}
             style={[styles.signIn]}>
