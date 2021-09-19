@@ -25,6 +25,7 @@
     "react-native-animatable": "^1.3.3",
     "react-native-bottomsheet-reanimated": "^0.0.41",
     "react-native-camera": "^4.0.0",
+    "react-native-credit-card-input": "^0.4.1",
     "react-native-elements": "^3.4.2",
     "react-native-fetching-indicator": "^0.2.0",
     "react-native-fs": "^2.18.0",
