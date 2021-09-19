@@ -18,12 +18,12 @@ router.post("/",(req,res)=>{
       
     const oid=req.body.oid;
     const latitude=req.body.lat;
-    const longitude=req.body.lon;
-    const action=0;
+    const longitude=req.body.lon;  
+    // const action=0;
 
 //check for existing user
-let sql=`insert into parks(oid,parkname,latitude,longitude,slots,price,image1,image2,image3,description,review) values(?,?,?,?,?,?,?,?,?,?,?)`;
-db.query(sql,[oid,parkname,latitude,longitude,slots,price,photo1,photo2,photo3,description,action],(err,result)=>{
+let sql=`insert into parks(oid,parkname,latitude,longitude,slots,price,image1,image2,image3,description) values(?,?,?,?,?,?,?,?,?,?)`;
+db.query(sql,[oid,parkname,latitude,longitude,slots,price,photo1,photo2,photo3,description],(err,result)=>{
 
     if(err){
         console.log(err)

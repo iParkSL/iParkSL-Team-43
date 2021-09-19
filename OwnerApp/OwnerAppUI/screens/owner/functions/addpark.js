@@ -28,8 +28,6 @@ import {images, icons, COLORS, FONTS, SIZES} from '../../../constants';
 import {colors} from 'react-native-elements';
 
 const HomeScreen = ({route, navigation}) => {
-  
-
   const [parkName, setparkName] = React.useState(null);
 
   const [price, setprice] = React.useState(null);
@@ -39,8 +37,6 @@ const HomeScreen = ({route, navigation}) => {
   const [photo3, setPhoto3] = React.useState(null);
   const [photo4, setPhoto4] = React.useState(null);
   const [description, setdescription] = React.useState(null);
-
-  
 
   const lat = route.params?.latitude;
 
@@ -67,14 +63,15 @@ const HomeScreen = ({route, navigation}) => {
         description,
       }),
     })
-      .then(res => res.json())
+      .then(res => console.log(res))
       .then(data => {
         Alert.alert(`${parkName} is Added successfuly`);
         navigation.navigate('Tabs');
       })
       .catch(err => {
-        Alert.alert(`${parkName} is Added successfuly`);
+        Alert.alert(`${parkName} is successfuly`);
         navigation.navigate('Tabs');
+        console.log(err);
       });
   };
 

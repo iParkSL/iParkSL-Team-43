@@ -19,11 +19,11 @@ router.put("/",(req,res)=>{
     const oid=req.body.oid;
     const latitude=req.body.lat;
     const longitude=req.body.lon;
-    const action=0;
+    // const action=0;  
 
 //check for existing user
-let sql=`UPDATE parks SET parkname=?,latitude=?,longitude=?,slots=?,price=?,image1=?,image2=?,image3=?,description=?,review=? where oid=?`;
-db.query(sql,[parkname,latitude,longitude,slots,price,photo1,photo2,photo3,description,action,oid],(err,result)=>{
+let sql=`UPDATE parks SET parkname=?,latitude=?,longitude=?,slots=?,price=?,image1=?,image2=?,image3=?,description=? where oid=?`;
+db.query(sql,[parkname,latitude,longitude,slots,price,photo1,photo2,photo3,description,oid],(err,result)=>{
 
     if(err){
         console.log(err)

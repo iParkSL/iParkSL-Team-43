@@ -170,7 +170,7 @@ const RootStackScreen = ({navigation}) => {
           name="MapScreen"
           component={MapScreen}
           options={{
-            title: 'Map Screen',
+            title: 'Pick Place',
             headerStyle: {
               backgroundColor: COLORS.orange,
             },

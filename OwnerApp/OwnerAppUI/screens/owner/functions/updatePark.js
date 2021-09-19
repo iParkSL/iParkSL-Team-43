@@ -21,7 +21,6 @@ import AsyncStorage from '@react-native-community/async-storage';
 import LinearGradient from 'react-native-linear-gradient';
 import ImagePicker from 'react-native-image-crop-picker';
 
-
 import MapPreview from './SelectMapView';
 
 import {images, icons, COLORS, FONTS, SIZES} from '../../../constants';
@@ -38,12 +37,10 @@ const updatePark = ({route, navigation}) => {
   const [photo3, setPhoto3] = React.useState(null);
   const [photo4, setPhoto4] = React.useState(null);
   const [description, setdescription] = React.useState(null);
-  
+
   const lat = route.params?.latitude;
 
   const lon = route.params?.longitude; //route.params.longitude;
-
-  
 
   const submitData = async () => {
     const oid = await AsyncStorage.getItem('id');
@@ -66,14 +63,15 @@ const updatePark = ({route, navigation}) => {
         description,
       }),
     })
-      .then(res => res.json())
+      .then(res => console.log(res))
       .then(data => {
         Alert.alert(`${parkName} is Updated successfuly`);
-        navigation.navigate('Home');
+        navigation.navigate('Tabs');
       })
       .catch(err => {
-        Alert.alert(`${parkName} is Updated successfuly`);
-        navigation.navigate('Home');
+        Alert.alert(`${parkName} is successfuly`);
+        navigation.navigate('Tabs');
+        console.log(err);
       });
   };
 
