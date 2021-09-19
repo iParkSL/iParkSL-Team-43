@@ -74,7 +74,10 @@ export default class myParks extends Component {
                       <TouchableOpacity
                         style={styles.signIn}
                         onPress={() => {
-                          this.props.navigation.push('Scan');
+                          this.props.navigation.push('Scan', {
+                            bid: `${item.bid}`,
+                            pid: `${item.pid}`,
+                          });
                         }}>
                         <View
                           style={[styles.signIn, {backgroundColor: '#ffb907'}]}>

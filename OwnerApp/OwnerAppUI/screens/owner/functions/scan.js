@@ -17,26 +17,36 @@ import Slot from './SlotUpdate';
 import {COLORS, SIZES, icons} from '../../../constants';
 const deviceWidth = Dimensions.get('screen').width;
 const deviceHeight = Dimensions.get('screen').height;
-const Scan = ({navigation}) => {
+const Scan = ({route, navigation}) => {
+  const BookingId = route.params?.bid;
+
   const onRead = async event => {
-    // console.log('Data: ' + event.data);
-    // const param = 'Data: ' + event.data;
-    // console.log('date:' + event.date);
-    const param = 'Data: ' + event.data;
+    try {
+      // console.log('Data: ' + event.data);
+      // const param = 'Data: ' + event.data;
+      // console.log('date:' + event.date);
+      const param = 'Data: ' + event.data;
 
-    const p1 = JSON.parse(event.data);
-    console.log(p1);
+      const p1 = JSON.parse(event.data);
+      console.log(p1);
+      if (p1.bid === BookingId) {
+        // console.log(event);
+        // console.log(param);
+        Alert.alert('Scan Successfully');
 
-    // console.log(event);
-    // console.log(param);
-    Alert.alert('Scan Successfully');
-
-    navigation.navigate('SlotUP', {
-      bid: p1.bid,
-      cid: p1.cid,
-      date: p1.date,
-      time: p1.time,
-    });
+        navigation.navigate('SlotUP', {
+          bid: p1.bid,
+          cid: p1.cid,
+          date: p1.date,
+          time: p1.time,
+        });
+      } else {
+        Alert.alert('Wrong QR Code');
+      }
+    } catch (e) {
+      console.log(e);
+      Alert.alert('Wrong QR Code');
+    }
   };
 
   function Header() {
