@@ -11,15 +11,20 @@ router.post('/',function(req, res){
     const CustomerID=req.body.CustomerID; 
     const ParkID=req.body.ParkID; 
     const EstimatedDuration=req.body.EstimatedDuration; 
+    const TimerStart=0;
+    const TimerEnd=0;
+    const TimerOn=0;
+    const isActive=1;
+    const isScaned=0;
 
 
     var today = new Date();
     var Time = today.getHours() + ":" + today.getMinutes() + ":" + today.getSeconds();
     var date = today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate();
 
-    const bookPark = `insert into booking(vehicleNo,vehicleType,paymentMethod,QrCode,CustomerID,ParkID,EstimatedDuration,Date,Time) values(?,?,?,?,?,?,?,?,?)`;
+    const bookPark = `insert into bookings(cid,pid,vtype,vehicleNo,pmethod,EstimatedTime,Qrid,time,date,timerStartTime,	timerEndTime,timerOn,isActive,isScaned) values(?,?,?,?,?,?,?,?,?,?,?,?,?,?)`;
 
-    db.query(bookPark,[vehicleNo,vehicleType,paymentMethod,QrCode,CustomerID,ParkID,EstimatedDuration,date,Time],(err,result)=>{
+    db.query(bookPark,[CustomerID,ParkID,vehicleType,vehicleNo,paymentMethod,EstimatedDuration,QrCode,Time,date,TimerStart,TimerEnd,TimerOn,isActive,isScaned],(err,result)=>{
         res.json("SUCCESS");
     });
 

@@ -13,9 +13,11 @@ import {
   StyleSheet,
   ScrollView,
   StatusBar,
+  Alert,
 } from 'react-native';
 
-const BookingRequest = ({navigation}) => {
+const BookingRequest = ({navigation,route}) => {
+  const {pid} = route.params;
   const [vehicle, setvehicle] = useState('');
   const [vehicleNoText, setVehicleNo] = useState('');
   const [payment, setpayment] = useState('');
@@ -27,16 +29,16 @@ const BookingRequest = ({navigation}) => {
       vehicleNo: vehicleNo,
       paymentMethod: paymentType,
       EstimatedDuration: estimatedTime,
-      CustomerID: '1',
-      ParkID: '1',
-      QrCode: 'abcd',
+      CustomerID: 1,
+      ParkID: pid,
+      QrCode: 41,
     };
 
    
     axios
       .post('http://localhost:8080/book', x)
       .then(res => {
-        if(res.data==='SUCCESS')navigation.push('QrCode');
+        if(res.data==='SUCCESS'){Alert.alert('Booking successfully')}
       })
       .catch(error => {
         console.log(error);
@@ -46,6 +48,7 @@ const BookingRequest = ({navigation}) => {
   return (
     <ScrollView>
       <View style={styles.footer}>
+      <Text style={[styles.text_footer, {marginTop: 10}]}>itemId: {JSON.stringify(pid)}</Text>
         <Text style={[styles.text_footer, {marginTop: 10}]}>
           Select Vehicle Type
         </Text>
