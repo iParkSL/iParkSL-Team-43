@@ -33,9 +33,9 @@ db.query(sql,[oid,parkname,latitude,longitude,slots,price,photo1,photo2,photo3,d
   
        
  
-    
+       
    
-});
+});   
 
 
 });

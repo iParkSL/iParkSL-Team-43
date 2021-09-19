@@ -16,6 +16,7 @@ import MapViewDirections from 'react-native-maps-directions';
 const GOOGLE_MAP_KEY = 'AIzaSyBDrKz0PJJisUQwq5OAPdH_wEh1oxaReKQ';
 import SearchableDropdown from 'react-native-searchable-dropdown';
 import axios from 'axios';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const screen = Dimensions.get('window');
 const ASPECT_RATIO = screen.width / screen.height;
@@ -95,6 +96,11 @@ const Find = ({navigation}) => {
       },
     });
   };
+  const BookNow = async () => {
+    const cid = await AsyncStorage.getItem('id');
+
+    return cid;
+  };
 
   return curentPosition.latitude ? (
     <View style={styles.container}>
@@ -147,7 +153,9 @@ const Find = ({navigation}) => {
               <Callout
                 style={styles.card}
                 onPress={() => {
+                  const custId = BookNow();
                   navigation.navigate('viewPark', {
+                    cid: custId,
                     pid: park.pid,
                     oid: park.oid,
                     parkname: park.parkname,

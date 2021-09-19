@@ -100,8 +100,11 @@ const SignInScreen = ({navigation}) => {
       axios
         .post('http://localhost:8080/register', x)
         .then(res => {
-          if (res.data == 'SUCCESS') {
-            navigation.navigate('Tabs');
+          if (res.data === 'SUCCESS') {
+            Alert.alert(
+              'Congratulation,Your account has been successfully created.Please Login',
+            );
+            navigation.navigate('SignInScreen');
           }
         })
         .catch(error => {

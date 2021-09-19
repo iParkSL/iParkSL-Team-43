@@ -15,39 +15,51 @@ import {
   StatusBar,
   Alert,
 } from 'react-native';
+import AsyncStorage from '@react-native-community/async-storage';
 
-const BookingRequest = ({navigation,route}) => {
+const BookingRequest = ({navigation, route}) => {
   const {pid} = route.params;
   const [vehicle, setvehicle] = useState('');
   const [vehicleNoText, setVehicleNo] = useState('');
   const [payment, setpayment] = useState('');
   const [EstimatedTimeText, setEstimatedTime] = useState('');
 
-  const Booking = (vehicleType, vehicleNo, paymentType, estimatedTime) => {
+  const Booking = async (
+    vehicleType,
+    vehicleNo,
+    paymentType,
+    estimatedTime,
+  ) => {
+    const cid = await AsyncStorage.getItem('id');
+
     const x = {
       vehicleType: vehicleType,
       vehicleNo: vehicleNo,
       paymentMethod: paymentType,
       EstimatedDuration: estimatedTime,
       CustomerID: 1,
-      ParkID: pid,     
+      ParkID: pid,
     };
 
-   
     axios
       .post('http://localhost:8080/book', x)
       .then(res => {
-        if(res.data==='SUCCESS'){Alert.alert('Booking successfully')}
+        if (res.data === 'SUCCESS') {
+          Alert.alert('Booking successfully');
+        }
       })
       .catch(error => {
         console.log(error);
       });
+    console.log(cid);
   };
 
   return (
     <ScrollView>
       <View style={styles.footer}>
-      <Text style={[styles.text_footer, {marginTop: 10}]}>itemId: {JSON.stringify(pid)}</Text>
+        <Text style={[styles.text_footer, {marginTop: 10}]}>
+          itemId: {JSON.stringify(pid)}
+        </Text>
         <Text style={[styles.text_footer, {marginTop: 10}]}>
           Select Vehicle Type
         </Text>
@@ -56,7 +68,7 @@ const BookingRequest = ({navigation,route}) => {
             selectedValue={vehicle}
             onValueChange={Itemvalue => setvehicle(Itemvalue)}
             mode={'dropdown'}>
-            <Picker.Item label="-SELECT-" color="grey"/>
+            <Picker.Item label="-SELECT-" color="grey" />
             <Picker.Item label="A1" value="A1" />
             <Picker.Item label="A" value="A" />
             <Picker.Item label="B1" value="B1" />
@@ -68,7 +80,7 @@ const BookingRequest = ({navigation,route}) => {
         <View style={styles.action}>
           <TextInput
             style={styles.textInput}
-            autoCapitalize="none"            
+            autoCapitalize="none"
             value={vehicleNoText}
             onChangeText={val => setVehicleNo(val)}
           />
@@ -82,7 +94,7 @@ const BookingRequest = ({navigation,route}) => {
             selectedValue={payment}
             onValueChange={Itemvalue => setpayment(Itemvalue)}
             mode={'dropdown'}>
-            <Picker.Item label="-SELECT-" color="grey"/>
+            <Picker.Item label="-SELECT-" color="grey" />
             <Picker.Item label="Online" value="online" />
             <Picker.Item label="Cash" value="cash" />
           </Picker>
@@ -104,7 +116,9 @@ const BookingRequest = ({navigation,route}) => {
         <View style={styles.button}>
           <TouchableOpacity
             style={styles.signIn}
-            onPress={()=>Booking(vehicle,vehicleNoText,payment,EstimatedTimeText)}>
+            onPress={() =>
+              Booking(vehicle, vehicleNoText, payment, EstimatedTimeText)
+            }>
             <View
               // colors={['#FDC73E', '#ffb907']}
               style={[styles.signIn]}>

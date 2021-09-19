@@ -15,6 +15,7 @@ import {
 import {DrawerContentScrollView, DrawerItem} from '@react-navigation/drawer';
 import Feather from 'react-native-vector-icons/Feather';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+import AsyncStorage from '@react-native-community/async-storage';
 
 export function DrawerContent(props) {
   return (
@@ -100,8 +101,13 @@ export function DrawerContent(props) {
           style={{backgroundColor: '#ffb907'}}
           label="Sign Out"
           labelStyle={{color: '#000000', fontWeight: '600', fontSize: 16}}
-          onPress={() => {
-            props.navigation.navigate('SplashScreen');
+          onPress={async () => {
+            try {
+              await AsyncStorage.removeItem('id');
+              props.navigation.navigate('SplashScreen');
+            } catch (e) {
+              console.log(e);
+            }
           }}
         />
       </Drawer.Section>

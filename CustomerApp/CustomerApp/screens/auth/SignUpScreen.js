@@ -18,6 +18,7 @@ import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const SignUPScreen = ({navigation}) => {
   const [nametext, setnametext] = useState('');
@@ -99,18 +100,18 @@ const SignUPScreen = ({navigation}) => {
       axios
         .post('http://localhost:8080/register', x)
         .then(res => {
-          if (res.data == 'SUCCESS') navigation.navigate('Home');
+          if (res.data === 'SUCCESS') {
+            Alert.alert(
+              'Congratulation,Your account has been successfully created.Please Login',
+            );
+            navigation.navigate('SignInScreen');
+          }
         })
         .catch(error => {
           if (error.response.data == 'User already registered') {
-            Alert.alert(
-              "Failed To Sign Up",
-              "User is already registered",
-              [
-                { text: "OK" }
-              ]
-            );
-            
+            Alert.alert('Failed To Sign Up', 'User is already registered', [
+              {text: 'OK'},
+            ]);
           }
         });
     }

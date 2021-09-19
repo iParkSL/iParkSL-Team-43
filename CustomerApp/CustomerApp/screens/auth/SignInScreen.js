@@ -10,47 +10,42 @@ import {
   Image,
   TextInput,
   StatusBar,
-  Alert
+  Alert,
 } from 'react-native';
 
 import * as Animatable from 'react-native-animatable';
 import LinearGradient from 'react-native-linear-gradient';
 import FontAwesome from 'react-native-vector-icons/FontAwesome';
 import Feather from 'react-native-vector-icons/Feather';
+import AsyncStorage from '@react-native-community/async-storage';
 
 const SignInScreen = ({navigation}) => {
   const [emailtext, setemailtext] = useState('');
   const [passwordtext, setpasswordtext] = useState('');
-  const [Data, setdata] = React.useState({   
+  const [Data, setdata] = React.useState({
     emailError: '',
-    passwordError: '',   
+    passwordError: '',
   });
 
-  const validate = () => {   
-    let emailError = '';   
+  const validate = () => {
+    let emailError = '';
     let passwordError = '';
 
     const reg = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if (!emailtext) {
       emailError = 'Email field is required';
-    }else if(reg.test(emailtext) === false) {
+    } else if (reg.test(emailtext) === false) {
       emailError = 'Invalid Email';
     }
-   
+
     if (!passwordtext) {
       passwordError = 'Password field is required';
-    } 
+    }
 
-  
-    if (
-      emailError ||    
-      passwordError 
-        
-    ) {
-      setdata({       
+    if (emailError || passwordError) {
+      setdata({
         emailError,
         passwordError,
-               
       });
       return false;
     }
@@ -58,38 +53,47 @@ const SignInScreen = ({navigation}) => {
     return true;
   };
 
-
   const login = (email, password) => {
     const x = {
       email: email,
       password: password,
     };
     if (validate()) {
-    axios
-      .post('http://localhost:8080/login', x)
-      .then(res => {
-        // if(res.data==='SUCCESS')navigation.navigate('Home');
-        if (res.data.status === 'SUCCESS')
-          navigation.navigate('Home', {
-            id: res.data.id,
-            username: res.data.username,
-          });
-        // console.log(res.data.id);
+      axios
+        .post('http://localhost:8080/login', x)
+        .then(async res => {
+          try {
+            // if(res.data==='SUCCESS')navigation.navigate('Home');
+            if (res.data.status === 'SUCCESS') {
+              Alert.alert(res.data.username, 'welcome to iparkSL');
+              navigation.navigate('Home', {
+                id: res.data.id,
+                username: res.data.username,
+              });
+              // console.log(res.data.id);
+              var id = res.data.id.toString();
 
-        console.log(res.data.username);
-      })
-      .catch(error => {
-        if (error.response.data == 'user does not exists'||error.response.data == 'Invalid credentials') {
-          Alert.alert(
-            "Failed To Sign In",
-            "Incorrect email or password has been enterted. Please try again",
-            [
-              { text: "OK" }
-            ]
-          );
-        }
-      
-      });
+              console.log(id);
+              await AsyncStorage.setItem('id', id);
+
+              console.log(JSON.stringify(id));
+            }
+          } catch (e) {
+            console.log(e);
+          }
+        })
+        .catch(error => {
+          if (
+            error.response.data == 'user does not exists' ||
+            error.response.data == 'Invalid credentials'
+          ) {
+            Alert.alert(
+              'Failed To Sign In',
+              'Incorrect email or password has been enterted. Please try again',
+              [{text: 'OK'}],
+            );
+          }
+        });
     }
   };
 
@@ -211,7 +215,7 @@ const SignInScreen = ({navigation}) => {
           </TouchableOpacity>
         </View>
         <Text
-          style={{color: '#05375a',marginTop:5}}
+          style={{color: '#05375a', marginTop: 5}}
           onPress={() => navigation.navigate('forgetPassword')}>
           Forget Password
         </Text>

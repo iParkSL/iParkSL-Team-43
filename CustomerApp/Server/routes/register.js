@@ -56,9 +56,11 @@ db.query(sqlCheckEmail,email,(err,user)=>{
 })
     }
     res.json("SUCCESS");
+    // res.json({status:'SUCCESS',id:user[0].id,username:user[0].name})
+
 });
 
-
+  
 });
 
 

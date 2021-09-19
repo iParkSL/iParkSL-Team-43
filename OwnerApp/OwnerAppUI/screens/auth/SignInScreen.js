@@ -69,6 +69,7 @@ const SignInScreen = ({navigation}) => {
             // }
 
             if (res.data.status == 'SUCCESS') {
+              Alert.alert(res.data.username, 'welcome to iparkSL');
               navigation.navigate('Tabs', {
                 id: res.data.id,
                 username: res.data.username,
