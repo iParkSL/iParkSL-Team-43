@@ -32,6 +32,7 @@ import {
   forgetPassword,
   resetPassword,
   checkPasscode,
+  makePayment,
 } from './customer/functions/index';
 
 
@@ -198,6 +199,7 @@ const RootStackScreen = ({navigation}) => {
             headerTitleStyle: {
               fontWeight: 'bold',
             },
+            headerLeft:()=>null,
           }}
         />
         <RootStack.Screen
@@ -289,6 +291,20 @@ const RootStackScreen = ({navigation}) => {
           component={checkPasscode}
           options={{
             title: ' ',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="makePayment"
+          component={makePayment}
+          options={{
+            title: 'Make Payment',
             headerStyle: {
               backgroundColor: COLORS.orange,
             },
