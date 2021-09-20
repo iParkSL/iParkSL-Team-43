@@ -1,4 +1,4 @@
-import React, {Component,useEffect, useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {
   View,
   ScrollView,
@@ -8,6 +8,7 @@ import {
   Text,
   StyleSheet,
   TextInput,
+  Alert,
 } from 'react-native';
 import {useTheme} from 'react-native-paper';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
@@ -17,30 +18,30 @@ import axios from 'axios';
 
 const Setting = ({navigation}) => {
   const [firstName, setFname] = useState('');
-  const [lastName, setLname] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
-
+  const [details, setDetails] = useState([]);
+  const [img, setImg] = useState('');
   const update = () => {
     // e.preventDefault();
     const x = {
       firstName,
-      lastName,
       email,
       phone,
     };
 
-  //  axios make
+    //  axios make
     axios
-      .post('http://localhost:8080/editprofile', x)
+      .post('http://localhost:8080/api/editProfile', x)
       .then(res => {
-        if(res.data==='SUCCESS')navigation.push('QrCode');
+        
+        if(res.data==='SUCCESS')Alert.alert('Successfully update');
       })
       .catch(error => {
+        
         console.log(error);
       });
-    }
-
+  };
 
  
 
@@ -52,118 +53,79 @@ const Setting = ({navigation}) => {
             padding: 10,
             width: '100%',
             backgroundColor: '#ffb907',
-            height: 80,
-          }}>
-         
-        </View>
+            height: 100,
+          }}></View>
 
         <TouchableOpacity>
-          <View style={{alignItems: 'center', height: 60}}>
-            {/* <Image
-              source={require('./img/profile.jpg')}
+          <View style={{alignItems: 'center', height: 80}}>
+            <Image
+              source={{uri:img }}
               style={{
-                width: 80,
-                height: 80,
+                width: 95,
+                height: 95,
                 borderRadius: 100,
-                marginTop: -40,
-              }}></Image> */}
-
-            <Icon
-              name="camera"
-              size={25}
-              color="#fff"
-              style={{
-                opacity: 0.7,
-                alignItems: 'center',
-                justifyContent: 'center',
-                borderRadius: 10,
-                marginTop: -55,
-              }}
-            />
+                marginTop: -50,
+              }}></Image>
           </View>
         </TouchableOpacity>
 
         <View style={{marginLeft: 30}}>
           <View>
-            <Text style={[styles.text_footer]}>First Name</Text>
+            <Text style={[styles.text_footer]}>Name</Text>
             <View style={styles.action}>
-              <FontAwesome5 name={'user'} solid size={20} />
+              <Image
+                style={styles.icons1}
+                source={require('./img/user.png')}
+              />
               <TextInput
-               style={styles.textInput}
-               value={firstName} 
-               onChangeText={val => setFname(val)}
-                />
+                style={styles.textInput}
+                value={firstName}
+                onChangeText={val => setFname(val)}
+              />
             </View>
-          </View>
- 
-
-          <Text style={styles.text_footer}>Last Name</Text>
-          <View style={styles.action}>
-            <FontAwesome5 name={'user'} solid size={20} />
-            <TextInput 
-             style={styles.textInput}
-             value={lastName} 
-             onChangeText={val => setLname(val)}  />
           </View>
 
           <Text style={styles.text_footer}>Email</Text>
           <View style={styles.action}>
-            <FontAwesome5 name={'envelope'} solid size={20} />
-            <TextInput 
-             style={styles.textInput}
-             value={email} 
-             onChangeText={val => setEmail(val)}  />
+            <Image style={styles.icons1} source={require('./img/email.png')} />
+
+            <TextInput
+              style={styles.textInput}
+              value={email}
+              onChangeText={val => setEmail(val)}
+            />
           </View>
 
           <Text style={styles.text_footer}>Phone</Text>
           <View style={styles.action}>
-            <FontAwesome5 name={'phone'} size={20} />
-            <TextInput 
-            style={styles.textInput}
-            value={phone} 
-            onChangeText={val => setPhone(val)} />
+            <Image style={styles.icons1} source={require('./img/telephone.png')} />
+            <TextInput
+              style={styles.textInput}
+              value={phone}
+              onChangeText={val => setPhone(val)}
+            />
           </View>
 
           <TouchableOpacity
-          style={{
-            alignSelf: 'center',
-            flexDirection: 'row',
-            justifyContent: 'center',
-            backgroundColor: '#ffb907',
-            width: '90%',
-            padding: 10,
-            paddingBottom: 15,
-            borderRadius: 10,
-            shadowOpacity: 80,
-            elevation: 15,
-            marginTop: 15,
-            marginBottom: 15,
-            backgroundColor: '#ffb907',
-          }}
-          onPress={()=>update()}
-          >
-          <Text style={{fontSize: 20, marginLeft: 10}}>Save Details</Text>
-
-        </TouchableOpacity>
-        
-          <View style={{flexDirection: 'row', alignItems: 'center',marginBottom:10}}>
-            <Text style={[styles.text_footer,{  marginBottom: 10,}]}>Notification</Text>
-            <TouchableOpacity>
-            <Feather
-              name="chevron-right"
-              size={25}
-              style={{marginLeft:100}}
-            />
-            </TouchableOpacity>
-            </View>
-
-
-
-            <View>
-              <Text style={{color: '#585858',fontSize: 18,}}>Change Password</Text> 
-            </View>
-
-          </View> 
+            style={{
+              alignSelf: 'center',
+              flexDirection: 'row',
+              justifyContent: 'center',
+              backgroundColor: '#ffb907',
+              width: '90%',
+              padding: 10,
+              paddingBottom: 15,
+              borderRadius: 10,
+              shadowOpacity: 80,
+              elevation: 15,
+              marginTop: 15,
+              marginBottom: 15,
+              backgroundColor: '#ffb907',
+            }}
+            onPress={() => update()}>
+            <Text style={{fontSize: 20, marginLeft: 10}}>Edit Profile</Text>
+          </TouchableOpacity>
+        </View>
       </ScrollView>
     </View>
   );
@@ -261,6 +223,8 @@ const styles = StyleSheet.create({
     color: '#000000',
     fontSize: 16,
   },
+  icons1: {
+    height: 20,
+    width: 20,
+  },
 });
-
-
