@@ -6,8 +6,8 @@ const db=require("../config/db");
 router.get("/",(req,res)=>{
     
 
-
-    db.query('select * from payments,customers where customers.id=payments.customerID',function(error, rows,fields){
+    var id=req.query.id
+    db.query(`select * from payments,customers where customers.id=payments.customerID and payments.ownerID=${id}`,function(error, rows,fields){
         if(error)console.log(error);
 
         else{
