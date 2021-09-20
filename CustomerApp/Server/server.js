@@ -40,6 +40,8 @@ app.use("/checkCode",require("./routes/checkCode"));
 app.use("/getEmails",require("./routes/getEmails"));
 app.use("/api",require("./routes/editProfile"));
 app.use("/makePayment",require("./routes/makePayment"));
+app.use("/physicalPayment",require("./routes/physicalPayment"));
+app.use("/reviewForm",require("./routes/reviewForm"));
 
 app.listen('8080',()=>{
     console.log('Server started on port 8080');

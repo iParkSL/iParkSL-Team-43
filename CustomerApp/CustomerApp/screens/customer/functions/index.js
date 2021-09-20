@@ -11,6 +11,8 @@ import forgetPassword from './forgetPassword';
 import resetPassword from './resetPassword';
 import checkPasscode from './checkPasscode';
 import makePayment from './makePayment';
+import physicalPayment from './physical Payment';
+import reviewForm from './reviewForm';
 export {
   findPark,
   viewPark,
@@ -25,4 +27,6 @@ export {
   resetPassword,
   checkPasscode,
   makePayment,
+  physicalPayment,
+  reviewForm
 };

@@ -42,6 +42,9 @@ import {
   forgetPassword,
   resetPassword,
   checkPasscode,
+  makePayment,
+  physicalPayment,
+  reviewForm
 } from './customer/functions/index';
 
 import {DrawerContent} from './DrawerContent';
@@ -216,6 +219,7 @@ const RootStackScreen = ({navigation}) => (
         headerTitleStyle: {
           fontWeight: 'bold',
         },
+        headerLeft:()=>null,
       }}
     />
     <RootStack.Screen
@@ -316,6 +320,50 @@ const RootStackScreen = ({navigation}) => (
         },
       }}
     />
+    <RootStack.Screen
+          name="makePayment"
+          component={makePayment}
+          options={{
+            title: 'Make Payment',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="physicalPayment"
+          component={physicalPayment}
+          options={{
+            title: 'physical Payment',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+          }}
+        />
+        <RootStack.Screen
+          name="reviewForm"
+          component={reviewForm}
+          options={{
+            title: 'Feedback',
+            headerStyle: {
+              backgroundColor: COLORS.orange,
+            },
+            headerTintColor: COLORS.black,
+            headerTitleStyle: {
+              fontWeight: 'bold',
+            },
+        headerLeft:()=>null,
+
+          }}
+        />
   </RootStack.Navigator>
 );
 

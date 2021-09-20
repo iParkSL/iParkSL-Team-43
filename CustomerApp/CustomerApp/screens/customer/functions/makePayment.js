@@ -82,7 +82,9 @@ import LinearGradient from 'react-native-linear-gradient';
         <View style={{marginTop: 270, marginLeft: 10}}>
             <TouchableOpacity
               style={styles.signIn}
-              onPress={() => this.props.navigation.push('QrCode')}>
+              onPress={() => this.props.navigation.push('physicalPayment',{
+                bid:`${bid}`
+              })}>
               <View
                 // colors={['#FDC73E', '#ffb907']}
 

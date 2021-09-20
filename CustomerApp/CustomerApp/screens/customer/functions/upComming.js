@@ -10,6 +10,7 @@ import {
   TouchableOpacity,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
+import AsyncStorage from '@react-native-community/async-storage';
 import {Component} from 'react';
 import axios from 'axios';
 
@@ -29,14 +30,16 @@ export default class App extends Component {
     // id,
   };
   componentDidMount() {
-    axios
-      .get('http://localhost:8080/upComing', {params: {id: '1'}})
+    AsyncStorage.getItem('id').then((id)=>{
+      axios
+      .get('http://localhost:8080/upComing', {params: {id:id}})
       .then(res => {
-        console.log(res);
+        console.log(res.data);
         this.setState({
           data: res.data,
         });
       });
+    })
   }
   // Cookie.set('http://bing.com',{
   //   bookingID:this.state.data[0].bid

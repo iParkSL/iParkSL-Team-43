@@ -98,52 +98,54 @@ export default class App extends Component {
   };
   
   async timerFunction(){
-    if(i==0){
-      axios.get('http://localhost:8080/timerOn',{params:{id:this.state.id}}
-      ).then(res=>{
-        console.log(res);
-      this.setState({
-        timerOnOff:res.data[0].timerOn,
-        isActive:res.data[0].isActive,
-        });
-      });
-      if(this.state.timerOnOff==1){
-        i=1;
-        j=0;
-        this.start()
+    if(this.state.isActive == 1){
+        if(i==0){
+          axios.get('http://localhost:8080/timerOn',{params:{id:this.state.id}}
+          ).then(res=>{
+            console.log(res);
+          this.setState({
+            timerOnOff:res.data[0].timerOn,
+            isActive:res.data[0].isActive,
+            });
+          });
+          if(this.state.timerOnOff==1){
+            i=1;
+            j=0;
+            this.start()
+          }
+          
+        }
+        if(j==0){
+          axios.get('http://localhost:8080/timerOn',{params:{id:this.state.id}}
+          ).then(res=>{
+            console.log(res);
+          this.setState({
+            timerOnOff:res.data[0].timerOn,
+            isActive:res.data[0].isActive,
+            });
+          });
+          if(this.state.timerOnOff==0){
+            i=2;
+            j=1;
+            this.stop()
+          }
+        }
+        if(i==2){
+          axios.get('http://localhost:8080/timerOn',{params:{id:this.state.id}}
+          ).then(res=>{
+            console.log(res);
+          this.setState({
+            timerOnOff:res.data[0].timerOn,
+            isActive:res.data[0].isActive,
+            });
+          });
+          if(this.state.timerOnOff==1){
+            i=1;
+            j=0;
+            this.resume()
+          }
+        }
       }
-      
-    }
-    if(j==0){
-      axios.get('http://localhost:8080/timerOn',{params:{id:this.state.id}}
-      ).then(res=>{
-        console.log(res);
-      this.setState({
-        timerOnOff:res.data[0].timerOn,
-        isActive:res.data[0].isActive,
-        });
-      });
-      if(this.state.timerOnOff==0){
-        i=2;
-        j=1;
-        this.stop()
-      }
-    }
-    if(i==2){
-      axios.get('http://localhost:8080/timerOn',{params:{id:this.state.id}}
-      ).then(res=>{
-        console.log(res);
-      this.setState({
-        timerOnOff:res.data[0].timerOn,
-        isActive:res.data[0].isActive,
-        });
-      });
-      if(this.state.timerOnOff==1){
-        i=1;
-        j=0;
-        this.resume()
-      }
-    }
   }
   render() {
     const {bid} =this.props.route.params;
@@ -175,7 +177,6 @@ export default class App extends Component {
             <Text style={{fontSize: 25, fontWeight: 'bold'}}>Kamal Perera</Text>
             <Text style={{fontSize: 20}}>2021/2/27</Text>
             <Text style={{fontSize: 20}}>1.30 pm</Text>
-            <Text>{this.state.k}</Text>
           </View>
         </View>
 
