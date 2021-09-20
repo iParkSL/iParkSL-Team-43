@@ -14,7 +14,7 @@ import {
 
 import {Component} from 'react';
 import axios from 'axios';
-
+import AsyncStorage from '@react-native-community/async-storage';
 const {width} = Dimensions.get('window');
 const height = width * 0.6;
 
@@ -23,12 +23,15 @@ export default class myParks extends Component {
     data: [],
   };
   componentDidMount() {
-    axios.get('http://localhost:8080/recentBookings').then(res => {
-      console.log(res);
+    AsyncStorage.getItem('id').then((id)=>{
+
+      axios.get('http://localhost:8080/recentBookings', {params: {id:id}}).then(res => {
+        console.log(res.data);
       this.setState({
         data: res.data,
       });
     });
+  })
   }
   render() {
     return (
