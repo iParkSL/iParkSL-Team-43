@@ -3,26 +3,23 @@ const router = express.Router();
 const db=require("../config/db");
 
 
-router.post('/',function(req, res){
+router.post('/editprofile',function(req, res){
     
-    const FirstName=req.body.firstName; 
-    const LastName=req.body.lastName; 
-    const Email=req.body.email; 
-    // const UserName=req.body.username; 
-    // const Password=req.body.password; 
+    const FirstName=req.body.firstName;   
+    const Email=req.body.email;  
     const Phone=req.body.phone; 
 
-
-    
-
-     const editProfile =  "UPDATE customer SET FirstName = ?, LastName = ?, Email = ?, Phone = ? WHERE CustomerID = 1";
+    const editProfile =  "UPDATE customers SET name = ?,email = ?, phone = ? WHERE id = 1";
+    console.log(FirstName);
+    db.query(editProfile,[FirstName,Email,Phone],(err,result)=>{
+    res.json("SUCCESS");
      
-
-    db.query(editProfile,[FirstName,LastName,Email,Phone],(err,result)=>{
-     console.log(err);
      });
 
+
 } );
+
+
 
 
 module.exports=router;
