@@ -43,7 +43,26 @@ const Setting = ({navigation}) => {
       });
   };
 
- 
+  useEffect(() => {
+    function getDetails() {
+      axios
+        .get('http://localhost:8080/api/get')
+        .then(response => {
+          console.log(response.data);
+          console.log(response.data[0].email);
+          setDetails(response.data[0]);
+          setFname(details.name);
+          setEmail(details.email);
+          setPhone(details.phone);
+          setImg(details.profimage)
+        })
+        .catch(error => {
+          console.log(error);
+        });
+    }
+
+    getDetails();
+  }, []);
 
   return (
     <View>
