@@ -13,7 +13,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import {Component} from 'react';
 import axios from 'axios';
-
+import AsyncStorage from '@react-native-community/async-storage';
 // import Icon from 'react-native-vector-icons/FontAwesome';
 
 const {width} = Dimensions.get('window');
@@ -25,12 +25,14 @@ export default class myParks extends Component {
   };
 
   componentDidMount() {
-    axios.get('http://localhost:8080/myParks').then(res => {
+    AsyncStorage.getItem('id').then((id)=>{
+    axios.get('http://localhost:8080/myParks', {params: {id:id}}).then(res => {
       console.log(res);
       this.setState({
         data: res.data,
       });
     });
+  })
   }
 
   render() {
