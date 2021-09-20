@@ -179,7 +179,7 @@ const SignInScreen = ({navigation}) => {
         <ScrollView>
           <Text style={styles.text_footer}>Name</Text>
           <View style={styles.action}>
-            <FontAwesome name="user-o" color="#05375a" size={20} />
+            {/* <FontAwesome name="user-o" color="#05375a" size={20} /> */}
             <TextInput
               placeholder="Your Name"
               style={styles.textInput}
@@ -198,7 +198,7 @@ const SignInScreen = ({navigation}) => {
 
           <Text style={styles.text_footer}>Email</Text>
           <View style={styles.action}>
-            <FontAwesome name="user-o" color="#05375a" size={20} />
+            {/* <FontAwesome name="user-o" color="#05375a" size={20} /> */}
             <TextInput
               placeholder="Your Email"
               style={styles.textInput}

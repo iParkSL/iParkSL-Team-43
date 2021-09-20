@@ -4,7 +4,7 @@ import React from 'react';
 // import MaterialIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 //import type {Node} from 'react';
 
-import RootStackScreen from './screens/RootStackScreen';
+import RootStackScreen from './screens/Screen';
 const App = () => {
   return (
   
