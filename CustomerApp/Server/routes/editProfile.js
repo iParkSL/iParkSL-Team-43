@@ -20,6 +20,12 @@ router.post('/editprofile',function(req, res){
 } );
 
 
+router.get('/get',(req,res)=> {
+    const sqlSelect = "SELECT * FROM customers WHERE id= 1";
+    db.query(sqlSelect,(err,result)=>{
+    res.send(result);  
+    });
+    });
 
 
 module.exports=router;
