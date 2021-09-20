@@ -27,14 +27,9 @@ export default class App extends Component {
   state = {
     data: [],
   };
-  componentDidMount() {
-    axios.get('http://localhost:8080/reviews').then(res => {
-      console.log(res);
-      this.setState({
-        data: res.data,
-      });
-    });
-  }
+   // componentDidMount() {
+    
+  // }
 
   render() {
     const {name, image1, image2, image3, image4, slots, pid, description} =
@@ -45,6 +40,12 @@ export default class App extends Component {
       images.push(image2);
       images.push(image3);
       images.push(image4);
+      axios.get('http://localhost:8080/reviews', {params: {pid:pid}}).then(res => {
+        console.log(res);
+        this.setState({
+          data: res.data,
+        });
+      });
     }
 
     // console.log(images)

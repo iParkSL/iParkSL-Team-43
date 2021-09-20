@@ -4,13 +4,13 @@ const db=require("../config/db");
 
 
 router.get("/",(req,res)=>{
-    const ID = req.params.pid;
+    const ID = req.query.pid;
     // console.log(req);
     // const ID = "hello";
     console.log(ID);
     // let squery=`select * from reviews`;
 
-    db.query('select * from reviews',function(error, rows,fields){
+    db.query(`select * from reviews where pid=${ID}`,function(error, rows,fields){
         if(error)console.log(error);
 
         else{
