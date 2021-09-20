@@ -10,6 +10,7 @@ import upComming from './upComming';
 import forgetPassword from './forgetPassword';
 import resetPassword from './resetPassword';
 import checkPasscode from './checkPasscode';
+import makePayment from './makePayment';
 export {
   findPark,
   viewPark,
@@ -23,4 +24,5 @@ export {
   forgetPassword,
   resetPassword,
   checkPasscode,
+  makePayment,
 };
