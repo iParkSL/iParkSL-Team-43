@@ -10,7 +10,7 @@ router.get("/",(req,res)=>{
     console.log(id);
     console.log(pa);
 
-    db.query(`select timerOn from bookings where bookings.bid=${id}`,function(error, rows,fields){
+    db.query(`select timerOn,isActive from bookings where bookings.bid=${id}`,function(error, rows,fields){
         if(error)console.log(error);
 
         else{

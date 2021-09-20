@@ -6,6 +6,8 @@ import {
   ScrollView,
   TouchableOpacity,
   Image,
+  BackHandler,
+  ToastAndroid,
 } from 'react-native';
 import moment from 'moment';
 import axios from 'axios';
@@ -35,14 +37,30 @@ export default class App extends Component {
       laps: [],
       timerOnOff:0,
       k: 0,
-      id:0
+      id:0,
+      isActive:1,
     };
+  }
+  
+  backAction = () => {
+    return true;
+  };
+
+  componentDidMount(){
+    this.timer=setInterval(()=> this.timerFunction(),5000)
+
+    this.backHandler = BackHandler.addEventListener(
+      "hardwareBackPress",
+      this.backAction
+    );
   }
 
   componentWillUnmount() {
     clearInterval(this.timer);
+    this.backHandler.remove();
   }
 
+  
   start = () => {
     const now = new Date().getTime();
     this.setState({
@@ -78,9 +96,7 @@ export default class App extends Component {
       this.setState({now: new Date().getTime()});
     }, 100);
   };
-  componentDidMount(){
-    this.timer=setInterval(()=> this.timerFunction(),5000)
-  }
+  
   async timerFunction(){
     if(i==0){
       axios.get('http://localhost:8080/timerOn',{params:{id:this.state.id}}
@@ -88,6 +104,7 @@ export default class App extends Component {
         console.log(res);
       this.setState({
         timerOnOff:res.data[0].timerOn,
+        isActive:res.data[0].isActive,
         });
       });
       if(this.state.timerOnOff==1){
@@ -95,6 +112,7 @@ export default class App extends Component {
         j=0;
         this.start()
       }
+      
     }
     if(j==0){
       axios.get('http://localhost:8080/timerOn',{params:{id:this.state.id}}
@@ -102,6 +120,7 @@ export default class App extends Component {
         console.log(res);
       this.setState({
         timerOnOff:res.data[0].timerOn,
+        isActive:res.data[0].isActive,
         });
       });
       if(this.state.timerOnOff==0){
@@ -116,6 +135,7 @@ export default class App extends Component {
         console.log(res);
       this.setState({
         timerOnOff:res.data[0].timerOn,
+        isActive:res.data[0].isActive,
         });
       });
       if(this.state.timerOnOff==1){
@@ -163,6 +183,31 @@ export default class App extends Component {
           interval={laps.reduce((total, curr) => total + curr, 0) + timer}
           style={styles.timer}
         />
+
+        {this.state.isActive == 0 &&(
+          <View style={{marginTop: 6, marginLeft: 10}}>
+            <TouchableOpacity
+              style={styles.signIn}
+              onPress={() => this.props.navigation.push('makePayment',{
+                bid:`${bid}`
+              })}>
+              <View
+                // colors={['#FDC73E', '#ffb907']}
+
+                style={[styles.signIn, {backgroundColor: '#ffb907'}]}>
+                <Text
+                  style={[
+                    styles.textSign,
+                    {
+                      color: '#000000',
+                    },
+                  ]}>
+                  Pay now
+                </Text>
+              </View>
+            </TouchableOpacity>
+          </View>
+        )}
 
       </View>
     );
@@ -218,4 +263,16 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
   },
+  signIn: {
+    width: '80%',
+    height: 35,
+    justifyContent: 'center',
+    // alignItems: 'center',
+    borderRadius: 6,
+  },
+    textSign: {
+      fontSize: 16,
+      alignSelf: 'center',
+      fontWeight: '600',
+    }
 });
