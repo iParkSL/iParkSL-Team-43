@@ -38,7 +38,7 @@ app.use("/forgetPassword",require("./routes/forgetPassword"));
 app.use("/resetPassword",require("./routes/resetPassword"));
 app.use("/checkCode",require("./routes/checkCode"));
 app.use("/getEmails",require("./routes/getEmails"));
-app.use("/editprofile",require("./routes/editProfile"));
+app.use("/api",require("./routes/editProfile"));
 app.use("/makePayment",require("./routes/makePayment"));
 
 app.listen('8080',()=>{
