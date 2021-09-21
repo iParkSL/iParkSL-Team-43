@@ -10,6 +10,7 @@ import {
   Image,
   TextInput,
   StatusBar,
+  BackHandler,
   Linking,
   Alert,
 } from 'react-native';
@@ -21,9 +22,25 @@ import AsyncStorage from '@react-native-community/async-storage';
 
 export default class App extends Component{
     state={
-        response:''
+        response:'',
+        i:0,
+        pid:0,
     }
-        
+    backAction = () => {
+      return true;
+    };
+  
+    componentDidMount(){
+  
+      this.backHandler = BackHandler.addEventListener(
+        "hardwareBackPress",
+        this.backAction
+      );
+    }
+  
+    componentWillUnmount() {
+      this.backHandler.remove();
+    }
     nullnotification = () =>
     Alert.alert(
       "ERROR",
@@ -35,20 +52,20 @@ export default class App extends Component{
     successnotification = () =>
     Alert.alert(
       "SUCCESS",
-      "Password update successfully",
+      "Feedback successfull",
       [
-        { text: "OK", onPress: () => this.props.navigation.push('SignInScreen') }
+        { text: "OK", onPress: () => this.props.navigation.push('Home') }
       ]
     );
 
-    submitFunction(bid){
+    submitFunction(){
         const response=this.state.response;
         if(response != ''){
                 AsyncStorage.getItem('id').then((id)=>{
                 
-                    axios.post('http://localhost:8080/reviewForm',
+                    axios.post('http://localhost:8080/reviewForm/insert',
                     {   id:id,
-                        bid:bid,
+                        pid:this.state.pid,
                         response:response,
                     }).then(res=>{
                         if(res.data==='SUCCESS'){
@@ -70,6 +87,17 @@ export default class App extends Component{
       }
     render(){
         const {bid} =this.props.route.params;
+        if(this.state.i==0){
+          axios.get('http://localhost:8080/reviewForm/getPid',{params:{id:bid}}
+        ).then(res=>{
+          console.log(res.data);
+        this.setState({
+        i:1,
+        pid:res.data[0].pid,
+          
+          });
+        });
+        }
 
         return(
             <View style={styles.container}>

@@ -34,7 +34,7 @@ import LinearGradient from 'react-native-linear-gradient';
     this.timer = setInterval(() => this.isPaid(), 5000);
   }
   async isPaid(){
-    if(this.state.isPaid==1){
+    if(this.state.isPaid==0){
       axios.get('http://localhost:8080/physicalPayment/isPaid',{params:{id:this.state.bid}}
       ).then(res=>{
         console.log(res);
@@ -55,10 +55,10 @@ import LinearGradient from 'react-native-linear-gradient';
     "SUCCESS",
     "Transaction processed successfully",
     [
-      { text: "OK", onPress: () => this.props.navigation.push('Home') }
-      // { text: "OK", onPress: () => this.props.navigation.push('reviewForm',{
-      //   bid:`${this.state.bid}`
-      // }) }
+      // { text: "OK", onPress: () => this.props.navigation.push('Home') }
+      { text: "OK", onPress: () => this.props.navigation.push('reviewForm',{
+        bid:`${this.state.bid}`
+      }) }
     ]
   );
   render(){
@@ -85,8 +85,8 @@ import LinearGradient from 'react-native-linear-gradient';
       return(
         <View style={{width}}>
         {this.state.isPaid===0 && (
-          <View style={{fontSize:40}}>
-            <Text>Transaction processing</Text>
+          <View style={{marginLeft:50}}>
+            <Text style={{fontSize:40}}>Transaction processing</Text>
           </View>
         )
 
