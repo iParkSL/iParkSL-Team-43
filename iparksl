@@ -1,0 +1,256 @@
+-- phpMyAdmin SQL Dump
+-- version 5.0.4
+-- https://www.phpmyadmin.net/
+--
+-- Host: 127.0.0.1:3306
+-- Generation Time: Sep 26, 2021 at 01:42 PM
+-- Server version: 8.0.21
+-- PHP Version: 8.0.0
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Database: `iparksl`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `bookings`
+--
+
+DROP TABLE IF EXISTS `bookings`;
+CREATE TABLE IF NOT EXISTS `bookings` (
+  `bid` int NOT NULL AUTO_INCREMENT,
+  `cid` int NOT NULL,
+  `pid` int NOT NULL,
+  `vtype` varchar(255) NOT NULL,
+  `pmethod` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'N',
+  `EstimatedTime` int NOT NULL,
+  `isActive` int NOT NULL DEFAULT '1',
+  `isScaned` int NOT NULL DEFAULT '0',
+  `timerOn` int NOT NULL DEFAULT '0',
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  `startTime` datetime NOT NULL,
+  `endTime` datetime NOT NULL,
+  `isPaid` int NOT NULL DEFAULT '0',
+  PRIMARY KEY (`bid`),
+  KEY `cid` (`cid`) USING BTREE,
+  KEY `pid` (`pid`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `bookings`
+--
+
+INSERT INTO `bookings` (`bid`, `cid`, `pid`, `vtype`, `pmethod`, `EstimatedTime`, `isActive`, `isScaned`, `timerOn`, `date`, `time`, `startTime`, `endTime`, `isPaid`) VALUES
+(3, 31, 1, 'vesel', 'P', 0, 0, 1, 0, '2021-02-27', '14:00:00', '2021-09-19 12:07:06', '2021-09-19 15:27:05', 1),
+(8, 1, 2, 'corolla', 'e-payment', 0, 0, 0, 0, '2021-02-27', '14:00:00', '2021-09-19 00:00:00', '2021-09-19 00:00:00', 0),
+(9, 1, 1, 'alto', 'e-payment', 0, 0, 0, 0, '2021-02-27', '14:00:00', '2021-09-19 00:00:00', '2021-09-19 00:00:00', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `contact`
+--
+
+DROP TABLE IF EXISTS `contact`;
+CREATE TABLE IF NOT EXISTS `contact` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `email` varchar(30) NOT NULL,
+  `message` varchar(100) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=60 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `contact`
+--
+
+INSERT INTO `contact` (`id`, `email`, `message`) VALUES
+(57, 'rashanmalith@gmail.com', 'Very good app'),
+(58, 'samanperera@gmail.com', 'App is absolutely very good'),
+(59, 'samanperera@gmail.com', 'good app');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `customers`
+--
+
+DROP TABLE IF EXISTS `customers`;
+CREATE TABLE IF NOT EXISTS `customers` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `profimage` varchar(255) NOT NULL,
+  `passwordCode` int NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `customers`
+--
+
+INSERT INTO `customers` (`id`, `name`, `email`, `password`, `profimage`, `passwordCode`) VALUES
+(1, 'Kamal', 'Kamal@mail', '123', 'https://digitalbrandblueprint.com/wp-content/uploads/2020/09/Portrait-300-01-1980x1980.png', 0),
+(31, 'tr', 't@gmail.com', '$2b$10$EHHnbri.yZ6miK4DCzAbseSt2zHLeTvtcDf43aQ2CyGyZIfYJeYSu', '', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `owners`
+--
+
+DROP TABLE IF EXISTS `owners`;
+CREATE TABLE IF NOT EXISTS `owners` (
+  `id` int NOT NULL AUTO_INCREMENT,
+  `name` varchar(100) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `passwordCode` int NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `owners`
+--
+
+INSERT INTO `owners` (`id`, `name`, `email`, `password`, `passwordCode`) VALUES
+(1, 'rajitha', '123', '$2b$10$MtCBXUwURbttQAaCIpO1nulmtbIsKofI6un3GSye62IDpTgwt94zW', 8938),
+(2, 'rt', 'r@gmail.com', '$2b$10$BrWDQSFj9YzrdeuONQqVKOsBQDfvi7VTfH5xG//ZDDJWiU7WTiIuu', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `parks`
+--
+
+DROP TABLE IF EXISTS `parks`;
+CREATE TABLE IF NOT EXISTS `parks` (
+  `pid` int NOT NULL AUTO_INCREMENT,
+  `oid` int NOT NULL,
+  `parkname` varchar(255) NOT NULL,
+  `latitude` float NOT NULL,
+  `longitude` float NOT NULL,
+  `slots` int NOT NULL,
+  `price` int NOT NULL,
+  `image1` varchar(255) NOT NULL,
+  `image2` varchar(200) DEFAULT NULL,
+  `image3` varchar(200) DEFAULT NULL,
+  `image4` varchar(200) DEFAULT NULL,
+  `description` mediumtext NOT NULL,
+  `review` int NOT NULL,
+  `address` varchar(150) NOT NULL,
+  PRIMARY KEY (`pid`),
+  KEY `oid` (`oid`) USING BTREE
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `parks`
+--
+
+INSERT INTO `parks` (`pid`, `oid`, `parkname`, `latitude`, `longitude`, `slots`, `price`, `image1`, `image2`, `image3`, `image4`, `description`, `review`, `address`) VALUES
+(1, 1, 'sky park', 0, 0, 10, 40, 'http://i.gettysburgdaily.com/imgs/CycloramaParkingLot051911/CycloramaParkingLot05191110.jpg', 'http://i.gettysburgdaily.com/imgs/CycloramaParkingLot051911/CycloramaParkingLot05191102.jpg', 'https://www.relumination.com/wp-content/uploads/2014/06/pl.jpg', 'https://th.bing.com/th/id/R.eb9bfbacf609993c343b6cbf6451f0b2?rik=B80jkW5BW5zRiQ&riu=http%3a%2f%2fi.gettysburgdaily.com%2fimgs%2fCycloramaParkingLot051911%2fCycloramaParkingLot05191104.jpg&ehk=q91W9%2b', 'You can get free wifi area, cctv facility, vehicle servise senter and few more services from our parking area ', 1, 'Wijerama road, Nugegoda'),
+(2, 2, 'Star Parks', 0, 0, 15, 50, 'https://th.bing.com/th/id/R.eb9bfbacf609993c343b6cbf6451f0b2?rik=B80jkW5BW5zRiQ&riu=http%3a%2f%2fi.gettysburgdaily.com%2fimgs%2fCycloramaParkingLot051911%2fCycloramaParkingLot05191104.jpg&ehk=q91W9%2bA%2f8ic3EtDDRt8NUvBWkVzKQl1ADNlnLQso6vk%3d&risl=&pid=Im', 'http://i.gettysburgdaily.com/imgs/CycloramaParkingLot051911/CycloramaParkingLot05191110.jpg', 'https://www.relumination.com/wp-content/uploads/2014/06/pl.jpg', 'http://i.gettysburgdaily.com/imgs/CycloramaParkingLot051911/CycloramaParkingLot05191102.jpg', 'You can get free wifi area, cctv facility, vehicle servise senter and few more services from our parking area ', 0, 'Colombo7');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `payments`
+--
+
+DROP TABLE IF EXISTS `payments`;
+CREATE TABLE IF NOT EXISTS `payments` (
+  `paymentID` int NOT NULL AUTO_INCREMENT,
+  `customerID` int NOT NULL,
+  `ownerID` int NOT NULL,
+  `amount` int NOT NULL,
+  `date` date NOT NULL,
+  `time` time NOT NULL,
+  PRIMARY KEY (`paymentID`),
+  KEY `customerID` (`customerID`),
+  KEY `ownerID` (`ownerID`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `payments`
+--
+
+INSERT INTO `payments` (`paymentID`, `customerID`, `ownerID`, `amount`, `date`, `time`) VALUES
+(1, 1, 2, 50, '2022-02-27', '10:42:36'),
+(2, 1, 2, 100, '2022-02-27', '10:42:36');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `reviews`
+--
+
+DROP TABLE IF EXISTS `reviews`;
+CREATE TABLE IF NOT EXISTS `reviews` (
+  `reviewID` int NOT NULL AUTO_INCREMENT,
+  `pid` int NOT NULL,
+  `cid` int NOT NULL,
+  `description` varchar(300) NOT NULL,
+  PRIMARY KEY (`reviewID`),
+  KEY `pid` (`pid`),
+  KEY `cid` (`cid`)
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+
+--
+-- Dumping data for table `reviews`
+--
+
+INSERT INTO `reviews` (`reviewID`, `pid`, `cid`, `description`) VALUES
+(1, 1, 1, 'Good parking area. Any customer can get better service'),
+(2, 2, 1, 'not bad'),
+(3, 1, 1, 'wooooowww'),
+(4, 1, 31, 'verry good service'),
+(5, 1, 31, 'ghh'),
+(6, 1, 31, 'sfghj');
+
+--
+-- Constraints for dumped tables
+--
+
+--
+-- Constraints for table `bookings`
+--
+ALTER TABLE `bookings`
+  ADD CONSTRAINT `bookings_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `parks` (`pid`);
+
+--
+-- Constraints for table `parks`
+--
+ALTER TABLE `parks`
+  ADD CONSTRAINT `parks_ibfk_1` FOREIGN KEY (`oid`) REFERENCES `owners` (`id`);
+
+--
+-- Constraints for table `payments`
+--
+ALTER TABLE `payments`
+  ADD CONSTRAINT `payments_ibfk_1` FOREIGN KEY (`customerID`) REFERENCES `customers` (`id`),
+  ADD CONSTRAINT `payments_ibfk_2` FOREIGN KEY (`ownerID`) REFERENCES `owners` (`id`);
+
+--
+-- Constraints for table `reviews`
+--
+ALTER TABLE `reviews`
+  ADD CONSTRAINT `reviews_ibfk_1` FOREIGN KEY (`pid`) REFERENCES `parks` (`pid`),
+  ADD CONSTRAINT `reviews_ibfk_2` FOREIGN KEY (`cid`) REFERENCES `customers` (`id`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
